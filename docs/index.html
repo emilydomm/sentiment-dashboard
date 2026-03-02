@@ -207,13 +207,26 @@ async function init() {
 }
 
 async function loadDate(date) {
+  // 切换日期时重置筛选状态
+  currentSentiment = 'all';
+  currentPlatform = 'all';
+  document.querySelectorAll('[data-sentiment]').forEach(b => b.classList.toggle('active', b.dataset.sentiment === 'all'));
+  document.querySelectorAll('[data-platform]').forEach(b => b.classList.remove('active'));
+  document.getElementById('searchInput').value = '';
   document.getElementById('dateLabel').textContent = `📅 ${date} 舆情数据`;
   document.getElementById('cardContainer').innerHTML = '<div class="loading">加载中...</div>';
   try {
     const res = await fetch(`data/${date}.json`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
     allData = await res.json();
+    if (!Array.isArray(allData)) allData = [];
     renderCards();
   } catch(e) {
+    allData = [];
+    document.getElementById('totalCount').textContent = '0';
+    document.getElementById('posCount').textContent = '0';
+    document.getElementById('negCount').textContent = '0';
+    document.getElementById('neuCount').textContent = '0';
     document.getElementById('cardContainer').innerHTML = '<div class="empty">暂无数据</div>';
   }
 }
