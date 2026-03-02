@@ -278,5 +278,61 @@
     "publish_date": "2025-12-24",
     "url": "https://www.xiaohongshu.com/explore/694b6125000000001d03a221",
     "sentiment": "positive"
+  },
+  {
+    "platform": "wb",
+    "note_id": "wb001",
+    "title": "理想汽车超充站超时占用费引热议：充电后15分钟未归位按2元/分钟收费",
+    "desc": "理想超充站超时占用费制度引发讨论，用户充电后15分钟内未归位充电枪将收费，单次最高200元。网友呼吁明确标准并加强提示，建议适度放宽时间限制。",
+    "author": "微博热议",
+    "ip_location": "",
+    "liked_count": 0,
+    "comment_count": 0,
+    "share_count": 0,
+    "publish_date": "2026-02-20",
+    "url": "https://m.weibo.cn/status/PbL2YxlZF",
+    "sentiment": "neutral"
+  },
+  {
+    "platform": "wb",
+    "note_id": "wb002",
+    "title": "理想超充站数量超越特斯拉，李想微博立Flag兑现",
+    "desc": "理想CEO李想曾在微博立Flag\"i8发布前超充站要超过特斯拉\"，目前承诺已兑现。理想i8交付用户反馈充电体验良好，但仍有用户关注产能问题。",
+    "author": "懂车帝",
+    "ip_location": "",
+    "liked_count": 0,
+    "comment_count": 0,
+    "share_count": 0,
+    "publish_date": "2026-02-10",
+    "url": "https://www.dongchedi.com/article/7517928099963535934",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "dy",
+    "note_id": "dy001",
+    "title": "理想5C超充，续航自由触手可及！",
+    "desc": "理想汽车官方账号发布5C超充体验视频，展示超充站充电效率，获得1743个喜欢。",
+    "author": "理想汽车",
+    "ip_location": "徐州",
+    "liked_count": 1743,
+    "comment_count": 0,
+    "share_count": 0,
+    "publish_date": "2025-06-18",
+    "url": "https://m.douyin.com/share/video/7517219695662222604",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "dy",
+    "note_id": "dy002",
+    "title": "国庆假期：非理想车主排队3小时，理想车主10分钟充满走人",
+    "desc": "国庆节服务区实录：其他品牌电车排队三小时充不上电，理想i8车主刷个抖音上个厕所回来电量从20%飙到80%直接走人，\"VIP通道\"体验引发广泛讨论。",
+    "author": "百家号",
+    "ip_location": "",
+    "liked_count": 0,
+    "comment_count": 0,
+    "share_count": 0,
+    "publish_date": "2025-10-08",
+    "url": "https://baijiahao.baidu.com/s?id=1845582462008889702",
+    "sentiment": "positive"
   }
 ]
