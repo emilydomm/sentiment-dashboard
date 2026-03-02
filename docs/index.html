@@ -163,7 +163,7 @@ const platformBadge = { xhs: 'badge-xhs', wb: 'badge-wb', dy: 'badge-dy', web: '
 async function init() {
   // 读取日期索引
   try {
-    const res = await fetch('dates.json');
+    const res = await fetch('data/dates.json');
     availableDates = await res.json();
   } catch(e) {
     // fallback: 尝试今天
@@ -188,7 +188,7 @@ async function loadDate(date) {
   document.getElementById('dateLabel').textContent = `📅 ${date} 舆情数据`;
   document.getElementById('cardContainer').innerHTML = '<div class="loading">加载中...</div>';
   try {
-    const res = await fetch(`../data/${date}.json`);
+    const res = await fetch(`data/${date}.json`);
     allData = await res.json();
     renderCards();
   } catch(e) {
