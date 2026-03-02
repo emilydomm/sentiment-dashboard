@@ -59,9 +59,21 @@ window.addEventListener('DOMContentLoaded', () => {
   
   .content { padding: 0 32px 32px; }
   .date-label { font-size: 13px; color: #888; margin: 16px 0 10px; }
-  
-  .card { background: white; border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,.06); display: flex; gap: 16px; align-items: flex-start; transition: box-shadow .2s; }
+
+  /* 三栏布局 */
+  .columns { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  .column-header { font-size: 14px; font-weight: 700; padding: 10px 14px; border-radius: 10px; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+  .col-pos .column-header { background: #f0fdf4; color: #16a34a; }
+  .col-neg .column-header { background: #fef2f2; color: #dc2626; }
+  .col-neu .column-header { background: #fffbeb; color: #d97706; }
+  .column-count { font-size: 12px; font-weight: 400; opacity: .7; margin-left: auto; }
+
+  .card { background: white; border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,.06); display: flex; gap: 12px; align-items: flex-start; transition: box-shadow .2s; }
   .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+
+  @media (max-width: 900px) {
+    .columns { grid-template-columns: 1fr; }
+  }
   
   .platform-badge { padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; white-space: nowrap; }
   .badge-xhs { background: #fff0f0; color: #ff2442; }
@@ -149,7 +161,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 <div class="content">
   <div class="date-label" id="dateLabel"></div>
-  <div id="cardContainer"><div class="loading">加载中...</div></div>
+  <div id="cardContainer">
+    <div class="loading">加载中...</div>
+  </div>
 </div>
 
 <script>
@@ -210,55 +224,80 @@ function setPlatform(p) {
   renderCards();
 }
 
+function makeCard(item) {
+  const badge = platformBadge[item.platform] || 'badge-web';
+  const label = platformLabel[item.platform] || item.platform;
+  const dotClass = item.sentiment === 'positive' ? 'dot-positive' : item.sentiment === 'negative' ? 'dot-negative' : 'dot-neutral';
+  const interactions = item.platform === 'xhs' ? `
+    <span>👍 ${item.liked_count}</span>
+    <span>💬 ${item.comment_count}</span>
+    <span>🔁 ${item.share_count}</span>
+  ` : '';
+  return `
+    <div class="card">
+      <div class="sentiment-dot ${dotClass}"></div>
+      <div class="card-body">
+        <div class="card-title">
+          <span class="platform-badge ${badge}">${label}</span>
+          ${item.url ? `<a href="${item.url}" target="_blank"> ${item.title}</a>` : ` ${item.title}`}
+        </div>
+        ${item.desc ? `<div class="card-desc">${item.desc}</div>` : ''}
+        <div class="card-meta">
+          <span>@${item.author}</span>
+          ${item.ip_location ? `<span>📍${item.ip_location}</span>` : ''}
+          <span>📅 ${item.publish_date}</span>
+          ${interactions}
+        </div>
+      </div>
+    </div>`;
+}
+
 function renderCards() {
   const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
   let filtered = allData.filter(item => {
-    if (currentSentiment !== 'all' && item.sentiment !== currentSentiment) return false;
     if (currentPlatform !== 'all' && item.platform !== currentPlatform) return false;
-    if (keyword && !item.title.toLowerCase().includes(keyword) && !item.author.toLowerCase().includes(keyword)) return false;
+    if (keyword && !item.title.toLowerCase().includes(keyword) && !(item.desc||'').toLowerCase().includes(keyword) && !item.author.toLowerCase().includes(keyword)) return false;
     return true;
   });
 
+  const pos = filtered.filter(i => i.sentiment === 'positive');
+  const neg = filtered.filter(i => i.sentiment === 'negative');
+  const neu = filtered.filter(i => i.sentiment === 'neutral');
+
   // 更新统计
   document.getElementById('totalCount').textContent = filtered.length;
-  document.getElementById('posCount').textContent = filtered.filter(i=>i.sentiment==='positive').length;
-  document.getElementById('negCount').textContent = filtered.filter(i=>i.sentiment==='negative').length;
-  document.getElementById('neuCount').textContent = filtered.filter(i=>i.sentiment==='neutral').length;
+  document.getElementById('posCount').textContent = pos.length;
+  document.getElementById('negCount').textContent = neg.length;
+  document.getElementById('neuCount').textContent = neu.length;
 
   if (filtered.length === 0) {
     document.getElementById('cardContainer').innerHTML = '<div class="empty">没有符合条件的内容</div>';
     return;
   }
 
-  const html = filtered.map(item => {
-    const badge = platformBadge[item.platform] || 'badge-web';
-    const label = platformLabel[item.platform] || item.platform;
-    const dotClass = item.sentiment === 'positive' ? 'dot-positive' : item.sentiment === 'negative' ? 'dot-negative' : 'dot-neutral';
-    const interactions = item.platform === 'xhs' ? `
-      <span>👍 ${item.liked_count}</span>
-      <span>💬 ${item.comment_count}</span>
-      <span>🔁 ${item.share_count}</span>
-    ` : '';
-    return `
-      <div class="card">
-        <div class="sentiment-dot ${dotClass}"></div>
-        <div class="card-body">
-          <div class="card-title">
-            <span class="platform-badge ${badge}">${label}</span>
-            ${item.url ? `<a href="${item.url}" target="_blank"> ${item.title}</a>` : ` ${item.title}`}
-          </div>
-          ${item.desc ? `<div class="card-desc">${item.desc}</div>` : ''}
-          <div class="card-meta">
-            <span>@${item.author}</span>
-            ${item.ip_location ? `<span>📍${item.ip_location}</span>` : ''}
-            <span>📅 ${item.publish_date}</span>
-            ${interactions}
-          </div>
-        </div>
-      </div>`;
-  }).join('');
+  // 如果选了特定情感，只显示单列
+  if (currentSentiment !== 'all') {
+    const items = filtered.filter(i => i.sentiment === currentSentiment);
+    document.getElementById('cardContainer').innerHTML = items.map(makeCard).join('');
+    return;
+  }
 
-  document.getElementById('cardContainer').innerHTML = html;
+  // 默认三栏分列
+  document.getElementById('cardContainer').innerHTML = `
+    <div class="columns">
+      <div class="col-pos">
+        <div class="column-header">🟢 正向声音 <span class="column-count">${pos.length} 条</span></div>
+        ${pos.length ? pos.map(makeCard).join('') : '<div class="empty" style="padding:30px">暂无正向内容</div>'}
+      </div>
+      <div class="col-neg">
+        <div class="column-header">🔴 负向声音 <span class="column-count">${neg.length} 条</span></div>
+        ${neg.length ? neg.map(makeCard).join('') : '<div class="empty" style="padding:30px">暂无负向内容</div>'}
+      </div>
+      <div class="col-neu">
+        <div class="column-header">🟡 中性讨论 <span class="column-count">${neu.length} 条</span></div>
+        ${neu.length ? neu.map(makeCard).join('') : '<div class="empty" style="padding:30px">暂无中性内容</div>'}
+      </div>
+    </div>`;
 }
 
 // init() 由密码验证成功后调用，不在这里自动执行
