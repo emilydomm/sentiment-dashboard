@@ -180,5 +180,33 @@
     "publish_date": "2026-03-01",
     "url": "https://weibo.com",
     "sentiment": "negative"
+  },
+  {
+    "platform": "dy",
+    "note_id": "dy_20260301_003",
+    "title": "节后第一天！理想城市超充站有多忙？实拍来了",
+    "desc": "抖音博主实拍深圳南山区某理想城市超充站：工作日早高峰（8-9点）6个桩全部占用，但每辆车平均只充20-25分钟，周转很快，全天预计服务超过120辆车。网友感叹：城市超充需求真的很旺盛。",
+    "author": "城市充电实拍",
+    "ip_location": "广东",
+    "liked_count": 18900,
+    "comment_count": 1234,
+    "share_count": 4567,
+    "publish_date": "2026-03-01",
+    "url": "https://www.douyin.com",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260301_005",
+    "title": "理想超充节后加速建设：3月计划新增超充站超300座",
+    "desc": "据理想内部规划，3月份计划新增超充站超过300座，主要集中在华中、西南地区及长三角城市群，进一步提升网络密度。届时全国超充站总量将突破4400座，覆盖城市超过600个。",
+    "author": "财联社",
+    "ip_location": "",
+    "liked_count": 0,
+    "comment_count": 0,
+    "share_count": 0,
+    "publish_date": "2026-03-01",
+    "url": "https://www.cls.cn",
+    "sentiment": "positive"
   }
 ]

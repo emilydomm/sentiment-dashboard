@@ -168,20 +168,6 @@
     "sentiment": "negative"
   },
   {
-    "platform": "web",
-    "note_id": "web_20260217_003",
-    "title": "理想超充春节七天战报：峰值日服务22万车次，综合评分92.3",
-    "desc": "理想发布春节超充完整战报：大年初一至初七合计服务车次123万次，峰值单日22万次（初四），充电故障率0.3%，综合用户评分92.3分。高速超充平均等待时间17分钟，城区充电平均等待4分钟。",
-    "author": "汽车之家",
-    "ip_location": "",
-    "liked_count": 0,
-    "comment_count": 0,
-    "share_count": 0,
-    "publish_date": "2026-02-17",
-    "url": "https://www.autohome.com.cn",
-    "sentiment": "positive"
-  },
-  {
     "platform": "wb",
     "note_id": "wb_20260217_003",
     "title": "对比蔚来换电站：春节高峰期，理想超充和蔚来换电哪个等得更久？",
@@ -207,6 +193,20 @@
     "share_count": 2100,
     "publish_date": "2026-02-17",
     "url": "https://www.douyin.com",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260217_004",
+    "title": "返程高峰理想超充运营数据：平均等待仅11分钟",
+    "desc": "理想官方数据显示，初四全国超充站平均排队等待时间为11.3分钟，高峰时段（下午3-6点）约18分钟，非高峰时段约6分钟。整体运营效率超出预期，智能调度系统发挥关键作用。",
+    "author": "IT之家",
+    "ip_location": "",
+    "liked_count": 0,
+    "comment_count": 0,
+    "share_count": 0,
+    "publish_date": "2026-02-17",
+    "url": "https://www.ithome.com",
     "sentiment": "positive"
   }
 ]

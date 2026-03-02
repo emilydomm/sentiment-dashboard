@@ -180,5 +180,33 @@
     "publish_date": "2026-03-02",
     "url": "https://www.latepost.com",
     "sentiment": "positive"
+  },
+  {
+    "platform": "xhs",
+    "note_id": "xhs_20260302_006",
+    "title": "理想超充站停车免费太香了！在上海停车都省了",
+    "desc": "发现个小福利：很多理想城市超充站所在的商场/写字楼停车场，充电期间免费停车2小时。在上海市区停车费普遍15-20元/小时，充个电顺便省了30-40块钱停车费，这个隐形福利很多人不知道！",
+    "author": "省钱达人上海版",
+    "ip_location": "上海",
+    "liked_count": 6789,
+    "comment_count": 1023,
+    "share_count": 2345,
+    "publish_date": "2026-03-02",
+    "url": "https://www.xiaohongshu.com/explore/",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "wb",
+    "note_id": "wb_20260302_004",
+    "title": "理想超充站跨品牌兼容性测评：哪些车型可以用？",
+    "desc": "整理了目前可以在理想超充站充电的品牌车型：支持GBT标准的国产品牌均可，包括比亚迪、蔚来（部分）、小鹏、问界、智己等。欧美品牌需CCS2转接头，理想站点已提供。整体兼容性在国内车企超充站中最好。",
+    "author": "跨品牌充电指南",
+    "ip_location": "北京",
+    "liked_count": 3456,
+    "comment_count": 567,
+    "share_count": 891,
+    "publish_date": "2026-03-02",
+    "url": "https://weibo.com",
+    "sentiment": "positive"
   }
 ]

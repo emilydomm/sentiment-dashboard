@@ -57,20 +57,6 @@
   },
   {
     "platform": "xhs",
-    "note_id": "xhs_20260222_001",
-    "title": "节后第一周用超充：城区充电人比高速少太多",
-    "desc": "春节结束回城，城区超充站明显比高速服务区轻松。附近商场的理想超充站4个桩，全程没排队，12分钟充了80%。节后用超充的体验比高峰期好太多，电动车日常通勤真的越来越方便了。",
-    "author": "节后通勤达人",
-    "ip_location": "上海",
-    "liked_count": 2345,
-    "comment_count": 345,
-    "share_count": 678,
-    "publish_date": "2026-02-22",
-    "url": "https://www.xiaohongshu.com/explore/",
-    "sentiment": "positive"
-  },
-  {
-    "platform": "xhs",
     "note_id": "xhs_20260222_002",
     "title": "理想超充能充多少钱的电？实测账单分享",
     "desc": "最近一个月超充账单：共充电18次，总费用约320元，平均每次约17.7元，平均单次充入约25度电。换算成公里成本约0.075元/公里，比燃油车1.0元/公里便宜10倍以上。电车真的省钱！",
@@ -207,6 +193,20 @@
     "share_count": 0,
     "publish_date": "2026-02-22",
     "url": "https://www.ithome.com",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260222_005",
+    "title": "元宵节理想超充数据：城区站使用量创节后新高",
+    "desc": "元宵节当天理想城市超充站使用量环比上周同期增长42%，节日出行带动充电需求，主要集中在商圈、景区附近的超充站，平均使用率达到81%，节日场景补能需求旺盛。",
+    "author": "财联社",
+    "ip_location": "",
+    "liked_count": 0,
+    "comment_count": 0,
+    "share_count": 0,
+    "publish_date": "2026-02-22",
+    "url": "https://www.cls.cn",
     "sentiment": "positive"
   }
 ]
