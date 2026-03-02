@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>理想超充舆情监测</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f7fa; color: #333; }
+  
+  .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: white; padding: 24px 32px; }
+  .header h1 { font-size: 22px; font-weight: 600; }
+  .header p { font-size: 13px; opacity: 0.7; margin-top: 4px; }
+  
+  .toolbar { background: white; border-bottom: 1px solid #e8e8e8; padding: 14px 32px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .toolbar select, .toolbar input { padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; outline: none; }
+  .toolbar input { width: 220px; }
+  .toolbar input:focus, .toolbar select:focus { border-color: #0f3460; }
+  .filter-btn { padding: 7px 14px; border-radius: 20px; border: 1px solid #ddd; background: white; font-size: 13px; cursor: pointer; transition: all .2s; }
+  .filter-btn.active { background: #0f3460; color: white; border-color: #0f3460; }
+  
+  .stats { display: flex; gap: 16px; padding: 20px 32px; }
+  .stat-card { background: white; border-radius: 12px; padding: 16px 20px; flex: 1; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+  .stat-card .num { font-size: 28px; font-weight: 700; }
+  .stat-card .label { font-size: 12px; color: #888; margin-top: 2px; }
+  .stat-card.pos .num { color: #22c55e; }
+  .stat-card.neg .num { color: #ef4444; }
+  .stat-card.neu .num { color: #f59e0b; }
+  
+  .content { padding: 0 32px 32px; }
+  .date-label { font-size: 13px; color: #888; margin: 16px 0 10px; }
+  
+  .card { background: white; border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,.06); display: flex; gap: 16px; align-items: flex-start; transition: box-shadow .2s; }
+  .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+  
+  .platform-badge { padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+  .badge-xhs { background: #fff0f0; color: #ff2442; }
+  .badge-wb { background: #fff4e8; color: #e6700a; }
+  .badge-dy { background: #f0f0ff; color: #3d3dc0; }
+  .badge-web { background: #f0f8ff; color: #0369a1; }
+  
+  .sentiment-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+  .dot-positive { background: #22c55e; }
+  .dot-negative { background: #ef4444; }
+  .dot-neutral { background: #f59e0b; }
+  
+  .card-body { flex: 1; }
+  .card-title { font-size: 15px; font-weight: 500; line-height: 1.4; }
+  .card-title a { color: #1a1a2e; text-decoration: none; }
+  .card-title a:hover { color: #0f3460; text-decoration: underline; }
+  .card-meta { font-size: 12px; color: #999; margin-top: 6px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .card-meta span { display: flex; align-items: center; gap: 3px; }
+  
+  .empty { text-align: center; padding: 60px; color: #bbb; }
+  .loading { text-align: center; padding: 60px; color: #888; }
+
+  @media (max-width: 600px) {
+    .header, .toolbar, .stats, .content { padding-left: 16px; padding-right: 16px; }
+    .stats { flex-wrap: wrap; }
+    .stat-card { min-width: calc(50% - 8px); }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>⚡ 理想超充舆情监测</h1>
+  <p>每日自动更新 · 数据来源：小红书 / 微博 / 网络资讯</p>
+</div>
+
+<div class="toolbar">
+  <select id="dateSelect" onchange="loadDate(this.value)"></select>
+  <input type="text" id="searchInput" placeholder="🔍 搜索关键词..." oninput="renderCards()">
+  <button class="filter-btn active" data-sentiment="all" onclick="setSentiment('all')">全部</button>
+  <button class="filter-btn" data-sentiment="positive" onclick="setSentiment('positive')">🟢 正向</button>
+  <button class="filter-btn" data-sentiment="neutral" onclick="setSentiment('neutral')">🟡 中性</button>
+  <button class="filter-btn" data-sentiment="negative" onclick="setSentiment('negative')">🔴 负向</button>
+  <button class="filter-btn" data-platform="xhs" onclick="setPlatform('xhs')" style="margin-left:8px">小红书</button>
+  <button class="filter-btn" data-platform="wb" onclick="setPlatform('wb')">微博</button>
+  <button class="filter-btn" data-platform="web" onclick="setPlatform('web')">资讯</button>
+</div>
+
+<div class="stats">
+  <div class="stat-card"><div class="num" id="totalCount">-</div><div class="label">📊 今日条目</div></div>
+  <div class="stat-card pos"><div class="num" id="posCount">-</div><div class="label">🟢 正向声音</div></div>
+  <div class="stat-card neg"><div class="num" id="negCount">-</div><div class="label">🔴 负向声音</div></div>
+  <div class="stat-card neu"><div class="num" id="neuCount">-</div><div class="label">🟡 中性讨论</div></div>
+</div>
+
+<div class="content">
+  <div class="date-label" id="dateLabel"></div>
+  <div id="cardContainer"><div class="loading">加载中...</div></div>
+</div>
+
+<script>
+let allData = [];
+let currentSentiment = 'all';
+let currentPlatform = 'all';
+let availableDates = [];
+
+const platformLabel = { xhs: '小红书', wb: '微博', dy: '抖音', web: '资讯' };
+const platformBadge = { xhs: 'badge-xhs', wb: 'badge-wb', dy: 'badge-dy', web: 'badge-web' };
+
+async function init() {
+  // 读取日期索引
+  try {
+    const res = await fetch('dates.json');
+    availableDates = await res.json();
+  } catch(e) {
+    // fallback: 尝试今天
+    const today = new Date().toISOString().slice(0,10);
+    availableDates = [today];
+  }
+
+  const dateSelect = document.getElementById('dateSelect');
+  availableDates.slice().reverse().forEach(d => {
+    const opt = document.createElement('option');
+    opt.value = d;
+    opt.textContent = d;
+    dateSelect.appendChild(opt);
+  });
+
+  if (availableDates.length > 0) {
+    loadDate(availableDates[availableDates.length - 1]);
+  }
+}
+
+async function loadDate(date) {
+  document.getElementById('dateLabel').textContent = `📅 ${date} 舆情数据`;
+  document.getElementById('cardContainer').innerHTML = '<div class="loading">加载中...</div>';
+  try {
+    const res = await fetch(`../data/${date}.json`);
+    allData = await res.json();
+    renderCards();
+  } catch(e) {
+    document.getElementById('cardContainer').innerHTML = '<div class="empty">暂无数据</div>';
+  }
+}
+
+function setSentiment(s) {
+  currentSentiment = s;
+  document.querySelectorAll('[data-sentiment]').forEach(b => b.classList.toggle('active', b.dataset.sentiment === s));
+  // 重置平台
+  renderCards();
+}
+
+function setPlatform(p) {
+  currentPlatform = currentPlatform === p ? 'all' : p;
+  document.querySelectorAll('[data-platform]').forEach(b => b.classList.toggle('active', b.dataset.platform === currentPlatform));
+  renderCards();
+}
+
+function renderCards() {
+  const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
+  let filtered = allData.filter(item => {
+    if (currentSentiment !== 'all' && item.sentiment !== currentSentiment) return false;
+    if (currentPlatform !== 'all' && item.platform !== currentPlatform) return false;
+    if (keyword && !item.title.toLowerCase().includes(keyword) && !item.author.toLowerCase().includes(keyword)) return false;
+    return true;
+  });
+
+  // 更新统计
+  document.getElementById('totalCount').textContent = filtered.length;
+  document.getElementById('posCount').textContent = filtered.filter(i=>i.sentiment==='positive').length;
+  document.getElementById('negCount').textContent = filtered.filter(i=>i.sentiment==='negative').length;
+  document.getElementById('neuCount').textContent = filtered.filter(i=>i.sentiment==='neutral').length;
+
+  if (filtered.length === 0) {
+    document.getElementById('cardContainer').innerHTML = '<div class="empty">没有符合条件的内容</div>';
+    return;
+  }
+
+  const html = filtered.map(item => {
+    const badge = platformBadge[item.platform] || 'badge-web';
+    const label = platformLabel[item.platform] || item.platform;
+    const dotClass = item.sentiment === 'positive' ? 'dot-positive' : item.sentiment === 'negative' ? 'dot-negative' : 'dot-neutral';
+    const interactions = item.platform === 'xhs' ? `
+      <span>👍 ${item.liked_count}</span>
+      <span>💬 ${item.comment_count}</span>
+      <span>🔁 ${item.share_count}</span>
+    ` : '';
+    return `
+      <div class="card">
+        <div class="sentiment-dot ${dotClass}"></div>
+        <div class="card-body">
+          <div class="card-title">
+            <span class="platform-badge ${badge}">${label}</span>
+            ${item.url ? `<a href="${item.url}" target="_blank"> ${item.title}</a>` : ` ${item.title}`}
+          </div>
+          <div class="card-meta">
+            <span>@${item.author}</span>
+            <span>📅 ${item.publish_date}</span>
+            ${interactions}
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+
+  document.getElementById('cardContainer').innerHTML = html;
+}
+
+init();
+</script>
+</body>
+</html>
