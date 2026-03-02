@@ -180,14 +180,19 @@ async function init() {
   // 读取日期索引
   try {
     const res = await fetch('data/dates.json');
-    availableDates = await res.json();
+    const raw = await res.json();
+    // 过滤掉非日期格式的条目（如 dates.json 本身）
+    availableDates = raw.filter(d => /^\d{4}-\d{2}-\d{2}$/.test(d));
   } catch(e) {
-    // fallback: 尝试今天
-    const today = new Date().toISOString().slice(0,10);
-    availableDates = [today];
+    availableDates = [];
   }
 
+  // 如果没有数据，fallback 到今天
+  const todayStr = new Date().toLocaleDateString('zh-CN', {timeZone:'Asia/Shanghai'}).replace(/\//g, '-').replace(/(\d+)-(\d+)-(\d+)/, (_, y, m, d) => `${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`);
+  if (availableDates.length === 0) availableDates = [todayStr];
+
   const dateSelect = document.getElementById('dateSelect');
+  // 最新日期在前
   availableDates.slice().reverse().forEach(d => {
     const opt = document.createElement('option');
     opt.value = d;
@@ -195,9 +200,10 @@ async function init() {
     dateSelect.appendChild(opt);
   });
 
-  if (availableDates.length > 0) {
-    loadDate(availableDates[availableDates.length - 1]);
-  }
+  // 默认选中最新日期（列表最后一个 = 下拉框第一个）
+  const latestDate = availableDates[availableDates.length - 1];
+  dateSelect.value = latestDate;
+  loadDate(latestDate);
 }
 
 async function loadDate(date) {
