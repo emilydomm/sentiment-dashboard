@@ -1,0 +1,58 @@
+[
+  {
+    "platform": "web",
+    "note_id": "web_20260221_001",
+    "title": "春节返程高峰：理想超充站承压运行，服务区满负荷",
+    "desc": "春节返程高峰期，主要高速服务区理想超充站迎来返程客流，部分站点出现排队现象。理想值守人员协助疏导，OTA 8.3超充实况功能帮助车主提前选择空闲站点。",
+    "author": "IT之家",
+    "ip_location": "",
+    "liked_count": 0,
+    "comment_count": 0,
+    "share_count": 0,
+    "publish_date": "2026-02-21",
+    "url": "https://www.ithome.com/0/924/342.htm",
+    "sentiment": "neutral"
+  },
+  {
+    "platform": "wb",
+    "note_id": "wb_20260221_001",
+    "title": "理想超充春节第8天：充电次数累计超120万次",
+    "desc": "据悉，春节假期第8天（2月21日）理想超充累计充电次数已超120万次，总充电量接近3500万度。理想纯电用户与其他品牌用户充电比约3:5，开放共用效果显著。",
+    "author": "微博",
+    "ip_location": "",
+    "liked_count": 0,
+    "comment_count": 0,
+    "share_count": 0,
+    "publish_date": "2026-02-21",
+    "url": "https://www.ithome.com/0/924/342.htm",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "xhs",
+    "note_id": "xhs_20260221_001",
+    "title": "返程真实体验：理想超充App实况功能救了我",
+    "desc": "车主分享返程遭遇，原计划的服务区App显示桩位占满，及时改道至20公里外的超充站，到达时位置充足，从出发到充电完毕比走拥堵路段快了40分钟，大赞实况功能。",
+    "author": "理想车主回家记",
+    "ip_location": "",
+    "liked_count": 0,
+    "comment_count": 0,
+    "share_count": 0,
+    "publish_date": "2026-02-21",
+    "url": "https://m.toutiao.com/a7604087571693453867/",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260221_002",
+    "title": "理想超充站返程流量分析：北上广深返城方向最拥堵",
+    "desc": "数据分析显示，春节返程期间，北京、上海、广州、深圳方向的高速超充站使用频率最高，相关路线的沪蓉、广深高速超充站峰值充电次数较去年同期增长约45%。",
+    "author": "懂车帝",
+    "ip_location": "",
+    "liked_count": 0,
+    "comment_count": 0,
+    "share_count": 0,
+    "publish_date": "2026-02-21",
+    "url": "https://www.dongchedi.com/article/7462952701110780428",
+    "sentiment": "neutral"
+  }
+]

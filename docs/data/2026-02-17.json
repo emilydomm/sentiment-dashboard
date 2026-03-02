@@ -1,0 +1,58 @@
+[
+  {
+    "platform": "wb",
+    "note_id": "wb_20260217_001",
+    "title": "春节理想超充站值守：专属保障服务让车主安心",
+    "desc": "理想汽车在500+座高速超充站安排工作人员全天值守，累计提供专属保障服务超4万次。有车主遇到充电枪故障，工作人员迅速响应解决，好评不断。",
+    "author": "微博用户",
+    "ip_location": "",
+    "liked_count": 0,
+    "comment_count": 0,
+    "share_count": 0,
+    "publish_date": "2026-02-17",
+    "url": "https://www.ithome.com/0/924/342.htm",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260217_001",
+    "title": "2026款理想L9 5C超充升级：家庭长途焦虑终结者？",
+    "desc": "分析文章评测2026款理想L9升级5C超充的实际价值，新款L9充电速度大幅提升，可在极短时间内补充大量续航，被认为有效解决家庭多人长途出行的补能焦虑问题。",
+    "author": "百家号",
+    "ip_location": "",
+    "liked_count": 0,
+    "comment_count": 0,
+    "share_count": 0,
+    "publish_date": "2026-02-17",
+    "url": "https://baijiahao.baidu.com/s?id=1858157376064564406",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "dy",
+    "note_id": "dy_20260217_001",
+    "title": "春节高速充电对比：超充/换电/双枪闪充谁最强？",
+    "desc": "视频测试5C超充（理想i8）、双枪闪充（比亚迪汉L）、换电（乐道L60）三种补能方式，从广州开到上海1500公里，全程比拼补能体验，吸引超6.6万次播放。",
+    "author": "智能车研究所",
+    "ip_location": "",
+    "liked_count": 2209,
+    "comment_count": 788,
+    "share_count": 214,
+    "publish_date": "2026-02-17",
+    "url": "https://www.bilibili.com/video/BV1yezsBCESG/",
+    "sentiment": "neutral"
+  },
+  {
+    "platform": "xhs",
+    "note_id": "xhs_20260217_001",
+    "title": "春节高速充电心得：提前用App查超充实况省去排队",
+    "desc": "车主分享OTA 8.3超充实况功能使用心得：节前在车机App实时查看目标服务区超充站状态，发现目标站人多后及时改换邻近空闲站，全程几乎零等待。",
+    "author": "理想车主日记",
+    "ip_location": "",
+    "liked_count": 0,
+    "comment_count": 0,
+    "share_count": 0,
+    "publish_date": "2026-02-17",
+    "url": "https://m.toutiao.com/a7604087571693453867/",
+    "sentiment": "positive"
+  }
+]
