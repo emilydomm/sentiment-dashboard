@@ -210,8 +210,14 @@ const platformBadge = { xhs: 'badge-xhs', wb: 'badge-wb', dy: 'badge-dy', web: '
 
 // Tab 切换
 function switchTab(tab) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    if ((tab === 'sentiment' && b.textContent.includes('舆情')) || 
+        (tab === 'industry' && b.textContent.includes('行业'))) {
+      b.classList.add('active');
+    } else {
+      b.classList.remove('active');
+    }
+  });
   
   if (tab === 'sentiment') {
     document.getElementById('sentiment-panel').style.display = 'block';
