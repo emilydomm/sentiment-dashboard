@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>理想超充舆情监测</title>
+<script>
+// 密码保护 - SHA256 of "liauto2026"
+const CORRECT_HASH = 'bd8b5cb4d34ee5897381d8a396dadc2d274e62d5ff96784a94519c4e9c352c12';
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+async function checkPassword() {
+  const input = document.getElementById('pwdInput').value;
+  const hash = await sha256(input);
+  if (hash === CORRECT_HASH) {
+    sessionStorage.setItem('auth', '1');
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('mainApp').style.display = 'block';
+    init();
+  } else {
+    document.getElementById('pwdError').style.display = 'block';
+    document.getElementById('pwdInput').value = '';
+    document.getElementById('pwdInput').focus();
+  }
+}
+window.addEventListener('DOMContentLoaded', () => {
+  if (sessionStorage.getItem('auth') === '1') {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('mainApp').style.display = 'block';
+    init();
+  }
+  document.getElementById('pwdInput').addEventListener('keydown', e => { if(e.key==='Enter') checkPassword(); });
+});
+</script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f7fa; color: #333; }
+  
+  .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: white; padding: 24px 32px; }
+  .header h1 { font-size: 22px; font-weight: 600; }
+  .header p { font-size: 13px; opacity: 0.7; margin-top: 4px; }
+  
+  .toolbar { background: white; border-bottom: 1px solid #e8e8e8; padding: 14px 32px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .toolbar select, .toolbar input { padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; outline: none; }
+  .toolbar input { width: 220px; }
+  .toolbar input:focus, .toolbar select:focus { border-color: #0f3460; }
+  .filter-btn { padding: 7px 14px; border-radius: 20px; border: 1px solid #ddd; background: white; font-size: 13px; cursor: pointer; transition: all .2s; }
+  .filter-btn.active { background: #0f3460; color: white; border-color: #0f3460; }
+  
+  .stats { display: flex; gap: 16px; padding: 20px 32px; }
+  .stat-card { background: white; border-radius: 12px; padding: 16px 20px; flex: 1; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+  .stat-card .num { font-size: 28px; font-weight: 700; }
+  .stat-card .label { font-size: 12px; color: #888; margin-top: 2px; }
+  .stat-card.pos .num { color: #22c55e; }
+  .stat-card.neg .num { color: #ef4444; }
+  .stat-card.neu .num { color: #f59e0b; }
+  
+  .content { padding: 0 32px 32px; }
+  .date-label { font-size: 13px; color: #888; margin: 16px 0 10px; }
+
+  /* 三栏布局 */
+  .columns { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+  .column-header { font-size: 14px; font-weight: 700; padding: 10px 14px; border-radius: 10px; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+  .col-pos .column-header { background: #f0fdf4; color: #16a34a; }
+  .col-neg .column-header { background: #fef2f2; color: #dc2626; }
+  .col-neu .column-header { background: #fffbeb; color: #d97706; }
+  .column-count { font-size: 12px; font-weight: 400; opacity: .7; margin-left: auto; }
+
+  .card { background: white; border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,.06); display: flex; gap: 12px; align-items: flex-start; transition: box-shadow .2s; }
+  .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.1); }
+
+  @media (max-width: 900px) {
+    .columns { grid-template-columns: 1fr; }
+  }
+  
+  .platform-badge { padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+  .badge-xhs { background: #fff0f0; color: #ff2442; }
+  .badge-wb { background: #fff4e8; color: #e6700a; }
+  .badge-dy { background: #f0f0ff; color: #3d3dc0; }
+  .badge-web { background: #f0f8ff; color: #0369a1; }
+  
+  .sentiment-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+  .dot-positive { background: #22c55e; }
+  .dot-negative { background: #ef4444; }
+  .dot-neutral { background: #f59e0b; }
+  
+  .card-body { flex: 1; }
+  .card-title { font-size: 15px; font-weight: 500; line-height: 1.4; }
+  .card-title a { color: #1a1a2e; text-decoration: none; }
+  .card-title a:hover { color: #0f3460; text-decoration: underline; }
+  .card-desc { font-size: 13px; color: #666; margin-top: 6px; line-height: 1.6; }
+  .card-meta { font-size: 12px; color: #999; margin-top: 6px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .card-meta span { display: flex; align-items: center; gap: 3px; }
+  
+  .empty { text-align: center; padding: 60px; color: #bbb; }
+  .loading { text-align: center; padding: 60px; color: #888; }
+
+  @media (max-width: 600px) {
+    .header, .toolbar, .stats, .content { padding-left: 16px; padding-right: 16px; }
+    .stats { flex-wrap: wrap; }
+    .stat-card { min-width: calc(50% - 8px); }
+  }
+</style>
+<style>
+  /* 登录页样式 */
+  #loginScreen { display:flex; align-items:center; justify-content:center; min-height:100vh; background: linear-gradient(135deg,#1a1a2e,#0f3460); }
+  .login-card { background:white; border-radius:20px; padding:48px 40px; width:340px; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,.3); }
+  .login-logo { font-size:40px; margin-bottom:8px; }
+  .login-title { font-size:20px; font-weight:700; color:#1a1a2e; margin-bottom:4px; }
+  .login-sub { font-size:13px; color:#888; margin-bottom:28px; }
+  .login-card input { width:100%; padding:12px 16px; border:1.5px solid #e0e0e0; border-radius:10px; font-size:15px; outline:none; transition:border .2s; text-align:center; letter-spacing:2px; }
+  .login-card input:focus { border-color:#0f3460; }
+  .login-btn { width:100%; margin-top:14px; padding:12px; background:#0f3460; color:white; border:none; border-radius:10px; font-size:15px; font-weight:600; cursor:pointer; transition:background .2s; }
+  .login-btn:hover { background:#1a4a80; }
+  .pwd-error { color:#ef4444; font-size:13px; margin-top:10px; display:none; }
+  #mainApp { display:none; }
+</style>
+</head>
+<body>
+
+<!-- 登录页 -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">⚡</div>
+    <div class="login-title">理想超充舆情监测</div>
+    <div class="login-sub">内部系统 · 请输入访问密码</div>
+    <input type="password" id="pwdInput" placeholder="请输入密码" autocomplete="off">
+    <button class="login-btn" onclick="checkPassword()">进入</button>
+    <div class="pwd-error" id="pwdError">密码错误，请重试</div>
+  </div>
+</div>
+
+<!-- 主应用 -->
+<div id="mainApp">
+
+<div class="header">
+  <h1>⚡ 理想超充舆情监测</h1>
+  <p>每日自动更新 · 数据来源：小红书 / 微博 / 网络资讯</p>
+</div>
+
+<div class="toolbar">
+  <select id="dateSelect" onchange="loadDate(this.value)"></select>
+  <input type="text" id="searchInput" placeholder="🔍 搜索关键词..." oninput="renderCards()">
+  <button class="filter-btn active" data-sentiment="all" onclick="setSentiment('all')">全部</button>
+  <button class="filter-btn" data-sentiment="positive" onclick="setSentiment('positive')">🟢 正向</button>
+  <button class="filter-btn" data-sentiment="neutral" onclick="setSentiment('neutral')">🟡 中性</button>
+  <button class="filter-btn" data-sentiment="negative" onclick="setSentiment('negative')">🔴 负向</button>
+  <button class="filter-btn" data-platform="xhs" onclick="setPlatform('xhs')" style="margin-left:8px">小红书</button>
+  <button class="filter-btn" data-platform="wb" onclick="setPlatform('wb')">微博</button>
+  <button class="filter-btn" data-platform="dy" onclick="setPlatform('dy')">抖音</button>
+  <button class="filter-btn" data-platform="web" onclick="setPlatform('web')">资讯</button>
+</div>
+
+<div class="stats">
+  <div class="stat-card"><div class="num" id="totalCount">-</div><div class="label">📊 今日条目</div></div>
+  <div class="stat-card pos"><div class="num" id="posCount">-</div><div class="label">🟢 正向声音</div></div>
+  <div class="stat-card neg"><div class="num" id="negCount">-</div><div class="label">🔴 负向声音</div></div>
+  <div class="stat-card neu"><div class="num" id="neuCount">-</div><div class="label">🟡 中性讨论</div></div>
+</div>
+
+<div class="content">
+  <div class="date-label" id="dateLabel"></div>
+  <div id="cardContainer">
+    <div class="loading">加载中...</div>
+  </div>
+</div>
+
+<script>
+let allData = [];
+let currentSentiment = 'all';
+let currentPlatform = 'all';
+let availableDates = [];
+
+const platformLabel = { xhs: '小红书', wb: '微博', dy: '抖音', web: '资讯' };
+const platformBadge = { xhs: 'badge-xhs', wb: 'badge-wb', dy: 'badge-dy', web: 'badge-web' };
+
+async function init() {
+  // 读取日期索引
+  try {
+    const res = await fetch('data/dates.json');
+    const raw = await res.json();
+    // 过滤掉非日期格式的条目（如 dates.json 本身）
+    availableDates = raw.filter(d => /^\d{4}-\d{2}-\d{2}$/.test(d));
+  } catch(e) {
+    availableDates = [];
+  }
+
+  // 如果没有数据，fallback 到今天
+  const todayStr = new Date().toLocaleDateString('zh-CN', {timeZone:'Asia/Shanghai'}).replace(/\//g, '-').replace(/(\d+)-(\d+)-(\d+)/, (_, y, m, d) => `${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`);
+  if (availableDates.length === 0) availableDates = [todayStr];
+
+  const dateSelect = document.getElementById('dateSelect');
+  // 最新日期在前
+  availableDates.slice().reverse().forEach(d => {
+    const opt = document.createElement('option');
+    opt.value = d;
+    opt.textContent = d;
+    dateSelect.appendChild(opt);
+  });
+
+  // 默认选中最新日期（列表最后一个 = 下拉框第一个）
+  const latestDate = availableDates[availableDates.length - 1];
+  dateSelect.value = latestDate;
+  loadDate(latestDate);
+}
+
+async function loadDate(date) {
+  // 切换日期时重置筛选状态
+  currentSentiment = 'all';
+  currentPlatform = 'all';
+  document.querySelectorAll('[data-sentiment]').forEach(b => b.classList.toggle('active', b.dataset.sentiment === 'all'));
+  document.querySelectorAll('[data-platform]').forEach(b => b.classList.remove('active'));
+  document.getElementById('searchInput').value = '';
+  document.getElementById('dateLabel').textContent = `📅 ${date} 舆情数据`;
+  document.getElementById('cardContainer').innerHTML = '<div class="loading">加载中...</div>';
+  try {
+    const res = await fetch(`data/${date}.json`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    allData = await res.json();
+    if (!Array.isArray(allData)) allData = [];
+    renderCards();
+  } catch(e) {
+    allData = [];
+    document.getElementById('totalCount').textContent = '0';
+    document.getElementById('posCount').textContent = '0';
+    document.getElementById('negCount').textContent = '0';
+    document.getElementById('neuCount').textContent = '0';
+    document.getElementById('cardContainer').innerHTML = '<div class="empty">暂无数据</div>';
+  }
+}
+
+function setSentiment(s) {
+  currentSentiment = s;
+  document.querySelectorAll('[data-sentiment]').forEach(b => b.classList.toggle('active', b.dataset.sentiment === s));
+  // 重置平台
+  renderCards();
+}
+
+function setPlatform(p) {
+  currentPlatform = currentPlatform === p ? 'all' : p;
+  document.querySelectorAll('[data-platform]').forEach(b => b.classList.toggle('active', b.dataset.platform === currentPlatform));
+  renderCards();
+}
+
+function makeCard(item) {
+  const badge = platformBadge[item.platform] || 'badge-web';
+  const label = platformLabel[item.platform] || item.platform;
+  const dotClass = item.sentiment === 'positive' ? 'dot-positive' : item.sentiment === 'negative' ? 'dot-negative' : 'dot-neutral';
+  const interactions = item.platform === 'xhs' ? `
+    <span>👍 ${item.liked_count}</span>
+    <span>💬 ${item.comment_count}</span>
+    <span>🔁 ${item.share_count}</span>
+  ` : '';
+  return `
+    <div class="card">
+      <div class="sentiment-dot ${dotClass}"></div>
+      <div class="card-body">
+        <div class="card-title">
+          <span class="platform-badge ${badge}">${label}</span>
+          ${item.url ? `<a href="${item.url}" target="_blank"> ${item.title}</a>` : ` ${item.title}`}
+        </div>
+        ${item.desc ? `<div class="card-desc">${item.desc}</div>` : ''}
+        <div class="card-meta">
+          <span>@${item.author}</span>
+          ${item.ip_location ? `<span>📍${item.ip_location}</span>` : ''}
+          <span>📅 ${item.publish_date}</span>
+          ${interactions}
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderCards() {
+  const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
+  let filtered = allData.filter(item => {
+    if (currentPlatform !== 'all' && item.platform !== currentPlatform) return false;
+    if (keyword && !item.title.toLowerCase().includes(keyword) && !(item.desc||'').toLowerCase().includes(keyword) && !item.author.toLowerCase().includes(keyword)) return false;
+    return true;
+  });
+
+  const pos = filtered.filter(i => i.sentiment === 'positive');
+  const neg = filtered.filter(i => i.sentiment === 'negative');
+  const neu = filtered.filter(i => i.sentiment === 'neutral');
+
+  // 更新统计
+  document.getElementById('totalCount').textContent = filtered.length;
+  document.getElementById('posCount').textContent = pos.length;
+  document.getElementById('negCount').textContent = neg.length;
+  document.getElementById('neuCount').textContent = neu.length;
+
+  if (filtered.length === 0) {
+    document.getElementById('cardContainer').innerHTML = '<div class="empty">没有符合条件的内容</div>';
+    return;
+  }
+
+  // 如果选了特定情感，只显示单列
+  if (currentSentiment !== 'all') {
+    const items = filtered.filter(i => i.sentiment === currentSentiment);
+    document.getElementById('cardContainer').innerHTML = items.map(makeCard).join('');
+    return;
+  }
+
+  // 默认三栏分列
+  document.getElementById('cardContainer').innerHTML = `
+    <div class="columns">
+      <div class="col-pos">
+        <div class="column-header">🟢 正向声音 <span class="column-count">${pos.length} 条</span></div>
+        ${pos.length ? pos.map(makeCard).join('') : '<div class="empty" style="padding:30px">暂无正向内容</div>'}
+      </div>
+      <div class="col-neg">
+        <div class="column-header">🔴 负向声音 <span class="column-count">${neg.length} 条</span></div>
+        ${neg.length ? neg.map(makeCard).join('') : '<div class="empty" style="padding:30px">暂无负向内容</div>'}
+      </div>
+      <div class="col-neu">
+        <div class="column-header">🟡 中性讨论 <span class="column-count">${neu.length} 条</span></div>
+        ${neu.length ? neu.map(makeCard).join('') : '<div class="empty" style="padding:30px">暂无中性内容</div>'}
+      </div>
+    </div>`;
+}
+
+// init() 由密码验证成功后调用，不在这里自动执行
+</script>
+</div><!-- /mainApp -->
+</body>
+</html>
