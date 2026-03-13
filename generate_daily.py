@@ -17,47 +17,70 @@ def clean_desc(text):
 
 def judge_sentiment(title, desc):
     """
-    情感判断：优先看正文内容，再看标题
-    正向关键词：体验好、方便、快、推荐等
-    负向关键词：排队、故障、占用、太差等
-    负向但实际正向的情况：标题含"焦虑"但正文是说没焦虑/解决了焦虑
+    情感判断：优先看正文内容，识别中文语境和网络用语
+    2026-03-13 优化：修复"锐评"、"霸张"等反讽表达的误判
     """
     text = (desc or '') + ' ' + (title or '')
+    title_str = title or ''
+    desc_str = desc or ''
     
-    # 正向信号（强）
-    pos_strong = ['体验很棒', '体验不错', '很好用', '推荐', '方便', '秒充', '10分钟', 
-                  '没有焦虑', '无焦虑', '解决了', '圈粉', '真香', '太爽', '好评',
-                  '不用排队', '来就充', '随时充', '体验还是很棒', '体验还是很好']
+    # ========== 1. 强正向信号（优先级最高）==========
+    pos_strong = [
+        '体验很棒', '体验不错', '很好用', '推荐', '方便', '秒充', '10分钟', 
+        '没有焦虑', '无焦虑', '解决了', '圈粉', '真香', '太爽', '好评',
+        '不用排队', '来就充', '随时充', '体验还是很棒', '体验还是很好',
+        '非常快', '真的快', '充电快', '速度快', '效率高', '很赞', '挺好',
+        '太爽了', '巨爽', '无敌', '吹爆', 'yyds', '绝了', '牛', '强',
+        '霸气', '霸张', '给力', '硬核', '真香定律'
+    ]
     
-    # 负向信号（强）
-    neg_strong = ['排队等', '排了很久', '排队半小时', '排队1小时', '等位', '充不上',
-                  '故障', '坏了', '损坏', '占位', '霸占', '投诉', '太贵了', '收费不合理',
-                  '服务差', '体验差', '太差', '失望', '坑']
+    # ========== 2. 强负向信号（只有这些才判负向）==========
+    neg_strong = [
+        '排队等了', '排了很久', '排队半小时', '排队1小时', '等位很久', '充不上',
+        '故障', '坏了', '损坏', '占位不充', '霸占车位', '投诉', '太贵了', '收费不合理',
+        '服务差', '体验差', '太差劲', '失望', '坑人', '被坑', '垃圾', '烂',
+        '不靠谱', '骗人', '虚假宣传', '上当', '后悔'
+    ]
     
-    # 标题中的误判词（出现在标题但实际内容可能是正向）
-    misleading_neg_in_title = ['焦虑', '伪命题', '悲剧']
+    # ========== 3. 网络玩梗/反讽表达（标题看似负向，实则正向）==========
+    misleading_in_title = [
+        '焦虑', '伪命题', '悲剧', '锐评', '吐槽', '差评'  # 这些词常用于反讽夸奖
+    ]
     
-    text_lower = text.lower()
+    # ========== 4. "太...了" 句式分析 ==========
+    # "太爽了"、"太快了" = 正向；"太差了"、"太慢了" = 负向
+    if '太' in text and '了' in text:
+        if any(w in text for w in ['太爽', '太快', '太棒', '太赞', '太好', '太牛', '太强', '太香']):
+            return 'positive'
+        if any(w in text for w in ['太差', '太慢', '太烂', '太坑', '太贵']):
+            return 'negative'
     
-    # 优先检查强正向
+    # ========== 5. 优先检查强正向（忽略误导词）==========
     if any(w in text for w in pos_strong):
         return 'positive'
     
-    # 优先检查强负向
-    if any(w in text for w in neg_strong):
+    # ========== 6. 检查强负向（但排除"短暂排队+快速充电"的场景）==========
+    has_strong_neg = any(w in text for w in neg_strong)
+    has_queue_but_fast = ('排队' in text or '等位' in text) and any(w in text for w in ['很快', '秒充', '1分钟', '2分钟', '马上', '立刻'])
+    
+    if has_strong_neg and not has_queue_but_fast:
         return 'negative'
     
-    # 标题含误导词，但正文有正向内容时，判为正向
-    title_has_misleading = any(w in (title or '') for w in misleading_neg_in_title)
-    desc_has_positive = any(w in (desc or '') for w in ['很棒', '不错', '好', '快', '方便', '推荐', '赞'])
-    if title_has_misleading and desc_has_positive:
+    # ========== 7. 标题有误导词 + 正文有正向内容 → 判为正向 ==========
+    title_misleading = any(w in title_str for w in misleading_in_title)
+    desc_positive = any(w in desc_str for w in [
+        '很棒', '不错', '好', '快', '方便', '推荐', '赞', '爽', '强', '牛', '给力', '满意'
+    ])
+    
+    if title_misleading and desc_positive:
         return 'positive'
     
-    # 一般负向词（仅在标题）
-    neg_title = ['伪命题', '悲剧', '崩塌', '失败', '差评', '质疑', '问题多']
-    if any(w in (title or '') for w in neg_title):
-        return 'negative'
+    # ========== 8. 正文大量正向词，即使标题中性也判正向 ==========
+    pos_count = sum(1 for w in ['好', '快', '方便', '不错', '赞', '推荐', '爽', '棒', '强'] if w in desc_str)
+    if pos_count >= 2:
+        return 'positive'
     
+    # ========== 9. 默认判中性 ==========
     return 'neutral'
 
 
