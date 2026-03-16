@@ -160,9 +160,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 <div class="stats">
   <div class="stat-card"><div class="num" id="industryTotalCount">-</div><div class="label">📊 今日资讯</div></div>
-  <div class="stat-card pos"><div class="num" id="industryPosCount">-</div><div class="label">🟢 正向</div></div>
-  <div class="stat-card neg"><div class="num" id="industryNegCount">-</div><div class="label">🔴 负向</div></div>
-  <div class="stat-card neu"><div class="num" id="industryNeuCount">-</div><div class="label">🟡 中性</div></div>
 </div>
 
 <div class="content">
@@ -388,9 +385,6 @@ async function loadIndustryDate(date) {
   } catch(e) {
     industryData = [];
     document.getElementById('industryTotalCount').textContent = '0';
-    document.getElementById('industryPosCount').textContent = '0';
-    document.getElementById('industryNegCount').textContent = '0';
-    document.getElementById('industryNeuCount').textContent = '0';
     document.getElementById('industryCardContainer').innerHTML = '<div class="empty">暂无数据</div>';
   }
 }
@@ -402,28 +396,19 @@ function renderIndustryCards() {
     return true;
   });
 
-  const pos = filtered.filter(i => i.sentiment === 'positive');
-  const neg = filtered.filter(i => i.sentiment === 'negative');
-  const neu = filtered.filter(i => i.sentiment === 'neutral');
-
   document.getElementById('industryTotalCount').textContent = filtered.length;
-  document.getElementById('industryPosCount').textContent = pos.length;
-  document.getElementById('industryNegCount').textContent = neg.length;
-  document.getElementById('industryNeuCount').textContent = neu.length;
 
   if (filtered.length === 0) {
     document.getElementById('industryCardContainer').innerHTML = '<div class="empty">没有符合条件的内容</div>';
     return;
   }
 
-  // 行业资讯采用时间线列表布局
+  // 行业资讯采用时间线列表布局（不显示正负向）
   const html = filtered.map(item => {
     const badge = 'badge-web';
-    const dotClass = item.sentiment === 'positive' ? 'dot-positive' : item.sentiment === 'negative' ? 'dot-negative' : 'dot-neutral';
     return `
       <div class="card">
-        <div class="sentiment-dot ${dotClass}"></div>
-        <div class="card-body">
+        <div class="card-body" style="margin-left:0">
           <div class="card-title">
             <span class="platform-badge ${badge}">🔖 ${item.keyword || '行业'}</span>
             <a href="${item.url}" target="_blank"> ${item.title}</a>

@@ -11,7 +11,6 @@
     "share_count": 0,
     "publish_date": "2026-03-16",
     "url": "https://www.cnr.cn/2013qcpd/2015xc/20260316/t20260316_527552753.shtml",
-    "sentiment": "positive",
     "keyword": "市场拓展"
   },
   {
@@ -26,7 +25,6 @@
     "share_count": 0,
     "publish_date": "2026-03-15",
     "url": "https://finance.sina.cn/stock/jdts/2026-03-15/detail-inhqzuxx9705746.d.html",
-    "sentiment": "negative",
     "keyword": "安全隐患"
   },
   {
@@ -41,7 +39,6 @@
     "share_count": 0,
     "publish_date": "2026-03-15",
     "url": "http://cj.sina.cn/articles/view/1650111241/625ab30902001fwgq",
-    "sentiment": "negative",
     "keyword": "消费者投诉"
   },
   {
@@ -56,7 +53,6 @@
     "share_count": 0,
     "publish_date": "2026-03-15",
     "url": "https://mparticle.uc.cn/article.html?uc_param_str=frdnsnpfvecpntnwprdssskt#!wm_aid=888135cb6bcd0d7985e140ab81536578",
-    "sentiment": "negative",
     "keyword": "车企经营危机"
   },
   {
@@ -71,7 +67,6 @@
     "share_count": 0,
     "publish_date": "2026-03-14",
     "url": "https://www.163.com/dy/article/KO0LKM1E0511CPVM.html",
-    "sentiment": "positive",
     "keyword": "概念车发布"
   },
   {
@@ -86,7 +81,6 @@
     "share_count": 0,
     "publish_date": "2026-03-12",
     "url": "https://m.itbear.com.cn/html/2026-03/1208599.html",
-    "sentiment": "positive",
     "keyword": "新车上市"
   },
   {
@@ -101,7 +95,6 @@
     "share_count": 0,
     "publish_date": "2026-03-12",
     "url": "https://m.itbear.com.cn/html/2026-03/1208629.html",
-    "sentiment": "positive",
     "keyword": "产品设计"
   },
   {
@@ -116,7 +109,6 @@
     "share_count": 0,
     "publish_date": "2026-03-09",
     "url": "https://www.sohu.com/a/994379865_122641265",
-    "sentiment": "positive",
     "keyword": "智能交互"
   },
   {
@@ -131,7 +123,6 @@
     "share_count": 0,
     "publish_date": "2026-03-05",
     "url": "https://m.jiemian.com/article/14083258.html",
-    "sentiment": "positive",
     "keyword": "新车发布"
   },
   {
@@ -146,7 +137,6 @@
     "share_count": 0,
     "publish_date": "2026-03-05",
     "url": "https://www.autohome.com.cn/news/201403/1312629.html",
-    "sentiment": "positive",
     "keyword": "新车发布"
   },
   {
@@ -161,7 +151,6 @@
     "share_count": 0,
     "publish_date": "2026-03-04",
     "url": "https://view.inews.qq.com/wxn/20260303A03T5000",
-    "sentiment": "positive",
     "keyword": "新车发布"
   },
   {
@@ -176,7 +165,6 @@
     "share_count": 0,
     "publish_date": "2026-03-02",
     "url": "https://news.m.yiche.com/info/107971389.html",
-    "sentiment": "positive",
     "keyword": "新车发布"
   }
 ]
