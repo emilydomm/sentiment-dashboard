@@ -210,7 +210,7 @@ function switchTab(tab) {
 async function init() {
   // 读取日期索引
   try {
-    const res = await fetch('data/dates.json');
+    const res = await fetch('data/dates.json?v=' + Date.now());
     const raw = await res.json();
     // 过滤掉非日期格式的条目（如 dates.json 本身）
     availableDates = raw.filter(d => /^\d{4}-\d{2}-\d{2}$/.test(d));
@@ -250,7 +250,7 @@ async function loadDate(date) {
   document.getElementById('dateLabel').textContent = `📅 ${date} 舆情数据`;
   document.getElementById('cardContainer').innerHTML = '<div class="loading">加载中...</div>';
   try {
-    const res = await fetch(`data/${date}.json`);
+    const res = await fetch(`data/${date}.json?v=${Date.now()}`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     allData = await res.json();
     if (!Array.isArray(allData)) allData = [];
@@ -380,7 +380,7 @@ async function loadIndustryDate(date) {
   document.getElementById('industryCardContainer').innerHTML = '<div class="loading">加载中...</div>';
   
   try {
-    const res = await fetch(`data/industry/${date}.json`);
+    const res = await fetch(`data/industry/${date}.json?v=${Date.now()}`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     industryData = await res.json();
     if (!Array.isArray(industryData)) industryData = [];
