@@ -88,5 +88,35 @@
     "url": "https://www.cnr.cn/2013qcpd/2015xc/20260316/t20260316_527552753.shtml",
     "sentiment": "positive",
     "keyword": "市场拓展"
+  },
+  {
+    "platform": "web",
+    "note_id": "https://www.163.com/dy/article/KO0LKM1E0511CPVM.html",
+    "title": "探路发布两款概念车：剪刀门轿跑S10百公里加速1.8秒",
+    "desc": "3月14日AWE展会上，探路旗下星际穿越发布旗舰智能轿跑S10和豪华SUV S11。S10搭载2448马力多电机系统，零百加速1.8秒，105度半固态电池续航1250公里。",
+    "author": "行业资讯",
+    "ip_location": "",
+    "liked_count": 0,
+    "comment_count": 0,
+    "share_count": 0,
+    "publish_date": "2026-03-14",
+    "url": "https://www.163.com/dy/article/KO0LKM1E0511CPVM.html",
+    "sentiment": "positive",
+    "keyword": "概念车发布"
+  },
+  {
+    "platform": "web",
+    "note_id": "https://mparticle.uc.cn/article.html?uc_param_str=frdnsnpfvecpntnwprdssskt#!wm_aid=888135cb6bcd0d7985e140ab81536578",
+    "title": "威马APP复活、极越修车等数月，爆雷车企车主售后困境",
+    "desc": "3月15日消息，威马、高合、极越、哪吒等新能源车企先后陷入经营困境，数十万车主面临售后难题。3月11日是哪吒汽车提交重整计划最后期限，方运舟与张勇被列为失信被执行人。",
+    "author": "行业资讯",
+    "ip_location": "",
+    "liked_count": 0,
+    "comment_count": 0,
+    "share_count": 0,
+    "publish_date": "2026-03-15",
+    "url": "https://mparticle.uc.cn/article.html?uc_param_str=frdnsnpfvecpntnwprdssskt#!wm_aid=888135cb6bcd0d7985e140ab81536578",
+    "sentiment": "negative",
+    "keyword": "车企经营危机"
   }
 ]
