@@ -11,7 +11,8 @@
     "share_count": 0,
     "publish_date": "2026-03-16",
     "url": "https://www.cnr.cn/2013qcpd/2015xc/20260316/t20260316_527552753.shtml",
-    "keyword": "市场拓展"
+    "keyword": "市场拓展",
+    "image": "//www.cnr.cn/2021/sjy/images/code.png"
   },
   {
     "platform": "web",
@@ -25,7 +26,8 @@
     "share_count": 0,
     "publish_date": "2026-03-15",
     "url": "https://finance.sina.cn/stock/jdts/2026-03-15/detail-inhqzuxx9705746.d.html",
-    "keyword": "安全隐患"
+    "keyword": "安全隐患",
+    "image": "https://n.sinaimg.cn/spider20260315/239/w600h439/20260315/6f52-e01faf0bf97c683667bb876e5eed022a.jpg"
   },
   {
     "platform": "web",
@@ -39,7 +41,8 @@
     "share_count": 0,
     "publish_date": "2026-03-15",
     "url": "http://cj.sina.cn/articles/view/1650111241/625ab30902001fwgq",
-    "keyword": "消费者投诉"
+    "keyword": "消费者投诉",
+    "image": "//k.sinaimg.cn/n/sinakd20260316s/519/w1265h854/20260316/1bab-6dcb8b1470ea7b2a090b72191bd53447.png/w700d1q75cms.jpg"
   },
   {
     "platform": "web",
@@ -53,7 +56,8 @@
     "share_count": 0,
     "publish_date": "2026-03-15",
     "url": "https://mparticle.uc.cn/article.html?uc_param_str=frdnsnpfvecpntnwprdssskt#!wm_aid=888135cb6bcd0d7985e140ab81536578",
-    "keyword": "车企经营危机"
+    "keyword": "车企经营危机",
+    "image": ""
   },
   {
     "platform": "web",
@@ -67,7 +71,8 @@
     "share_count": 0,
     "publish_date": "2026-03-14",
     "url": "https://www.163.com/dy/article/KO0LKM1E0511CPVM.html",
-    "keyword": "概念车发布"
+    "keyword": "概念车发布",
+    "image": "https://static.ws.126.net/f2e/include/common_nav/images/topapp.jpg"
   },
   {
     "platform": "web",
@@ -81,7 +86,8 @@
     "share_count": 0,
     "publish_date": "2026-03-12",
     "url": "https://m.itbear.com.cn/html/2026-03/1208599.html",
-    "keyword": "新车上市"
+    "keyword": "新车上市",
+    "image": "https://m.itbear.com.cn/static/img/icon-back.png"
   },
   {
     "platform": "web",
@@ -95,7 +101,8 @@
     "share_count": 0,
     "publish_date": "2026-03-12",
     "url": "https://m.itbear.com.cn/html/2026-03/1208629.html",
-    "keyword": "产品设计"
+    "keyword": "产品设计",
+    "image": "https://m.itbear.com.cn/static/img/icon-back.png"
   },
   {
     "platform": "web",
@@ -109,7 +116,8 @@
     "share_count": 0,
     "publish_date": "2026-03-09",
     "url": "https://www.sohu.com/a/994379865_122641265",
-    "keyword": "智能交互"
+    "keyword": "智能交互",
+    "image": "http://sohu-media.bjcnc.scs.sohucs.com/web/static/images/sohu_logo.png"
   },
   {
     "platform": "web",
@@ -123,7 +131,8 @@
     "share_count": 0,
     "publish_date": "2026-03-05",
     "url": "https://m.jiemian.com/article/14083258.html",
-    "keyword": "新车发布"
+    "keyword": "新车发布",
+    "image": "https://img.jiemian.com/101/original/20260308/177290111910524700_a300x300.jpg"
   },
   {
     "platform": "web",
@@ -137,7 +146,8 @@
     "share_count": 0,
     "publish_date": "2026-03-05",
     "url": "https://www.autohome.com.cn/news/201403/1312629.html",
-    "keyword": "新车发布"
+    "keyword": "新车发布",
+    "image": "https://z.autoimg.cn/zixun/www/img/opg_400_400.png"
   },
   {
     "platform": "web",
@@ -151,7 +161,8 @@
     "share_count": 0,
     "publish_date": "2026-03-04",
     "url": "https://view.inews.qq.com/wxn/20260303A03T5000",
-    "keyword": "新车发布"
+    "keyword": "新车发布",
+    "image": ""
   },
   {
     "platform": "web",
@@ -165,6 +176,7 @@
     "share_count": 0,
     "publish_date": "2026-03-02",
     "url": "https://news.m.yiche.com/info/107971389.html",
-    "keyword": "新车发布"
+    "keyword": "新车发布",
+    "image": "https://static1.bitautoimg.com/yc-pc/bitautoPC/static/images/qr.png"
   }
 ]

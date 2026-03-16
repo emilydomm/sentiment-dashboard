@@ -403,12 +403,23 @@ function renderIndustryCards() {
     return;
   }
 
-  // 行业资讯采用时间线列表布局（不显示正负向）
+  // 行业资讯采用时间线列表布局（带配图）
   const html = filtered.map(item => {
     const badge = 'badge-web';
+    let imageHtml = '';
+    if (item.image) {
+      let imgSrc = item.image;
+      // 修复相对协议URL
+      if (imgSrc.startsWith('//')) imgSrc = 'https:' + imgSrc;
+      // 只显示有效的图片（过滤logo/icon）
+      if (!imgSrc.includes('logo') && !imgSrc.includes('icon') && !imgSrc.includes('code.png')) {
+        imageHtml = `<img src="${imgSrc}" style="width:120px;height:80px;object-fit:cover;border-radius:8px;margin-right:12px;flex-shrink:0" onerror="this.style.display='none'">`;
+      }
+    }
     return `
-      <div class="card">
-        <div class="card-body" style="margin-left:0">
+      <div class="card" style="display:flex;align-items:flex-start">
+        ${imageHtml}
+        <div class="card-body" style="margin-left:0;flex:1">
           <div class="card-title">
             <span class="platform-badge ${badge}">🔖 ${item.keyword || '行业'}</span>
             <a href="${item.url}" target="_blank"> ${item.title}</a>
