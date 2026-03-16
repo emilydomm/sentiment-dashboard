@@ -5,33 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>智能电动传播资讯</title>
 <script>
-// 密码保护 - SHA256 of "liauto2026"
-const CORRECT_HASH = 'bd8b5cb4d34ee5897381d8a396dadc2d274e62d5ff96784a94519c4e9c352c12';
-async function sha256(str) {
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-}
-async function checkPassword() {
-  const input = document.getElementById('pwdInput').value;
-  const hash = await sha256(input);
-  if (hash === CORRECT_HASH) {
-    sessionStorage.setItem('auth', '1');
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('mainApp').style.display = 'block';
-    init();
-  } else {
-    document.getElementById('pwdError').style.display = 'block';
-    document.getElementById('pwdInput').value = '';
-    document.getElementById('pwdInput').focus();
-  }
-}
+// 密码保护已移除 - 直接加载应用
 window.addEventListener('DOMContentLoaded', () => {
-  if (sessionStorage.getItem('auth') === '1') {
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('mainApp').style.display = 'block';
-    init();
-  }
-  document.getElementById('pwdInput').addEventListener('keydown', e => { if(e.key==='Enter') checkPassword(); });
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('mainApp').style.display = 'block';
+  init();
 });
 </script>
 <style>
