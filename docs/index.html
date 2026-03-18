@@ -210,7 +210,17 @@ async function init() {
     const res = await fetch('data/dates.json?v=' + Date.now());
     const raw = await res.json();
     // 过滤掉非日期格式的条目（如 dates.json 本身）
-    availableDates = raw.filter(d => /^\d{4}-\d{2}-\d{2}$/.test(d));
+    let dates = raw.filter(d => /^\d{4}-\d{2}-\d{2}$/.test(d));
+    
+    // T-7过滤：只保留最近7天
+    const today = new Date();
+    const sevenDaysAgo = new Date(today);
+    sevenDaysAgo.setDate(today.getDate() - 6);
+    
+    availableDates = dates.filter(d => {
+      const date = new Date(d + 'T00:00:00');
+      return date >= sevenDaysAgo && date <= today;
+    });
   } catch(e) {
     availableDates = [];
   }
