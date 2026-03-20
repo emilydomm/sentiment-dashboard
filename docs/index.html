@@ -363,18 +363,31 @@ function renderCards() {
 // ========== 行业资讯相关函数 ==========
 
 async function initIndustry() {
-  // 简化：直接加载今天的文件（后续可通过dates.json扩展）
   const todayStr = new Date().toLocaleDateString('zh-CN', {timeZone:'Asia/Shanghai'}).replace(/\//g, '-').replace(/(\d+)-(\d+)-(\d+)/, (_, y, m, d) => `${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`);
-  industryAvailableDates = [todayStr];
+
+  // 读取 dates.json，获取所有可用日期
+  let availableDates = [];
+  try {
+    const res = await fetch(`data/industry/dates.json?v=${Date.now()}`);
+    if (res.ok) availableDates = await res.json();
+  } catch(e) {}
+
+  // 加入今天（如果没有也先放进去，loadIndustryDate 内会处理回退）
+  if (!availableDates.includes(todayStr)) availableDates.push(todayStr);
+  availableDates.sort().reverse();
+  industryAvailableDates = availableDates;
 
   const dateSelect = document.getElementById('industryDateSelect');
   dateSelect.innerHTML = '';
-  const opt = document.createElement('option');
-  opt.value = todayStr;
-  opt.textContent = todayStr;
-  dateSelect.appendChild(opt);
-  
+  availableDates.forEach(d => {
+    const opt = document.createElement('option');
+    opt.value = d;
+    opt.textContent = d + (d === todayStr ? ' (今日)' : '');
+    dateSelect.appendChild(opt);
+  });
+
   dateSelect.value = todayStr;
+  // 先尝试今天，若无数据自动回退到最近一天
   loadIndustryDate(todayStr);
 }
 
@@ -382,14 +395,28 @@ async function loadIndustryDate(date) {
   document.getElementById('industrySearchInput').value = '';
   document.getElementById('industryDateLabel').textContent = `📅 ${date} 行业资讯`;
   document.getElementById('industryCardContainer').innerHTML = '<div class="loading">加载中...</div>';
-  
+
   try {
     const res = await fetch(`data/industry/${date}.json?v=${Date.now()}`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     industryData = await res.json();
-    if (!Array.isArray(industryData)) industryData = [];
+    if (!Array.isArray(industryData) || industryData.length === 0) throw new Error('empty');
     renderIndustryCards();
   } catch(e) {
+    // 若当前日期没有数据，自动回退到 dates.json 中最近一天
+    const fallback = (industryAvailableDates || []).find(d => d < date);
+    if (fallback) {
+      document.getElementById('industryDateLabel').textContent = `📅 ${fallback} 行业资讯（最新可用）`;
+      document.getElementById('industryDateSelect').value = fallback;
+      try {
+        const res2 = await fetch(`data/industry/${fallback}.json?v=${Date.now()}`);
+        if (!res2.ok) throw new Error();
+        industryData = await res2.json();
+        if (!Array.isArray(industryData)) industryData = [];
+        renderIndustryCards();
+        return;
+      } catch(e2) {}
+    }
     industryData = [];
     document.getElementById('industryTotalCount').textContent = '0';
     document.getElementById('industryCardContainer').innerHTML = '<div class="empty">暂无数据</div>';
