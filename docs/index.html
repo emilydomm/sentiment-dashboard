@@ -260,7 +260,12 @@ async function loadDate(date) {
     document.getElementById('posCount').textContent = '0';
     document.getElementById('negCount').textContent = '0';
     document.getElementById('neuCount').textContent = '0';
-    document.getElementById('cardContainer').innerHTML = '<div class="empty">暂无数据</div>';
+    // 判断是否今天数据缺失（可能爬虫受限）
+    const today = new Date().toLocaleDateString('zh-CN', {year:'numeric',month:'2-digit',day:'2-digit',timeZone:'Asia/Shanghai'}).replace(/\//g,'-');
+    const isToday = date === today;
+    document.getElementById('cardContainer').innerHTML = isToday
+      ? '<div class="empty" style="padding:60px 20px"><div style="font-size:32px;margin-bottom:12px">🚫</div><div style="font-size:16px;color:#e63946;font-weight:600;margin-bottom:8px">爬虫限制，数据未能更新</div><div style="font-size:13px;color:#999">今日小红书数据暂时无法获取，请稍后再试</div></div>'
+      : '<div class="empty">暂无数据</div>';
   }
 }
 
