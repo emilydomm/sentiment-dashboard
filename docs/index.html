@@ -459,7 +459,8 @@ function renderIndustryCards() {
 
     let imgSrc = item.image || '';
     if (imgSrc.startsWith('//')) imgSrc = 'https:' + imgSrc;
-    const validImg = imgSrc && !imgSrc.includes('logo') && !imgSrc.includes('icon') && !imgSrc.includes('code.png') && !imgSrc.includes('placeholder');
+    const badPatterns = ['logo','icon','avatar','placeholder','default','sprite','blank','searchbox','/gcp/','qrcode','watermark','/brand/','favicon'];
+    const validImg = imgSrc && imgSrc.startsWith('http') && !badPatterns.some(p => imgSrc.toLowerCase().includes(p));
 
     const imageBlock = validImg ? `
       <div style="flex-shrink:0;width:160px;height:108px;border-radius:10px;overflow:hidden;background:#f0f0f0;margin-left:16px">

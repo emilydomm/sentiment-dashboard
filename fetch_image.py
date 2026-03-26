@@ -13,6 +13,26 @@ HEADERS = {
     'Accept-Language': 'zh-CN,zh;q=0.9',
 }
 
+# 无意义图片的特征关键词（路径或文件名含这些词的一律过滤）
+BAD_IMAGE_PATTERNS = [
+    'logo', 'icon', 'avatar', 'placeholder', 'default', 'sprite', 'blank',
+    'searchbox',  # bdstatic searchbox目录下基本都是logo
+    '/gcp/',      # bdstatic gcp路径多为品牌logo
+    'qrcode', 'qr_code',
+    'watermark',
+    '/brand/',
+    'favicon',
+]
+
+def is_valid_image(url):
+    """判断图片URL是否为有效内容图（非logo/icon）"""
+    url_lower = url.lower()
+    if not url.startswith('http'):
+        return False
+    if any(p in url_lower for p in BAD_IMAGE_PATTERNS):
+        return False
+    return True
+
 def fetch_og_image(url, timeout=6):
     """从URL提取og:image，失败返回空字符串"""
     try:
@@ -29,15 +49,16 @@ def fetch_og_image(url, timeout=6):
             m = re.search(p, html, re.I | re.S)
             if m:
                 img = m.group(1).strip()
-                if img.startswith('http') and not any(x in img.lower() for x in
-                        ['logo','icon','avatar','placeholder','default','sprite','blank']):
+                if img.startswith('//'):
+                    img = 'https:' + img
+                if is_valid_image(img):
                     return img
         
         # 兜底：找第一张内容大图
         img_tags = re.findall(r'<img[^>]+src=["\']([^"\']{50,})["\']', html, re.I)
         for img in img_tags:
-            if any(ext in img.lower() for ext in ['.jpg','.jpeg','.png','.webp']) and img.startswith('http'):
-                if not any(x in img.lower() for x in ['logo','icon','avatar','sprite','loading','blank']):
+            if any(ext in img.lower() for ext in ['.jpg','.jpeg','.png','.webp']):
+                if is_valid_image(img):
                     return img
     except:
         pass
