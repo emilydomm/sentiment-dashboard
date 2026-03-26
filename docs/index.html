@@ -155,16 +155,19 @@ window.addEventListener('DOMContentLoaded', () => {
 <div id="industry-panel">
 <div class="toolbar">
   <select id="industryDateSelect" onchange="loadIndustryDate(this.value)"></select>
-  <input type="text" id="industrySearchInput" placeholder="🔍 搜索关键词..." oninput="renderIndustryCards()">
+  <input type="text" id="industrySearchInput" placeholder="🔍 搜索标题/关键词..." oninput="renderIndustryCards()">
 </div>
 
 <div class="stats">
-  <div class="stat-card"><div class="num" id="industryTotalCount">-</div><div class="label">📊 今日资讯</div></div>
+  <div class="stat-card" style="max-width:180px">
+    <div class="num" id="industryTotalCount">-</div>
+    <div class="label">📊 今日资讯条数</div>
+  </div>
 </div>
 
-<div class="content">
-  <div class="date-label" id="industryDateLabel"></div>
-  <div id="industryCardContainer">
+<div class="content" style="padding-top:8px">
+  <div class="date-label" id="industryDateLabel" style="margin-bottom:16px;font-size:14px;color:#666;font-weight:500"></div>
+  <div id="industryCardContainer" style="max-width:900px">
     <div class="loading">加载中...</div>
   </div>
 </div>
@@ -437,31 +440,67 @@ function renderIndustryCards() {
     return;
   }
 
-  // 行业资讯采用时间线列表布局（带配图）
+  // 行业资讯卡片布局
+  const kwColorMap = {
+    '电池技术':   {bg:'#fff7ed', color:'#c2410c', dot:'#f97316'},
+    '充电技术':   {bg:'#eff6ff', color:'#1d4ed8', dot:'#3b82f6'},
+    '底盘技术':   {bg:'#f0fdf4', color:'#15803d', dot:'#22c55e'},
+    '智能驾驶':   {bg:'#faf5ff', color:'#7e22ce', dot:'#a855f7'},
+    '新车发布':   {bg:'#fff1f2', color:'#be123c', dot:'#f43f5e'},
+    '增程技术':   {bg:'#ecfeff', color:'#0e7490', dot:'#06b6d4'},
+    '三电系统':   {bg:'#fefce8', color:'#a16207', dot:'#eab308'},
+    '悬架技术':   {bg:'#f0fdf4', color:'#166534', dot:'#16a34a'},
+    '能耗表现':   {bg:'#f0fdfa', color:'#0f766e', dot:'#14b8a6'},
+  };
+
   const html = filtered.map(item => {
-    const badge = 'badge-web';
-    let imageHtml = '';
-    if (item.image) {
-      let imgSrc = item.image;
-      // 修复相对协议URL
-      if (imgSrc.startsWith('//')) imgSrc = 'https:' + imgSrc;
-      // 只显示有效的图片（过滤logo/icon）
-      if (!imgSrc.includes('logo') && !imgSrc.includes('icon') && !imgSrc.includes('code.png')) {
-        imageHtml = `<img src="${imgSrc}" style="width:120px;height:80px;object-fit:cover;border-radius:8px;margin-right:12px;flex-shrink:0" onerror="this.style.display='none'">`;
-      }
-    }
+    const kw = item.keyword || '行业资讯';
+    const kwStyle = kwColorMap[kw] || {bg:'#f0f8ff', color:'#0369a1', dot:'#3b82f6'};
+
+    let imgSrc = item.image || '';
+    if (imgSrc.startsWith('//')) imgSrc = 'https:' + imgSrc;
+    const validImg = imgSrc && !imgSrc.includes('logo') && !imgSrc.includes('icon') && !imgSrc.includes('code.png') && !imgSrc.includes('placeholder');
+
+    const imageBlock = validImg ? `
+      <div style="flex-shrink:0;width:160px;height:108px;border-radius:10px;overflow:hidden;background:#f0f0f0;margin-right:16px">
+        <img src="${imgSrc}" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.parentElement.style.display='none'">
+      </div>` : '';
+
     return `
-      <div class="card" style="display:flex;align-items:flex-start">
-        ${imageHtml}
-        <div class="card-body" style="margin-left:0;flex:1">
-          <div class="card-title">
-            <span class="platform-badge ${badge}">🔖 ${item.keyword || '行业'}</span>
-            <a href="${item.url}" target="_blank"> ${item.title}</a>
+      <div style="
+        background:white;
+        border-radius:14px;
+        padding:18px 20px;
+        margin-bottom:12px;
+        box-shadow:0 2px 8px rgba(0,0,0,.06);
+        display:flex;
+        align-items:flex-start;
+        border-left:4px solid ${kwStyle.dot};
+        transition:box-shadow .2s, transform .15s;
+        cursor:default;
+      " onmouseenter="this.style.boxShadow='0 6px 20px rgba(0,0,0,.12)';this.style.transform='translateY(-1px)'"
+         onmouseleave="this.style.boxShadow='0 2px 8px rgba(0,0,0,.06)';this.style.transform='translateY(0)'">
+        ${imageBlock}
+        <div style="flex:1;min-width:0">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
+            <span style="
+              display:inline-block;
+              background:${kwStyle.bg};
+              color:${kwStyle.color};
+              font-size:11px;
+              font-weight:700;
+              padding:3px 10px;
+              border-radius:20px;
+              white-space:nowrap;
+              letter-spacing:.3px;
+            ">${kw}</span>
+            <span style="font-size:11px;color:#bbb">📅 ${item.publish_date}</span>
           </div>
-          ${item.desc ? `<div class="card-desc">${item.desc}</div>` : ''}
-          <div class="card-meta">
-            <span>📅 ${item.publish_date}</span>
+          <div style="font-size:15px;font-weight:600;line-height:1.5;margin-bottom:8px">
+            <a href="${item.url}" target="_blank" style="color:#1a1a2e;text-decoration:none"
+               onmouseenter="this.style.color='#0f3460'" onmouseleave="this.style.color='#1a1a2e'">${item.title}</a>
           </div>
+          ${item.desc ? `<div style="font-size:13px;color:#666;line-height:1.7;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">${item.desc}</div>` : ''}
         </div>
       </div>`;
   }).join('');
