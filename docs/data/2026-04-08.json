@@ -1,0 +1,112 @@
+[
+  {
+    "platform": "web",
+    "note_id": "web_20260403_hanlu_5c",
+    "title": "韩路：理想5C超充是我用过稳定性最高的5C充电系统和电池",
+    "desc": "汽车博主韩路4月3日表示，自己的理想MEGA已进行高功率5C超充两年，体验"好用的很"。他让理想工程师检查了一台跑了4万公里的MEGA，电池健康度仍在95%左右。韩路直言，截至2026年4月，理想的5C超充系统和电池是他用过稳定性最高的。",
+    "author": "快科技/韩路",
+    "ip_location": "",
+    "publish_date": "2026-04-03",
+    "url": "https://www.toutiao.com/article/7624525436969599488/",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260403_mega_battery_health",
+    "title": "韩路揭秘理想5C超充：4万公里电池95%健康度，稳定性真能抗6年？",
+    "desc": "博主韩路实测：理想MEGA跑了4万公里、持续5C超充两年后，电池健康度仍维持95%左右。理想承诺1500次5C满充满放后电池健康度保持80%以上。韩路提醒用户确保电池散热充足、冷却进气口未被防虫网等异物阻挡。",
+    "author": "搜狐汽车",
+    "ip_location": "",
+    "publish_date": "2026-04-03",
+    "url": "https://www.sohu.com/a/1005292896_121885028",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260404_auto_charging_station",
+    "title": "充电不用人了？理想自动充电站将于第二季度正式落成",
+    "desc": "根据理想超充2026年Q1季报（3月24日发布），理想首座全自动充电站将于Q2落地，自动充电机械臂代替人工插拔枪，实现车辆自动找站、停车到充电全流程无感补能，解决雨雪低温天气充电痛点。截至Q1已建成4000+座超充站、22000+根超充桩。",
+    "author": "今日头条",
+    "ip_location": "",
+    "publish_date": "2026-04-04",
+    "url": "https://m.toutiao.com/a7621023790952186402/",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260404_q1_report_ifeng",
+    "title": "理想汽车建成超4000座超充站，首座自动充电站将于Q2落地",
+    "desc": "理想汽车宣布截至2026年Q1已建成超4000座超充站、22000个以上超充桩，覆盖280多座城市，其中近70%为5C和4C高功率充电桩。首座自动充电站将于今年Q2正式落地，标志着"无感补能时代"开启。春节期间已提供超145万次充电服务。",
+    "author": "凤凰网汽车",
+    "ip_location": "",
+    "publish_date": "2026-04-04",
+    "url": "https://auto.ifeng.com/c/8rkgVuXBBFy",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260405_5c_vs_normal_comparison",
+    "title": "理想超充70%是5C/4C桩，比普通桩快多少？",
+    "desc": "理想5C/4C超充桩比普通桩快4到5倍，补能500公里最多能节省63分钟。高速场景5C超充12分钟补能500公里，低温环境下平均充电时间也只有14.5分钟，优于竞品。近70%高比例意味着用户有很大概率享受高效补能。",
+    "author": "今日头条",
+    "ip_location": "",
+    "publish_date": "2026-04-05",
+    "url": "https://m.toutiao.com/article/7620679965478076966/",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260406_q2_auto_charging_toutiao",
+    "title": "理想Q2落地自动充电站，"无感补能"能改善充电体验吗？",
+    "desc": "理想Q2落地的自动充电站将充电从手动操作变为自动化服务，从找站、停车到充电的全流程将进一步简化。基于已建成超4000座超充站的网络支撑，自动充电站首先作为试点，初期主要服务理想自家车型。",
+    "author": "今日头条",
+    "ip_location": "",
+    "publish_date": "2026-04-06",
+    "url": "https://m.toutiao.com/article/7620679717410161190/",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260406_occupy_charger_problem",
+    "title": "理想5C快充为啥成了"慢充位"？充电桩被老旧电车占满，这局该怎么破？",
+    "desc": "理想全开放策略导致春运期间5C超充桩被增程车、网约车占满，纯电车主本只需12分钟充电却在寒风中等了俩小时。车主在网上吐槽称"理想建的不是超充站，是给友商建的慢充停车场"。理想客服回应高速超充桩开放政策不做改变。",
+    "author": "有驾",
+    "ip_location": "",
+    "publish_date": "2026-04-06",
+    "url": "https://m.yoojia.com/article/8473501455617799722.html",
+    "sentiment": "negative"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260407_spring_festival_occupy",
+    "title": "桩是好桩却遭疯抢！理想超充被占潮冲垮，全开放真的错了吗？",
+    "desc": "春运期间理想超充网络遭遇高峰冲击，增程车、网约车低速慢充占位，纯电车主焦急排队。有建议通过差异化服务费调节，向理想纯电用户发放专属优惠券保障优先补能。车主认可理想超充硬件水平，吐槽运营策略。",
+    "author": "今日头条",
+    "ip_location": "",
+    "publish_date": "2026-04-07",
+    "url": "https://m.toutiao.com/a1857974863057948/",
+    "sentiment": "negative"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260407_open_policy_debate",
+    "title": "理想超充稳如快，被春运占桩潮冲击——全开放策略再引争议",
+    "desc": "理想高速充电桩全开放策略在春运巨量车流下暴露短板，网约车抢占超充位导致效率跌至谷底。不过车主也对理想充电桩产品力给予客观评价：稳定、速度快、充电枪轻便。这是整个新能源行业高速补能网络面临的共性难题。",
+    "author": "百家号",
+    "ip_location": "",
+    "publish_date": "2026-04-07",
+    "url": "https://baijiahao.baidu.com/s?id=1857939049939714213",
+    "sentiment": "neutral"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260408_l9_5c_family_trip",
+    "title": "2026款理想L9升级5C超充，能否真正解决家庭长途焦虑？",
+    "desc": "2026款理想L9搭载5C超充，高速场景12分钟补能500公里，解决家庭长途出行补能焦虑。纯电续航提升，增程器噪音极低。测评认为确实在一定程度上解决了长途出行痛点，但也指出高速服务区排队问题仍存在。",
+    "author": "百家号",
+    "ip_location": "",
+    "publish_date": "2026-04-08",
+    "url": "https://baijiahao.baidu.com/s?id=1858157376064564406",
+    "sentiment": "positive"
+  }
+]
