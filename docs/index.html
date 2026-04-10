@@ -8,13 +8,14 @@
 // 密码保护已移除 - 直接加载应用
 window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('loginScreen').style.display = 'none';
-  document.getElementById('mainApp').style.display = 'block';
+  document.getElementById('mainApp').classList.add('visible');
   init();
 });
 </script>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f7fa; color: #333; }
+  html, body { overflow: hidden; height: 100%; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f7fa; color: #333; display: flex; flex-direction: column; }
   
   .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: white; padding: 24px 32px; }
   .header h1 { font-size: 22px; font-weight: 600; }
@@ -39,7 +40,10 @@ window.addEventListener('DOMContentLoaded', () => {
   .stat-card.neg .num { color: #ef4444; }
   .stat-card.neu .num { color: #f59e0b; }
   
-  .content { padding: 0 32px 32px; }
+  #mainApp { display: none; flex-direction: column; height: 100%; overflow: hidden; }
+  #mainApp.visible { display: flex; }
+  #sentiment-panel, #industry-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+  .content { padding: 0 32px 32px; flex: 1; overflow-y: auto; }
   .date-label { font-size: 13px; color: #888; margin: 16px 0 10px; }
 
   /* 三栏布局 */
@@ -97,7 +101,7 @@ window.addEventListener('DOMContentLoaded', () => {
   .login-btn { width:100%; margin-top:14px; padding:12px; background:#0f3460; color:white; border:none; border-radius:10px; font-size:15px; font-weight:600; cursor:pointer; transition:background .2s; }
   .login-btn:hover { background:#1a4a80; }
   .pwd-error { color:#ef4444; font-size:13px; margin-top:10px; display:none; }
-  #mainApp { display:none; }
+  /* #mainApp display controlled by .visible class */
 </style>
 </head>
 <body>
@@ -198,11 +202,11 @@ function switchTab(tab) {
   });
   
   if (tab === 'sentiment') {
-    document.getElementById('sentiment-panel').style.display = 'block';
+    document.getElementById('sentiment-panel').style.display = 'flex';
     document.getElementById('industry-panel').style.display = 'none';
   } else if (tab === 'industry') {
     document.getElementById('sentiment-panel').style.display = 'none';
-    document.getElementById('industry-panel').style.display = 'block';
+    document.getElementById('industry-panel').style.display = 'flex';
     if (industryData.length === 0) initIndustry();
   }
 }
