@@ -1,0 +1,79 @@
+[
+  {
+    "platform": "web",
+    "note_id": "web_20260413_3month_19new_stations",
+    "title": "理想汽车3月新增19座超充站，全国站点达4057座",
+    "desc": "4月8日，理想汽车公布3月超充网络建设进展，当月新增19座超充站，截至2026年3月31日，全国超充站达4057座、超充桩2.24万根，覆盖31省289城。2026年将实现全系产品升级800V高压平台及5C超充电池，并计划建成约4800座超充站，高速充电桩占比预计超35%。全5C超充站超570座，5C和4C超充桩总占比近70%。",
+    "author": "观点网",
+    "ip_location": "",
+    "publish_date": "2026-04-08",
+    "url": "https://www.guandian.cn/article/20260408/553616.html",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260413_auto_charging_q2_ifeng",
+    "title": "理想首座自动充电站Q2落地，机械臂插枪全程无需下车",
+    "desc": "理想汽车Q1季报显示，首座自动充电站将于2026年第二季度投用，支持车辆自动寻站、泊车及充电，由机械臂自动完成插拔枪操作，全程无需车主下车，正式开启「无感补能」时代。高速18条国家级高速平均每127公里设有一座超充站，1200多座服务区站点实现不下高速即可补能。",
+    "author": "凤凰网汽车",
+    "ip_location": "",
+    "publish_date": "2026-04-08",
+    "url": "https://auto.ifeng.com/c/8rmHMsLJxUk",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260413_l6_800v_5c_beijing_show",
+    "title": "理想L6 800V+5C超充谍照曝光，有望北京车展亮相",
+    "desc": "网络曝出理想L6 800V平台冬季路试谍照，新车基于第二代增程平台打造，预计2026年4月北京车展发布。官方表示2026年将实现全系产品升级至800V高压平台及5C超充电池，超充版充电速度将进一步提升。",
+    "author": "搜狐网",
+    "ip_location": "",
+    "publish_date": "2026-04-08",
+    "url": "https://m.sohu.com/a/1008671745_121850794/",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260413_occupy_fee_complaint_4_4",
+    "title": "用户投诉：理想超充站充电完成后未充分告知即扣38元占位费",
+    "desc": "2026年4月4日，有用户在顺义后沙峪理想超充站充电后被扣除38元占位费，向黑猫投诉平台投诉称理想未充分履行告知义务、提醒不到位，侵犯消费者知情权与公平交易权，要求全额退款。该投诉目前处理中。",
+    "author": "黑猫投诉",
+    "ip_location": "",
+    "publish_date": "2026-04-04",
+    "url": "https://tousu.sina.cn/complaint/view/17395465602/",
+    "sentiment": "negative"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260413_peak_queue_2hour",
+    "title": "节假日充电5分钟排队2小时，理想超充高峰期仍面临压力",
+    "desc": "分析指出，理想3966座超充站在日常和长途场景下能有效支撑用户，但在极端高峰时段仍面临挑战。2026年春运前3天，全国高速服务区充电桩使用量暴涨210%，热门路段排队时长峰值超2.5小时，微博等平台有用户实测蔚来新ES8及享界S9T在理想桩上充电效率较好。",
+    "author": "今日头条",
+    "ip_location": "",
+    "publish_date": "2026-04-07",
+    "url": "https://m.toutiao.com/a7601738837533999626/",
+    "sentiment": "neutral"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260413_5c_tech_near_refuel",
+    "title": "5C超充技术实测：体验已无限接近燃油车加油",
+    "desc": "今日头条评测文章指出，理想5C超充技术实际体验已无限接近传统燃油车加油。截至2026年初，理想超充站累计突破3900座，高速场景平均150公里一站，城市核心区构建「3公里充电圈」，大幅缩短等待时间。但充电终极体验仍依赖网络覆盖和兼容性。",
+    "author": "今日头条",
+    "ip_location": "",
+    "publish_date": "2026-04-07",
+    "url": "https://m.toutiao.com/a7599914663953842739/",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260413_l9_2026_family_anxiety",
+    "title": "2026款理想L9升级5C超充，车主实测：家庭长途补能焦虑明显改善",
+    "desc": "一位郑州车主以老L9车主视角评测2026款理想L9，认为5C超充对家庭长途补能焦虑确实有效缓解，高速行驶增程器噪音极低，纯电续航有所提升。同时也指出高速服务区节假日排队问题仍然存在，建议节假日出行做好补能规划。",
+    "author": "有驾",
+    "ip_location": "",
+    "publish_date": "2026-04-08",
+    "url": "https://m.yoojia.com/article/9855091451800873395.html",
+    "sentiment": "positive"
+  }
+]
