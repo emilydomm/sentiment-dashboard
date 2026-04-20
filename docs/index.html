@@ -42,7 +42,7 @@ window.addEventListener('DOMContentLoaded', () => {
   
   #mainApp { display: none; flex-direction: column; height: 100%; overflow: hidden; }
   #mainApp.visible { display: flex; }
-  #sentiment-panel, #industry-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+  #sentiment-panel, #industry-panel, #wechat-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
   .content { padding: 0 32px 32px; flex: 1; overflow-y: auto; }
   .date-label { font-size: 13px; color: #888; margin: 16px 0 10px; }
 
@@ -129,6 +129,7 @@ window.addEventListener('DOMContentLoaded', () => {
 <div class="tabs">
   <button class="tab-btn" onclick="switchTab('sentiment')">📊 理想超充舆情监测</button>
   <button class="tab-btn active" onclick="switchTab('industry')">📰 智能电动行业资讯</button>
+  <button class="tab-btn" onclick="switchTab('wechat')">📬 友商公众号跟踪</button>
 </div>
 
 <div id="sentiment-panel" style="display:none">
@@ -177,6 +178,31 @@ window.addEventListener('DOMContentLoaded', () => {
 </div>
 </div><!-- /industry-panel -->
 
+<div id="wechat-panel" style="display:none">
+<div class="toolbar">
+  <select id="wechatDateSelect" onchange="loadWechatDate(this.value)"></select>
+  <input type="text" id="wechatSearchInput" placeholder="🔍 搜索品牌/标题/摘要..." oninput="renderWechatCards()">
+</div>
+
+<div class="stats">
+  <div class="stat-card" style="max-width:180px">
+    <div class="num" id="wechatTotalCount">-</div>
+    <div class="label">📬 当日内容条数</div>
+  </div>
+  <div class="stat-card" style="max-width:220px">
+    <div class="num" id="wechatBrandCount">-</div>
+    <div class="label">🏷️ 跟踪品牌数</div>
+  </div>
+</div>
+
+<div class="content" style="padding-top:8px">
+  <div class="date-label" id="wechatDateLabel" style="margin-bottom:16px;font-size:14px;color:#666;font-weight:500"></div>
+  <div id="wechatCardContainer" style="max-width:980px">
+    <div class="loading">加载中...</div>
+  </div>
+</div>
+</div><!-- /wechat-panel -->
+
 <script>
 let allData = [];
 let currentSentiment = 'all';
@@ -187,6 +213,10 @@ let availableDates = [];
 let industryData = [];
 let industryAvailableDates = [];
 
+// 友商公众号跟踪数据
+let wechatData = null;
+let wechatAvailableDates = [];
+
 const platformLabel = { xhs: '小红书', wb: '微博', dy: '抖音', web: '资讯' };
 const platformBadge = { xhs: 'badge-xhs', wb: 'badge-wb', dy: 'badge-dy', web: 'badge-web' };
 
@@ -194,7 +224,8 @@ const platformBadge = { xhs: 'badge-xhs', wb: 'badge-wb', dy: 'badge-dy', web: '
 function switchTab(tab) {
   document.querySelectorAll('.tab-btn').forEach(b => {
     if ((tab === 'sentiment' && b.textContent.includes('舆情')) || 
-        (tab === 'industry' && b.textContent.includes('行业'))) {
+        (tab === 'industry' && b.textContent.includes('行业')) ||
+        (tab === 'wechat' && b.textContent.includes('公众号'))) {
       b.classList.add('active');
     } else {
       b.classList.remove('active');
@@ -204,10 +235,17 @@ function switchTab(tab) {
   if (tab === 'sentiment') {
     document.getElementById('sentiment-panel').style.display = 'flex';
     document.getElementById('industry-panel').style.display = 'none';
+    document.getElementById('wechat-panel').style.display = 'none';
   } else if (tab === 'industry') {
     document.getElementById('sentiment-panel').style.display = 'none';
     document.getElementById('industry-panel').style.display = 'flex';
+    document.getElementById('wechat-panel').style.display = 'none';
     if (industryData.length === 0) initIndustry();
+  } else if (tab === 'wechat') {
+    document.getElementById('sentiment-panel').style.display = 'none';
+    document.getElementById('industry-panel').style.display = 'none';
+    document.getElementById('wechat-panel').style.display = 'flex';
+    if (!wechatData) initWechat();
   }
 }
 
@@ -244,6 +282,108 @@ async function init() {
   
   // 初始化行业资讯（默认显示）
   initIndustry();
+}
+
+async function initWechat() {
+  const todayStr = new Date().toLocaleDateString('zh-CN', {timeZone:'Asia/Shanghai'}).replace(/\//g, '-').replace(/(\d+)-(\d+)-(\d+)/, (_, y, m, d) => `${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`);
+  let dates = [];
+  try {
+    const res = await fetch(`data/wechat/dates.json?v=${Date.now()}`);
+    if (res.ok) dates = await res.json();
+  } catch(e) {}
+  if (!Array.isArray(dates)) dates = [];
+  if (!dates.includes(todayStr)) dates.push(todayStr);
+  dates.sort().reverse();
+  wechatAvailableDates = dates;
+
+  const select = document.getElementById('wechatDateSelect');
+  select.innerHTML = '';
+  dates.forEach(d => {
+    const opt = document.createElement('option');
+    opt.value = d;
+    opt.textContent = d + (d === todayStr ? ' (今日)' : '');
+    select.appendChild(opt);
+  });
+
+  select.value = todayStr;
+  loadWechatDate(todayStr);
+}
+
+async function loadWechatDate(date) {
+  document.getElementById('wechatSearchInput').value = '';
+  document.getElementById('wechatDateLabel').textContent = `📅 ${date} 友商公众号跟踪（T-1）`;
+  document.getElementById('wechatCardContainer').innerHTML = '<div class="loading">加载中...</div>';
+
+  try {
+    const res = await fetch(`data/wechat/${date}.json?v=${Date.now()}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    wechatData = await res.json();
+    renderWechatCards();
+  } catch(e) {
+    wechatData = null;
+    document.getElementById('wechatTotalCount').textContent = '0';
+    document.getElementById('wechatBrandCount').textContent = '0';
+    document.getElementById('wechatCardContainer').innerHTML = '<div class="empty">暂无数据</div>';
+  }
+}
+
+function renderWechatCards() {
+  const keyword = document.getElementById('wechatSearchInput').value.trim().toLowerCase();
+  const brands = (wechatData && Array.isArray(wechatData.brands)) ? wechatData.brands : [];
+
+  let filteredBrands = brands.map(brand => ({
+    ...brand,
+    items: (brand.items || []).filter(item => {
+      if (!keyword) return true;
+      return (brand.brand || '').toLowerCase().includes(keyword)
+        || (item.title || '').toLowerCase().includes(keyword)
+        || (item.desc || '').toLowerCase().includes(keyword);
+    })
+  }));
+
+  const filteredTotal = filteredBrands.reduce((sum, b) => sum + (b.items || []).length, 0);
+  document.getElementById('wechatTotalCount').textContent = filteredTotal;
+  document.getElementById('wechatBrandCount').textContent = brands.length;
+
+  const note = wechatData && wechatData.sources_note
+    ? `<div style="background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;padding:12px 14px;border-radius:10px;margin-bottom:14px;font-size:13px;line-height:1.7">⚠️ ${wechatData.sources_note}</div>`
+    : '';
+
+  if (!brands.length) {
+    document.getElementById('wechatCardContainer').innerHTML = note + '<div class="empty">暂无数据</div>';
+    return;
+  }
+
+  const html = filteredBrands.map(brand => {
+    const items = brand.items || [];
+    const emptyText = keyword ? '没有符合搜索条件的内容' : '当日未检索到可公开验证的新增官方发文';
+    const cards = items.length ? items.map(item => `
+      <div class="card" style="margin-bottom:12px">
+        <div class="card-body">
+          <div class="card-title">
+            <span class="platform-badge badge-web">官方发布</span>
+            ${item.url ? `<a href="${item.url}" target="_blank"> ${item.title}</a>` : ` ${item.title}`}
+          </div>
+          ${item.desc ? `<div class="card-desc">${item.desc}</div>` : ''}
+          <div class="card-meta">
+            <span>🏷️ ${brand.brand}</span>
+            <span>📅 ${item.publish_date || (wechatData.target_date || '')}</span>
+            ${item.source ? `<span>🔗 ${item.source}</span>` : ''}
+          </div>
+        </div>
+      </div>`).join('') : `<div class="empty" style="padding:30px">${emptyText}</div>`;
+
+    return `
+      <div style="background:white;border-radius:14px;padding:18px 20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.06)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:12px;flex-wrap:wrap">
+          <div style="font-size:18px;font-weight:700;color:#1a1a2e">${brand.brand}</div>
+          <div style="font-size:12px;color:#666;background:#f3f4f6;padding:5px 10px;border-radius:999px">${brand.account || brand.brand} · ${items.length} 条</div>
+        </div>
+        ${cards}
+      </div>`;
+  }).join('');
+
+  document.getElementById('wechatCardContainer').innerHTML = note + html;
 }
 
 async function loadDate(date) {

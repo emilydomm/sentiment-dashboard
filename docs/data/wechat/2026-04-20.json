@@ -1,0 +1,19 @@
+{
+  "date": "2026-04-20",
+  "target_date": "2026-04-19",
+  "sources_note": "优先使用品牌官方公开资讯页/官网可验证公开发布内容；公众号原文因公开检索受限，本次试运行未发现蔚来、小鹏汽车在 2026-04-19 有可公开验证的新增官方发文。",
+  "brands": [
+    {
+      "brand": "蔚来",
+      "account": "蔚来",
+      "items": [],
+      "status": "no_verified_update"
+    },
+    {
+      "brand": "小鹏汽车",
+      "account": "小鹏汽车",
+      "items": [],
+      "status": "no_verified_update"
+    }
+  ]
+}
