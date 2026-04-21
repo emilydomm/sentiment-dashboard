@@ -187,7 +187,7 @@ window.addEventListener('DOMContentLoaded', () => {
 <div class="stats">
   <div class="stat-card" style="max-width:180px">
     <div class="num" id="wechatTotalCount">-</div>
-    <div class="label">📬 当日内容条数</div>
+    <div class="label">📬 T-7内容条数</div>
   </div>
   <div class="stat-card" style="max-width:220px">
     <div class="num" id="wechatBrandCount">-</div>
@@ -311,7 +311,7 @@ async function initWechat() {
 
 async function loadWechatDate(date) {
   document.getElementById('wechatSearchInput').value = '';
-  document.getElementById('wechatDateLabel').textContent = `📅 ${date} 友商公众号跟踪（T-1）`;
+  document.getElementById('wechatDateLabel').textContent = `📅 ${date} 友商公众号跟踪（T-7）`;
   document.getElementById('wechatCardContainer').innerHTML = '<div class="loading">加载中...</div>';
 
   try {
@@ -356,7 +356,7 @@ function renderWechatCards() {
 
   const html = filteredBrands.map(brand => {
     const items = brand.items || [];
-    const emptyText = keyword ? '没有符合搜索条件的内容' : '当日未检索到可公开验证的新增官方发文';
+    const emptyText = keyword ? '没有符合搜索条件的内容' : 'T-7未检索到可公开验证的新增官方发文';
     const cards = items.length ? items.map(item => `
       <div class="card" style="margin-bottom:12px">
         <div class="card-body">
