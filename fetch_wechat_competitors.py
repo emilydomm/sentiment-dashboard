@@ -6,7 +6,8 @@
 数据原则：
 - 只保留真实可公开验证的内容
 - 不捏造阅读量/点赞量等拿不到的数据
-- 当前优先汇总品牌官方公众号/官方号在近7天公开发布的内容
+- 只收录品牌官方公众号原文 `mp.weixin.qq.com` 链接
+- 官网页、转载页、聚合页一律不收录
 - 数据输出到 docs/data/wechat/YYYY-MM-DD.json
 
 当前跟踪品牌：蔚来 / 小鹏汽车 / 极氪
@@ -15,7 +16,6 @@
 import json
 import os
 import re
-import subprocess
 import sys
 from datetime import datetime, timedelta, date
 from urllib.parse import urlparse
@@ -28,47 +28,27 @@ BRANDS = [
         "brand": "蔚来",
         "account": "蔚来",
         "queries": [
-            "蔚来 公众号 近7天",
-            "蔚来 微信公众号 发布 2026",
-            "site:mp.weixin.qq.com 蔚来 微信公众号",
-            "site:mp.weixin.qq.com NIO 蔚来"
+            "site:mp.weixin.qq.com 蔚来 微信公众号 原文",
+            "site:mp.weixin.qq.com NIO 蔚来 原文",
         ]
     },
     {
         "brand": "小鹏汽车",
         "account": "小鹏汽车",
         "queries": [
-            "小鹏汽车 公众号 近7天",
-            "小鹏汽车 微信公众号 发布 2026",
-            "site:mp.weixin.qq.com 小鹏汽车 微信公众号",
-            "site:mp.weixin.qq.com XPENG 小鹏汽车"
+            "site:mp.weixin.qq.com 小鹏汽车 微信公众号 原文",
+            "site:mp.weixin.qq.com XPENG 小鹏汽车 原文",
         ]
     },
     {
         "brand": "极氪",
         "account": "极氪ZEEKR",
         "queries": [
-            "极氪 公众号 近7天",
-            "极氪 微信公众号 发布 2026",
-            "site:mp.weixin.qq.com 极氪 微信公众号",
-            "site:mp.weixin.qq.com ZEEKR 极氪"
+            "site:mp.weixin.qq.com 极氪 微信公众号 原文",
+            "site:mp.weixin.qq.com ZEEKR 极氪 原文",
         ]
     }
 ]
-
-
-def run_web_search(query, count=8):
-    cmd = [
-        "python3", "-c",
-        (
-            "import json,sys;"
-            "sys.path.insert(0,'/workspace/openclaw');"
-            "print('')"
-        )
-    ]
-    # 直接走 openclaw exec 外壳中的 web_search 不现实；这里改为调用 openclaw session 外部不可用。
-    # 所以本脚本仅作为数据结构与去重整理器，真正搜索应由 Agent 调用 web_search 后写入。
-    return []
 
 
 def normalize_date(text):
@@ -102,9 +82,7 @@ def domain_label(url):
     except Exception:
         return ""
     if "mp.weixin.qq.com" in host:
-        return "微信公众号"
-    if "weixin.qq.com" in host:
-        return "微信"
+        return "微信公众号原文"
     return host or "网页"
 
 
@@ -122,6 +100,9 @@ def build_from_agent_results(raw_results, target_date):
             if not publish_date:
                 publish_date = normalize_date(desc) or normalize_date(title)
             if not title or not url:
+                continue
+            parsed_host = urlparse(url).netloc.lower()
+            if "mp.weixin.qq.com" not in parsed_host:
                 continue
             if not in_t7(publish_date, today):
                 continue
@@ -146,7 +127,7 @@ def build_from_agent_results(raw_results, target_date):
         "target_date": target_date,
         "window": "T-7",
         "brands": brands,
-        "sources_note": "仅收录近7天内可公开验证的官方公众号/官方号相关内容；不展示无法核实的阅读量、点赞等字段。"
+        "sources_note": "仅收录近7天内可公开验证的品牌官方公众号原文 mp.weixin.qq.com 链接；官网页、转载页、聚合页均不展示，不展示无法核实的阅读量、点赞等字段。"
     }
 
 
