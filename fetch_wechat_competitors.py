@@ -18,7 +18,7 @@ import os
 import re
 import sys
 from datetime import datetime, timedelta, date
-from urllib.parse import urlparse
+from urllib.parse import urlparse, parse_qs
 
 ROOT = "/workspace/sentiment-dashboard"
 OUT_DIR = os.path.join(ROOT, "docs/data/wechat")
@@ -86,38 +86,84 @@ def domain_label(url):
     return host or "网页"
 
 
+def canonical_mp_url(url):
+    url = (url or '').strip()
+    if not url:
+        return ''
+    try:
+        u = urlparse(url)
+        if 'mp.weixin.qq.com' not in u.netloc.lower():
+            return ''
+        qs = parse_qs(u.query)
+        if u.path.startswith('/s'):
+            biz = qs.get('__biz', [''])[-1]
+            mid = qs.get('mid', [''])[-1]
+            idx = qs.get('idx', [''])[-1]
+            sn = qs.get('sn', [''])[-1]
+            if biz and mid and idx and sn:
+                return f'https://mp.weixin.qq.com/s?__biz={biz}&mid={mid}&idx={idx}&sn={sn}'
+            return f'https://mp.weixin.qq.com{u.path}'
+        return f'https://mp.weixin.qq.com{u.path}'
+    except Exception:
+        return url
+
+
+def normalize_item(item):
+    title = (item.get('title') or '').strip()
+    url = canonical_mp_url((item.get('url') or '').strip())
+    desc = (item.get('desc') or item.get('snippet') or '').strip()
+    publish_date = (item.get('publish_date') or '').strip()
+    if not publish_date:
+        publish_date = normalize_date(desc) or normalize_date(title)
+    return {
+        'title': title,
+        'url': url,
+        'desc': desc[:180],
+        'publish_date': publish_date,
+        'source': item.get('source') or domain_label(url)
+    }
+
+
+def merge_manual_items(raw_results):
+    manual = {}
+    for brand in raw_results:
+        brand_name = brand.get('brand', '')
+        extras = []
+        for key in ('manual_items', 'confirmed_items', 'extra_items'):
+            val = brand.get(key)
+            if isinstance(val, list):
+                extras.extend(val)
+        if extras:
+            manual[brand_name] = extras
+    return manual
+
+
 def build_from_agent_results(raw_results, target_date):
     today = datetime.strptime(target_date, "%Y-%m-%d").date()
+    manual = merge_manual_items(raw_results)
     brands = []
     for brand in raw_results:
         items = []
         seen = set()
-        for item in brand.get("items", []):
-            title = (item.get("title") or "").strip()
-            url = (item.get("url") or "").strip()
-            desc = (item.get("desc") or item.get("snippet") or "").strip()
-            publish_date = (item.get("publish_date") or "").strip()
-            if not publish_date:
-                publish_date = normalize_date(desc) or normalize_date(title)
+        combined = list(brand.get('items', [])) + list(manual.get(brand.get('brand', ''), []))
+        for item in combined:
+            row = normalize_item(item)
+            title = row['title']
+            url = row['url']
+            publish_date = row['publish_date']
             if not title or not url:
                 continue
             parsed_host = urlparse(url).netloc.lower()
             if "mp.weixin.qq.com" not in parsed_host:
                 continue
-            if not in_t7(publish_date, today):
+            if publish_date and not in_t7(publish_date, today):
                 continue
             key = url
             if key in seen:
                 continue
             seen.add(key)
-            items.append({
-                "title": title,
-                "url": url,
-                "desc": desc[:180],
-                "publish_date": publish_date,
-                "source": item.get("source") or domain_label(url)
-            })
-        items.sort(key=lambda x: (x.get("publish_date", ""), x.get("title", "")), reverse=True)
+            items.append(row)
+        items.sort(key=lambda x: (x.get("publish_date", ""), x.get("title", ""), x.get('url','')), reverse=True)
         brands.append({
             "brand": brand.get("brand", ""),
             "account": brand.get("account", ""),
@@ -127,7 +173,7 @@ def build_from_agent_results(raw_results, target_date):
         "target_date": target_date,
         "window": "T-7",
         "brands": brands,
-        "sources_note": "仅收录近7天内可公开验证的品牌官方公众号原文 mp.weixin.qq.com 链接；官网页、转载页、聚合页均不展示，不展示无法核实的阅读量、点赞等字段。"
+        "sources_note": "仅收录近7天内可公开验证的品牌官方公众号原文 mp.weixin.qq.com 链接；官网页、转载页、聚合页均不展示，不展示无法核实的阅读量、点赞等字段。公开搜索对微信原文召回不稳定，因此允许把已明确确认的公众号原文直链并入结果，避免漏检。"
     }
 
 
