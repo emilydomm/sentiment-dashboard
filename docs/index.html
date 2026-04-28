@@ -17,11 +17,28 @@ window.addEventListener('DOMContentLoaded', () => {
   html, body { overflow: hidden; height: 100%; margin: 0; padding: 0; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f7fa; color: #333; display: flex; flex-direction: column; }
   
-  .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: white; padding: 24px 32px; }
-  .header h1 { font-size: 22px; font-weight: 600; }
-  .header p { font-size: 13px; opacity: 0.7; margin-top: 4px; }
+  .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: white; padding: 24px 32px; display:flex; align-items:flex-start; justify-content:space-between; gap:20px; }
+  .header-main h1 { font-size: 22px; font-weight: 600; }
+  .header-main p { font-size: 13px; opacity: 0.7; margin-top: 4px; }
+  .header-actions { position: relative; flex-shrink: 0; }
+  .settings-btn { border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.1); color: white; border-radius: 10px; padding: 10px 14px; font-size: 13px; font-weight: 600; cursor: pointer; backdrop-filter: blur(6px); transition: all .2s; }
+  .settings-btn:hover { background: rgba(255,255,255,.18); }
+  .settings-panel { position: absolute; top: calc(100% + 10px); right: 0; width: 280px; background: white; color: #333; border-radius: 14px; box-shadow: 0 12px 32px rgba(0,0,0,.18); padding: 14px; display: none; z-index: 20; }
+  .settings-panel.visible { display: block; }
+  .settings-title { font-size: 14px; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; }
+  .settings-subtitle { font-size: 12px; color: #777; line-height: 1.6; margin-bottom: 10px; }
+  .settings-option { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid #f0f0f0; }
+  .settings-option:first-of-type { border-top: none; }
+  .settings-option-text { font-size: 13px; color: #333; line-height: 1.5; }
+  .switch { position: relative; width: 42px; height: 24px; flex-shrink: 0; }
+  .switch input { opacity: 0; width: 0; height: 0; }
+  .slider { position: absolute; inset: 0; background: #d1d5db; border-radius: 999px; transition: .2s; cursor: pointer; }
+  .slider:before { content: ''; position: absolute; width: 18px; height: 18px; left: 3px; top: 3px; background: white; border-radius: 50%; transition: .2s; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+  .switch input:checked + .slider { background: #0f3460; }
+  .switch input:checked + .slider:before { transform: translateX(18px); }
+  .settings-tip { margin-top: 10px; font-size: 12px; color: #888; line-height: 1.6; }
   
-  .tabs { background: white; border-bottom: 2px solid #e8e8e8; display: flex; padding: 0 32px; }
+  .tabs { background: white; border-bottom: 2px solid #e8e8e8; display: flex; padding: 0 32px; gap: 2px; overflow-x: auto; }
   .tab-btn { padding: 14px 24px; border: none; background: none; font-size: 14px; font-weight: 500; color: #666; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all .2s; }
   .tab-btn.active { color: #0f3460; border-bottom-color: #0f3460; }
   
@@ -85,6 +102,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
   @media (max-width: 600px) {
     .header, .toolbar, .stats, .content { padding-left: 16px; padding-right: 16px; }
+    .header { flex-direction: column; align-items: stretch; }
+    .header-actions { align-self: flex-end; }
+    .settings-panel { width: min(280px, calc(100vw - 32px)); }
     .stats { flex-wrap: wrap; }
     .stat-card { min-width: calc(50% - 8px); }
   }
@@ -122,14 +142,45 @@ window.addEventListener('DOMContentLoaded', () => {
 <div id="mainApp">
 
 <div class="header">
-  <h1>⚡ 智能电动传播资讯</h1>
-  <p>每日自动更新 · 舆情监测+行业资讯</p>
+  <div class="header-main">
+    <h1>⚡ 智能电动传播资讯</h1>
+    <p>每日自动更新 · 舆情监测 + 行业资讯 + 友商跟踪</p>
+  </div>
+  <div class="header-actions">
+    <button class="settings-btn" type="button" onclick="toggleSettingsPanel()">⚙️ 页面设置</button>
+    <div class="settings-panel" id="settingsPanel">
+      <div class="settings-title">页面显示设置</div>
+      <div class="settings-subtitle">可控制顶部页面标签是否展示。默认仅展示“智能电动行业资讯”。</div>
+      <div class="settings-option">
+        <div class="settings-option-text">📊 理想超充舆情监测</div>
+        <label class="switch">
+          <input type="checkbox" id="toggle-sentiment" onchange="handleVisibilityToggle('sentiment', this.checked)">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="settings-option">
+        <div class="settings-option-text">📰 智能电动行业资讯</div>
+        <label class="switch">
+          <input type="checkbox" id="toggle-industry" onchange="handleVisibilityToggle('industry', this.checked)">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="settings-option">
+        <div class="settings-option-text">📬 友商公众号跟踪</div>
+        <label class="switch">
+          <input type="checkbox" id="toggle-wechat" onchange="handleVisibilityToggle('wechat', this.checked)">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="settings-tip">关闭后，对应页面标签会立即隐藏；若当前正在查看该页面，会自动切回仍在展示的页面。</div>
+    </div>
+  </div>
 </div>
 
-<div class="tabs">
-  <button class="tab-btn" onclick="switchTab('sentiment')">📊 理想超充舆情监测</button>
-  <button class="tab-btn active" onclick="switchTab('industry')">📰 智能电动行业资讯</button>
-  <button class="tab-btn" onclick="switchTab('wechat')">📬 友商公众号跟踪</button>
+<div class="tabs" id="tabsBar">
+  <button class="tab-btn" data-tab="sentiment" onclick="switchTab('sentiment')">📊 理想超充舆情监测</button>
+  <button class="tab-btn active" data-tab="industry" onclick="switchTab('industry')">📰 智能电动行业资讯</button>
+  <button class="tab-btn" data-tab="wechat" onclick="switchTab('wechat')">📬 友商公众号跟踪</button>
 </div>
 
 <div id="sentiment-panel" style="display:none">
@@ -217,39 +268,108 @@ let industryAvailableDates = [];
 let wechatData = null;
 let wechatAvailableDates = [];
 
+const DASHBOARD_SETTINGS_KEY = 'dashboardVisibleTabs';
+const defaultVisibleTabs = { sentiment: false, industry: true, wechat: false };
+let visibleTabs = { ...defaultVisibleTabs };
+let currentTab = 'industry';
+
 const platformLabel = { xhs: '小红书', wb: '微博', dy: '抖音', web: '资讯' };
 const platformBadge = { xhs: 'badge-xhs', wb: 'badge-wb', dy: 'badge-dy', web: 'badge-web' };
 
-// Tab 切换
-function switchTab(tab) {
-  document.querySelectorAll('.tab-btn').forEach(b => {
-    if ((tab === 'sentiment' && b.textContent.includes('舆情')) || 
-        (tab === 'industry' && b.textContent.includes('行业')) ||
-        (tab === 'wechat' && b.textContent.includes('公众号'))) {
-      b.classList.add('active');
-    } else {
-      b.classList.remove('active');
-    }
-  });
-  
-  if (tab === 'sentiment') {
-    document.getElementById('sentiment-panel').style.display = 'flex';
-    document.getElementById('industry-panel').style.display = 'none';
-    document.getElementById('wechat-panel').style.display = 'none';
-  } else if (tab === 'industry') {
-    document.getElementById('sentiment-panel').style.display = 'none';
-    document.getElementById('industry-panel').style.display = 'flex';
-    document.getElementById('wechat-panel').style.display = 'none';
-    if (industryData.length === 0) initIndustry();
-  } else if (tab === 'wechat') {
-    document.getElementById('sentiment-panel').style.display = 'none';
-    document.getElementById('industry-panel').style.display = 'none';
-    document.getElementById('wechat-panel').style.display = 'flex';
-    if (!wechatData) initWechat();
+function loadTabSettings() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(DASHBOARD_SETTINGS_KEY) || '{}');
+    visibleTabs = {
+      sentiment: !!saved.sentiment,
+      industry: saved.industry !== undefined ? !!saved.industry : true,
+      wechat: !!saved.wechat,
+    };
+  } catch (e) {
+    visibleTabs = { ...defaultVisibleTabs };
+  }
+
+  if (!Object.values(visibleTabs).some(Boolean)) {
+    visibleTabs.industry = true;
   }
 }
 
+function saveTabSettings() {
+  localStorage.setItem(DASHBOARD_SETTINGS_KEY, JSON.stringify(visibleTabs));
+}
+
+function syncSettingsControls() {
+  const ids = ['sentiment', 'industry', 'wechat'];
+  ids.forEach(tab => {
+    const el = document.getElementById(`toggle-${tab}`);
+    if (el) el.checked = !!visibleTabs[tab];
+  });
+}
+
+function getFirstVisibleTab() {
+  return ['industry', 'sentiment', 'wechat'].find(tab => visibleTabs[tab]) || 'industry';
+}
+
+function applyTabVisibility() {
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    const tab = btn.dataset.tab;
+    btn.style.display = visibleTabs[tab] ? 'inline-block' : 'none';
+  });
+
+  const tabsBar = document.getElementById('tabsBar');
+  const hasVisibleTabs = Object.values(visibleTabs).some(Boolean);
+  tabsBar.style.display = hasVisibleTabs ? 'flex' : 'none';
+
+  if (!visibleTabs[currentTab]) {
+    currentTab = getFirstVisibleTab();
+  }
+
+  syncSettingsControls();
+  switchTab(currentTab, { force: true });
+}
+
+function toggleSettingsPanel(force) {
+  const panel = document.getElementById('settingsPanel');
+  const shouldShow = typeof force === 'boolean' ? force : !panel.classList.contains('visible');
+  panel.classList.toggle('visible', shouldShow);
+}
+
+function handleVisibilityToggle(tab, checked) {
+  visibleTabs[tab] = checked;
+  if (!Object.values(visibleTabs).some(Boolean)) {
+    visibleTabs.industry = true;
+  }
+  saveTabSettings();
+  applyTabVisibility();
+}
+
+// Tab 切换
+function switchTab(tab, options = {}) {
+  if (!visibleTabs[tab] && !options.force) return;
+  currentTab = visibleTabs[tab] ? tab : getFirstVisibleTab();
+
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tab === currentTab);
+  });
+  
+  document.getElementById('sentiment-panel').style.display = currentTab === 'sentiment' ? 'flex' : 'none';
+  document.getElementById('industry-panel').style.display = currentTab === 'industry' ? 'flex' : 'none';
+  document.getElementById('wechat-panel').style.display = currentTab === 'wechat' ? 'flex' : 'none';
+
+  if (currentTab === 'industry' && industryData.length === 0) initIndustry();
+  if (currentTab === 'wechat' && !wechatData) initWechat();
+}
+
 async function init() {
+  loadTabSettings();
+  syncSettingsControls();
+
+  document.addEventListener('click', (event) => {
+    const panel = document.getElementById('settingsPanel');
+    const actions = document.querySelector('.header-actions');
+    if (panel && actions && !actions.contains(event.target)) {
+      toggleSettingsPanel(false);
+    }
+  });
   // 生成T-7日期列表（今天往前7天）
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -282,6 +402,7 @@ async function init() {
   
   // 初始化行业资讯（默认显示）
   initIndustry();
+  applyTabVisibility();
 }
 
 async function initWechat() {
