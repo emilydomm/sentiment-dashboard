@@ -1,0 +1,58 @@
+import json, os
+items = [
+  {
+    "title": "新能源汽车‘超快充’竞速火热 规模化落地仍需技术突破",
+    "url": "https://finance.sina.cn/stock/relnews/hk/2026-04-28/detail-inhvyvau7492816.d.html",
+    "publish_date": "2026-04-28",
+    "keyword": "充电技术",
+    "desc": "北京车展期间，超快充从4C、5C继续向10C、15C演进，比亚迪、宁德时代等集中展示快充与低温补能能力，但成本、电池寿命和电网负荷仍是规模化落地难点。",
+    "image": ""
+  },
+  {
+    "title": "吉林大学自动轮智行底盘惊艳亮相2026北京国际车展",
+    "url": "https://m.10jqka.com.cn/20260428/c676330487.shtml",
+    "publish_date": "2026-04-28",
+    "keyword": "底盘技术",
+    "desc": "吉林大学发布自动轮智行底盘方案，将转向、制动、驱动和悬架高度集成到单个自动轮模块，主打全向转向、高速稳定、轻量化和高能效。",
+    "image": ""
+  },
+  {
+    "title": "启境GT7亮相北京车展，满配华为乾崑新一代智能技术",
+    "url": "https://m.zol.com.cn/article/11727186.html",
+    "publish_date": "2026-04-24",
+    "keyword": "智能驾驶",
+    "desc": "启境GT7在北京车展首发并举行技术发布会，首批搭载华为乾崑ADS 5、鸿蒙座舱小艺智能体等新一代智能化方案，强化高阶辅助驾驶与座舱交互能力。",
+    "image": ""
+  },
+  {
+    "title": "2026广汽科技日放大招：五大核心技术，重构智能新能源出行",
+    "url": "https://m.sohu.com/a/1015107908_120802710/?pvid=000115_3w_a",
+    "publish_date": "2026-04-24",
+    "keyword": "底盘技术",
+    "desc": "广汽集中发布星源动力、星舰车身、星河智舱、星灵架构等技术，其中原创星舰车身与多元环笼设计瞄准城市SUV与硬派越野兼容需求，强调车身刚性与安全性能。",
+    "image": ""
+  },
+  {
+    "title": "2026北京车展：前瞻，新能源与智能化引领产业新变革",
+    "url": "https://www.bitauto.com/article/1003109330432/",
+    "publish_date": "2026-04-24",
+    "keyword": "电池技术",
+    "desc": "易车前瞻指出，北京车展新能源车型占比预计超六成，行业竞争正从参数炫技转向体验落地，电池超充、补能体系和舱驾融合成为本届核心看点。",
+    "image": ""
+  },
+  {
+    "title": "4月，这些重磅新车将上市",
+    "url": "https://m.gasgoo.com/news/70452010.html",
+    "publish_date": "2026-04-24",
+    "keyword": "新车发布",
+    "desc": "盖世汽车梳理多款4月上市新车，其中与众08、ID. ERA 9X、智己LS8、零跑D19等集中推进800V、5C超充、线控转向和高阶辅助驾驶配置。",
+    "image": ""
+  }
+]
+path = '/workspace/sentiment-dashboard/docs/data/industry/2026-04-29.json'
+os.makedirs(os.path.dirname(path), exist_ok=True)
+text = json.dumps(items, ensure_ascii=False, indent=2)
+json.loads(text)
+with open(path, 'w', encoding='utf-8') as f:
+    f.write(text)
+print(path)
