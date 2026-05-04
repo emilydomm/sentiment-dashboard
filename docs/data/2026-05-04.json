@@ -1,0 +1,32 @@
+[
+  {
+    "platform": "web",
+    "note_id": "web_20260504_heimao_points_rule",
+    "title": "理想超充积分抵扣规则违法",
+    "desc": "黑猫投诉页面显示，用户于2026年1月15日发起投诉，称理想超充积分抵扣需在充电前手动开启，相关交易条件缺少明显提示；出现历史订单纠纷后，还被拒绝继续购买充电服务。该案例反映出理想超充在积分抵扣规则提示和服务衔接上存在用户不满。",
+    "author": "黑猫投诉用户“正义喵”",
+    "publish_date": "2026-01-15",
+    "url": "https://tousu.sina.cn/complaint/view/17392507612/?sld=12cc45eb7c145c98b33709d870c45eb7",
+    "sentiment": "negative"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260408_charging_network_progress",
+    "title": "理想汽车3月新增19座超充站，全国超充网络达4057座覆盖289城",
+    "desc": "4月8日报道称，理想汽车3月新增19座超充站，全国自建超充站总数达到4057座、超充桩22439根，覆盖31省289城；其中高速超充站超过1200座，5C超充桩已部署逾4500根，部分城市形成约3公里充电生活圈。内容以网络扩张和能力建设为主。",
+    "author": "中关村在线",
+    "publish_date": "2026-04-08",
+    "url": "https://m.zol.com.cn/article/11614171.html",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260408_beijing_lab",
+    "title": "理想汽车“智能超充动力电池北京市重点实验室”正式揭牌",
+    "desc": "4月8日公开信息显示，理想汽车“智能超充动力电池北京市重点实验室”完成揭牌，研究方向聚焦高密度快充固态电池、智能电池管理及面向高阶自动驾驶的高安全电池技术。该信息属于技术研发与平台建设进展，对理想超充技术体系形成正面支撑。",
+    "author": "国际科技创新中心网络服务平台",
+    "publish_date": "2026-04-08",
+    "url": "https://www.ncsti.gov.cn/kjdt/yqdy/yqdt/202604/t20260408_243229.html",
+    "sentiment": "positive"
+  }
+]
