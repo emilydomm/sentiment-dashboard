@@ -7,4 +7,4 @@ dates = sorted([
 ])
 with open('docs/data/industry/dates.json', 'w', encoding='utf-8') as f:
     json.dump(dates, f, ensure_ascii=False)
-print(f'updated {len(dates)} dates')
+print(len(dates))
