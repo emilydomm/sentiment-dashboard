@@ -1,7 +1,7 @@
 import json, glob, os
 
 dates = sorted([
-    os.path.basename(f).replace('.json', '')
+    os.path.basename(f).replace('.json','')
     for f in glob.glob('docs/data/industry/*.json')
     if not f.endswith('dates.json')
 ])
