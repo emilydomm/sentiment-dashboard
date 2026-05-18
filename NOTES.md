@@ -8,6 +8,10 @@
 - Forbidden group target example: `chat:oc_1e7043c8d90c241ad6b4a1dabab8a0e8`
 - If any existing script, cron job, legacy config, remembered target, or auto-generated send step conflicts with this rule, this rule overrides it.
 - Treat this as a hard constraint, not a preference: if a run summary shows any group send for industry news, it is a bug and must be removed before the next run.
+- Double-insurance check: before running or editing the industry-news automation, verify both of these are true:
+  1. the only allowed delivery target is `user:ou_dfa6d78ac7f1e08b474d766109b9fea7`
+  2. no prompt / config / summary text contains any group target, group chat_id, or instruction to send to a group
+- If either check fails, treat the job as misconfigured and fix it before the run.
 - Once 馨姐 has already given a clear instruction, execute it immediately; do not repeatedly ask for reconfirmation.
 
 Recorded on 2026-05-17 after repeated user clarification.
