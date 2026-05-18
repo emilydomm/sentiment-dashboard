@@ -1,0 +1,32 @@
+[
+  {
+    "platform": "web",
+    "note_id": "web_20260515_l9_5c_network_plan",
+    "title": "理想汽车公布5C超充网络最新规划",
+    "desc": "5月15日理想在全新一代理想L9发布会上披露，已建成1300座高速超充站、贯通160条高速路线，2026年底5C超充枪将由约4100根翻倍至8300根，体现补能网络持续扩张。",
+    "author": "新浪财经/理想汽车发布会",
+    "publish_date": "2026-05-15",
+    "url": "https://finance.sina.com.cn/7x24/2026-05-15/doc-inhxyimm3352677.shtml",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260515_l9_launch_supercharge_layout",
+    "title": "全新理想L9上市，理想汽车更新超充网络布局",
+    "desc": "中国证券报/中证金牛座5月15日报道称，理想在发布新一代理想L9同时更新超充网络布局进展，强调高速超充覆盖与5C超充枪扩容计划，属于官方层面的正向进展信息。",
+    "author": "中国证券报·中证金牛座",
+    "publish_date": "2026-05-15",
+    "url": "https://wap.eastmoney.com/a/202605153739179281.html",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260515_supercharge_battery_controversy_response",
+    "title": "理想汽车回应超充争议：数据支持“不伤电池”，并提出排队治理措施",
+    "desc": "相关报道提到，针对“超充伤电池”争议，理想引用用户数据称高频5C使用车辆与低频使用车辆电池健康度差异不明显，同时介绍高速站值守、充电时长上限等措施，内容同时包含争议背景与官方回应。",
+    "author": "懂车帝",
+    "publish_date": "2026-05-15",
+    "url": "https://m.dongchedi.com/article/7563982322719081000",
+    "sentiment": "neutral"
+  }
+]
