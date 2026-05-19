@@ -89,12 +89,12 @@ window.addEventListener('DOMContentLoaded', () => {
   .calendar-day.disabled { color:#d4d8df; cursor:default; }
   .calendar-day.has-data { font-weight:600; background:#f8fafc; }
   .calendar-day.has-data::before { content:''; position:absolute; bottom:5px; left:50%; transform:translateX(-50%); width:5px; height:5px; border-radius:999px; background:#93c5fd; }
-  .calendar-day.range-selected { color:#1f2937; background:transparent; border:none; box-shadow:none; border-radius:0; font-weight:600; }
+  .calendar-day.range-selected { color:#c0c6d0; background:transparent; border:none; box-shadow:none; border-radius:0; font-weight:400; }
   .calendar-day.range-selected.has-data { background:transparent; }
   .calendar-day.range-selected::after { content:none; }
-  .calendar-day.range-selected.has-data::before { background:#93c5fd; }
+  .calendar-day.range-selected.has-data::before { background:#93c5fd; opacity:.85; }
   .calendar-day.selected { color:#1f2937; background:transparent; box-shadow:none; border:none; }
-  .calendar-day.selected.range-selected { color:#1f2937; background:transparent; box-shadow:none; border:none; font-weight:700; }
+  .calendar-day.selected.range-selected { color:#2563eb; background:transparent; box-shadow:none; border:none; font-weight:700; }
   .calendar-day.selected:not(.range-selected) { background:#dbeafe; border-radius:14px; box-shadow:inset 0 0 0 1.5px #60a5fa; }
   .calendar-day.selected:not(.range-selected)::before { background:#2563eb; }
   .calendar-day.today::after { content:'今'; position:absolute; right:5px; top:4px; font-size:10px; color:#94a3b8; }
