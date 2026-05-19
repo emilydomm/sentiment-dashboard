@@ -80,22 +80,20 @@ window.addEventListener('DOMContentLoaded', () => {
   .calendar-nav button:hover { background:#e7edf5; color:#0f3460; }
   .calendar-weekdays, .calendar-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:6px; }
   .calendar-weekdays div { text-align:center; font-size:12px; color:#9aa1ad; padding:4px 0; }
-  .calendar-day { border:none; background:transparent; min-height:36px; border-radius:10px; font-size:14px; color:#1f2937; cursor:pointer; position:relative; }
+  .calendar-day { border:none; background:transparent; min-height:36px; border-radius:10px; font-size:14px; color:#1f2937; cursor:pointer; position:relative; z-index:1; }
   .calendar-day:hover { background:#f5f7fb; }
   .calendar-day.muted { color:#c0c6d0; }
   .calendar-day.disabled { color:#d4d8df; cursor:default; }
   .calendar-day.has-data { font-weight:600; background:#f8fafc; }
   .calendar-day.has-data::before { content:''; position:absolute; bottom:5px; left:50%; transform:translateX(-50%); width:5px; height:5px; border-radius:999px; background:#93c5fd; }
-  .calendar-day.range-selected { background:#eaf2ff; color:#2563eb; box-shadow:none; border:none; border-radius:0; }
-  .calendar-day.range-selected.has-data { background:#eaf2ff; }
-  .calendar-day.range-start { border-radius:14px 0 0 14px; }
-  .calendar-day.range-end { border-radius:0 14px 14px 0; }
-  .calendar-day.range-single { border-radius:14px; }
+  .calendar-day.range-selected { color:#2563eb; background:transparent; }
+  .calendar-day.range-selected.has-data { background:transparent; }
+  .calendar-day.range-selected::after { content:''; position:absolute; left:-3px; right:-3px; top:4px; bottom:4px; background:#eaf2ff; z-index:-1; }
+  .calendar-day.range-start::after { left:0; border-radius:14px 0 0 14px; }
+  .calendar-day.range-end::after { right:0; border-radius:0 14px 14px 0; }
+  .calendar-day.range-single::after { left:0; right:0; border-radius:14px; }
   .calendar-day.range-selected::before { background:#60a5fa; opacity:.9; }
-  .calendar-day.selected { color:#1d4ed8; box-shadow:none; border-radius:0; }
-  .calendar-day.range-start.selected { border-radius:14px 0 0 14px; }
-  .calendar-day.range-end.selected { border-radius:0 14px 14px 0; }
-  .calendar-day.range-single.selected { border-radius:14px; }
+  .calendar-day.selected { color:#1d4ed8; background:transparent; box-shadow:none; }
   .calendar-day.selected:not(.range-selected) { background:#dbeafe; border-radius:14px; box-shadow:inset 0 0 0 1.5px #60a5fa; }
   .calendar-day.selected:not(.range-selected)::before { background:#2563eb; }
   .calendar-day.today::after { content:'今'; position:absolute; right:5px; top:4px; font-size:10px; color:#94a3b8; }
