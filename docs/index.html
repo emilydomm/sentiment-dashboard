@@ -496,7 +496,10 @@ function handleVisibilityToggle(tab, checked) {
 // Tab 切换
 function switchTab(tab, options = {}) {
   if (!visibleTabs[tab] && !options.force) return;
-  currentTab = visibleTabs[tab] ? tab : getFirstVisibleTab();
+  currentTab = tab;
+  if (!visibleTabs[currentTab]) {
+    currentTab = getFirstVisibleTab();
+  }
 
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.tab === currentTab);
