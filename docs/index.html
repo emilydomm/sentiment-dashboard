@@ -670,16 +670,14 @@ async function initWechat() {
     if (res.ok) dates = await res.json();
   } catch(e) {}
   if (!Array.isArray(dates)) dates = [];
-  if (!dates.includes(todayStr)) dates.push(todayStr);
   dates = [...new Set(dates)].sort().reverse();
   wechatAvailableDates = dates;
 
-  const initialDate = dates.includes(todayStr) ? todayStr : dates[0];
+  const initialDate = dates[0] || todayStr;
   currentWechatDate = initialDate;
   wechatCalendarMonth = parseDateString(initialDate);
   wechatCalendarMonth = new Date(wechatCalendarMonth.getFullYear(), wechatCalendarMonth.getMonth(), 1);
-  renderWechatCalendar();
-  loadWechatDate(initialDate);
+  await loadWechatDate(initialDate);
 }
 
 async function loadWechatDate(date) {
