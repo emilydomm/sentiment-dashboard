@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f7fa; color: #333; display: flex; flex-direction: column; }
   
   .header { background: linear-gradient(135deg, #0f172a 0%, #16213e 42%, #1d4ed8 100%); color: white; padding: 26px 32px 24px; display:flex; align-items:flex-start; justify-content:space-between; gap:20px; }
-  .header-main h1 { font-size: 26px; font-weight: 700; letter-spacing:-0.02em; }
+  .header-main h1 { font-size: 22px; font-weight: 700; letter-spacing:-0.02em; }
   .header-main p { font-size: 14px; opacity: 0.82; margin-top: 6px; }
   .header-actions { position: relative; flex-shrink: 0; }
   .settings-btn { border: 1px solid rgba(255,255,255,.18); background: rgba(255,255,255,.08); color: white; border-radius: 12px; padding: 9px 14px; font-size: 13px; font-weight: 600; cursor: pointer; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: all .2s ease; display:inline-flex; align-items:center; gap:8px; }
@@ -51,6 +51,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   .industry-layout { padding:24px 32px 32px; display:grid; grid-template-columns:320px minmax(0, 1fr); gap:28px; align-items:start; }
   .industry-sidebar { display:flex; flex-direction:column; gap:16px; position:sticky; top:0; }
+  .industry-search-panel { background:#fff; border:1px solid #eceff3; border-radius:20px; padding:16px; box-shadow:inset 0 1px 0 rgba(255,255,255,.7); }
   .industry-sidebar-card { background:linear-gradient(180deg,#ffffff 0%, #f8fbff 100%); border:1px solid #e8edf5; border-radius:24px; padding:22px; box-shadow:0 10px 30px rgba(15,52,96,.08); }
   .industry-kicker { font-size:12px; color:#8a94a6; letter-spacing:.08em; text-transform:uppercase; margin-bottom:10px; }
   .industry-summary-line { display:flex; flex-direction:column; gap:8px; }
@@ -58,17 +59,10 @@ window.addEventListener('DOMContentLoaded', () => {
   .industry-summary-line .summary-date { font-size:15px; color:#1f2937; font-weight:600; }
   .industry-summary-line .summary-sub { font-size:13px; color:#6b7280; line-height:1.6; }
   .calendar-card { background:#fff; border:1px solid #eceff3; border-radius:20px; padding:16px 16px 12px; box-shadow:inset 0 1px 0 rgba(255,255,255,.7); }
-  .industry-main { min-width:0; display:flex; flex-direction:column; gap:20px; }
-  .industry-hero { background:linear-gradient(180deg,#ffffff 0%, #f8fbff 100%); border:1px solid #e7edf5; border-radius:30px; padding:28px 32px; box-shadow:0 18px 44px rgba(15,52,96,.08); min-height:220px; display:flex; flex-direction:column; justify-content:space-between; }
-  .industry-main-top { display:grid; grid-template-columns:minmax(420px, 1.35fr) minmax(260px, .65fr); align-items:start; gap:32px; }
-  .industry-main-title { min-width:0; }
-  .industry-main-title h2 { font-size:40px; line-height:1.12; color:#101828; margin-bottom:12px; letter-spacing:-0.03em; max-width:none; }
-  .industry-main-title p { font-size:15px; color:#667085; line-height:1.8; max-width:680px; }
-  .industry-search-wrap { min-width:0; display:flex; align-items:flex-start; justify-content:flex-end; padding-top:2px; }
-  .industry-search-wrap input { width:100%; max-width:300px; padding:12px 16px; border:1px solid #d9e0ea; border-radius:999px; font-size:14px; outline:none; background:#fff; }
+  .industry-main { min-width:0; display:flex; flex-direction:column; gap:16px; }
+  .industry-search-wrap { min-width:0; display:flex; align-items:flex-start; justify-content:flex-start; }
+  .industry-search-wrap input { width:100%; padding:12px 16px; border:1px solid #d9e0ea; border-radius:999px; font-size:14px; outline:none; background:#fff; }
   .industry-search-wrap input:focus { border-color:#0f3460; box-shadow:0 0 0 4px rgba(15,52,96,.08); }
-  .industry-meta-row { display:flex; gap:12px; align-items:center; flex-wrap:wrap; font-size:13px; color:#6b7280; padding-top:6px; }
-  .industry-pill { display:inline-flex; align-items:center; gap:6px; padding:9px 14px; border-radius:999px; background:#f3f6fb; color:#334155; border:1px solid #e6ebf2; }
   .industry-card-list { display:flex; flex-direction:column; gap:16px; }
   .calendar-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
   .calendar-title-btn { border:none; background:none; padding:0; font-size:16px; font-weight:700; color:#1a1a2e; display:flex; align-items:center; gap:6px; cursor:default; }
@@ -143,7 +137,6 @@ window.addEventListener('DOMContentLoaded', () => {
   @media (max-width: 980px) {
     .industry-layout { grid-template-columns:1fr; }
     .industry-sidebar { position:static; }
-    .industry-main-top { grid-template-columns:1fr; gap:16px; }
     .industry-search-wrap { width:100%; min-width:0; justify-content:flex-start; }
     .industry-search-wrap input { width:100%; max-width:none; }
   }
@@ -271,6 +264,11 @@ window.addEventListener('DOMContentLoaded', () => {
         <span class="summary-sub">按发布日期浏览每日行业资讯，点击左侧日期即可切换到当天内容。</span>
       </div>
     </div>
+    <div class="industry-search-panel">
+      <div class="industry-search-wrap">
+        <input type="text" id="industrySearchInput" placeholder="🔍 搜索标题/关键词..." oninput="renderIndustryCards()">
+      </div>
+    </div>
     <div class="calendar-card">
       <div class="calendar-header">
         <button class="calendar-title-btn" type="button" id="industryCalendarTitle">2026年5月</button>
@@ -287,22 +285,6 @@ window.addEventListener('DOMContentLoaded', () => {
   </aside>
 
   <section class="industry-main">
-    <div class="industry-hero">
-      <div class="industry-main-top">
-        <div class="industry-main-title">
-          <h2>欢迎来到机器人小戴的资讯看板</h2>
-          <p>行业资讯每天9:00自动更新，聚合最近一周内可公开验证的技术、充电、底盘与新车动态。</p>
-        </div>
-        <div class="industry-search-wrap">
-          <input type="text" id="industrySearchInput" placeholder="🔍 搜索标题/关键词..." oninput="renderIndustryCards()">
-        </div>
-      </div>
-      <div class="industry-meta-row">
-        <span class="industry-pill">📅 <span id="industryHeroDate">2026-05-19</span></span>
-        <span class="industry-pill">🗂️ 当日资讯 <span id="industryHeroCount">-</span> 条</span>
-      </div>
-    </div>
-
     <div id="industryCardContainer" class="industry-card-list">
       <div class="loading">加载中...</div>
     </div>
@@ -797,8 +779,6 @@ async function initIndustry() {
 async function loadIndustryDate(date) {
   document.getElementById('industrySearchInput').value = '';
   document.getElementById('industryDateLabel').textContent = `${date} 行业资讯`;
-  const heroDate = document.getElementById('industryHeroDate');
-  if (heroDate) heroDate.textContent = date;
   document.getElementById('industryCardContainer').innerHTML = '<div class="loading">加载中...</div>';
 
   try {
@@ -820,8 +800,6 @@ async function loadIndustryDate(date) {
         if (!Array.isArray(industryData)) industryData = [];
         currentIndustryDate = fallback;
         document.getElementById('industryDateLabel').textContent = `${fallback} 行业资讯（最新可用）`;
-        const heroDate = document.getElementById('industryHeroDate');
-        if (heroDate) heroDate.textContent = fallback;
         industryCalendarMonth = new Date(parseDateString(fallback).getFullYear(), parseDateString(fallback).getMonth(), 1);
         renderIndustryCalendar();
         renderIndustryCards();
@@ -843,8 +821,6 @@ function renderIndustryCards() {
   });
 
   document.getElementById('industryTotalCount').textContent = filtered.length;
-  const heroCount = document.getElementById('industryHeroCount');
-  if (heroCount) heroCount.textContent = filtered.length;
 
   if (filtered.length === 0) {
     document.getElementById('industryCardContainer').innerHTML = '<div class="empty">没有符合条件的内容</div>';
