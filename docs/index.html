@@ -767,7 +767,21 @@ function renderIndustryCards() {
             <a href="${item.url}" target="_blank" style="color:#1a1a2e;text-decoration:none"
                onmouseenter="this.style.color='#0f3460'" onmouseleave="this.style.color='#1a1a2e'">${item.title}</a>
           </div>
-          ${item.desc ? `<div style="font-size:13px;color:#666;line-height:1.7;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">${item.desc}</div>` : ''}
+          ${item.desc ? `<div style="font-size:13px;color:#666;line-height:1.7;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:8px">${item.desc}</div>` : ''}
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <span style="
+              display:inline-block;
+              background:${kwStyle.bg};
+              color:${kwStyle.color};
+              font-size:11px;
+              font-weight:700;
+              padding:3px 10px;
+              border-radius:20px;
+              white-space:nowrap;
+              letter-spacing:.3px;
+            ">${kw}</span>
+            <span style="font-size:11px;color:#bbb">📅 ${item.publish_date}</span>
+          </div>
         </div>
         ${imageBlock}
       </div>`;
