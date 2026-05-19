@@ -80,10 +80,11 @@ window.addEventListener('DOMContentLoaded', () => {
   .calendar-nav button:hover { background:#e7edf5; color:#0f3460; }
   .calendar-weekdays, .calendar-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:6px; }
   .calendar-grid { position:relative; }
-  .calendar-range-track { position:absolute; z-index:0; pointer-events:none; }
-  .calendar-range-track.available { background:#dbeafe; border-radius:999px; }
-  .calendar-range-track.active { background:linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); border-radius:999px; }
-  .calendar-cell { position:relative; min-height:36px; }
+  .calendar-cell { position:relative; min-height:36px; border-radius:0; }
+  .calendar-cell.range-fill.available { background:#dbeafe; }
+  .calendar-cell.range-fill.active { background:linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); }
+  .calendar-cell.range-start { border-top-left-radius:999px; border-bottom-left-radius:999px; }
+  .calendar-cell.range-end { border-top-right-radius:999px; border-bottom-right-radius:999px; }
   .calendar-weekdays div { text-align:center; font-size:12px; color:#9aa1ad; padding:4px 0; }
   .calendar-day { border:none; background:transparent; min-height:36px; border-radius:10px; font-size:14px; color:#c0c6d0; cursor:default; position:relative; z-index:1; box-shadow:none; }
   .calendar-day:hover { background:transparent; }
@@ -601,7 +602,6 @@ function renderWechatCalendar() {
   const activeHighlightDates = (wechatData && Array.isArray(wechatData.highlight_dates)) ? wechatData.highlight_dates : DEFAULT_WECHAT_HIGHLIGHT_DATES;
   const activeTargetDate = (wechatData && wechatData.target_date) ? wechatData.target_date : currentWechatDate;
   let html = '';
-  const tracks = [];
 
   for (let i = 0; i < 42; i++) {
     const cellDate = new Date(gridStart);
@@ -612,6 +612,18 @@ function renderWechatCalendar() {
     const hasData = availableSet.has(targetDate);
     const isInRange = activeHighlightDates.includes(dateStr);
     const isActiveRange = isInRange && targetDate === activeTargetDate;
+    const prevDate = new Date(cellDate); prevDate.setDate(cellDate.getDate() - 1);
+    const nextDate = new Date(cellDate); nextDate.setDate(cellDate.getDate() + 1);
+    const prevInRange = activeHighlightDates.includes(formatDateString(prevDate));
+    const nextInRange = activeHighlightDates.includes(formatDateString(nextDate));
+    const cellCls = [
+      'calendar-cell',
+      isInRange ? 'range-fill' : '',
+      hasData && isInRange ? 'available' : '',
+      isActiveRange ? 'active' : '',
+      isInRange && !prevInRange ? 'range-start' : '',
+      isInRange && !nextInRange ? 'range-end' : ''
+    ].filter(Boolean).join(' ');
     const cls = [
       'calendar-day',
       inMonth ? '' : 'muted',
@@ -621,33 +633,10 @@ function renderWechatCalendar() {
       isActiveRange ? 'active' : ''
     ].filter(Boolean).join(' ');
 
-    if (isInRange) {
-      const col = (i % 7) + 1;
-      const row = Math.floor(i / 7) + 1;
-      tracks.push({ col, row, targetDate, active: targetDate === activeTargetDate, available: hasData });
-    }
-
-    html += `<div class="calendar-cell"><button type="button" class="${cls}" ${hasData ? `onclick="selectWechatDate('${dateStr}')"` : 'tabindex="-1"'}>${cellDate.getDate()}</button></div>`;
+    html += `<div class="${cellCls}"><button type="button" class="${cls}" ${hasData ? `onclick="selectWechatDate('${dateStr}')"` : 'tabindex="-1"'}>${cellDate.getDate()}</button></div>`;
   }
 
-  const grouped = new Map();
-  for (const item of tracks) {
-    const key = `${item.row}-${item.targetDate}-${item.active}-${item.available}`;
-    if (!grouped.has(key)) grouped.set(key, []);
-    grouped.get(key).push(item);
-  }
-
-  let trackHtml = '';
-  for (const items of grouped.values()) {
-    items.sort((a, b) => a.col - b.col);
-    const row = items[0].row;
-    const startCol = items[0].col;
-    const endCol = items[items.length - 1].col;
-    const trackCls = ['calendar-range-track', items[0].available ? 'available' : '', items[0].active ? 'active' : ''].filter(Boolean).join(' ');
-    trackHtml += `<div class="${trackCls}" style="grid-column:${startCol} / ${endCol + 1}; grid-row:${row}; margin:6px 0;"></div>`;
-  }
-
-  grid.innerHTML = trackHtml + html;
+  grid.innerHTML = html;
 }
 
 function selectWechatDate(dateStr) {
