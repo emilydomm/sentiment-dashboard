@@ -51,7 +51,7 @@ window.addEventListener('DOMContentLoaded', () => {
   .toolbar input:focus, .toolbar select:focus { border-color: #0f3460; }
 
   .industry-layout { padding:24px 32px 32px; display:grid; grid-template-columns:320px minmax(0, 1fr); gap:28px; align-items:start; }
-  .industry-sidebar { display:flex; flex-direction:column; gap:16px; position:sticky; top:0; }
+  .industry-sidebar { display:flex; flex-direction:column; gap:16px; position:sticky; top:0; align-self:start; }
   .industry-search-panel { background:#fff; border:1px solid #eceff3; border-radius:20px; padding:16px; box-shadow:inset 0 1px 0 rgba(255,255,255,.7); }
   .industry-sidebar-card { background:linear-gradient(180deg,#ffffff 0%, #f8fbff 100%); border:1px solid #e8edf5; border-radius:24px; padding:22px; box-shadow:0 10px 30px rgba(15,52,96,.08); }
   .industry-kicker { font-size:12px; color:#8a94a6; letter-spacing:.08em; text-transform:uppercase; margin-bottom:10px; }
@@ -61,10 +61,12 @@ window.addEventListener('DOMContentLoaded', () => {
   .industry-summary-line .summary-sub { font-size:13px; color:#6b7280; line-height:1.6; }
   .calendar-card { background:#fff; border:1px solid #eceff3; border-radius:20px; padding:16px 16px 12px; box-shadow:inset 0 1px 0 rgba(255,255,255,.7); }
   .industry-main { min-width:0; display:flex; flex-direction:column; gap:16px; }
+  .industry-main-grid { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:16px; align-items:start; }
   .industry-search-wrap { min-width:0; display:flex; align-items:flex-start; justify-content:flex-start; }
   .industry-search-wrap input { width:100%; padding:12px 16px; border:1px solid #d9e0ea; border-radius:999px; font-size:14px; outline:none; background:#fff; }
   .industry-search-wrap input:focus { border-color:#0f3460; box-shadow:0 0 0 4px rgba(15,52,96,.08); }
   .industry-card-list { display:flex; flex-direction:column; gap:16px; }
++  .industry-column { display:flex; flex-direction:column; gap:16px; }
   .calendar-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
   .calendar-title-btn { border:none; background:none; padding:0; font-size:16px; font-weight:700; color:#1a1a2e; display:flex; align-items:center; gap:6px; cursor:default; }
   .calendar-nav { display:flex; gap:6px; }
@@ -134,6 +136,10 @@ window.addEventListener('DOMContentLoaded', () => {
   
   .empty { text-align: center; padding: 60px; color: #bbb; }
   .loading { text-align: center; padding: 60px; color: #888; }
+
+  @media (max-width: 1100px) {
+    .industry-main-grid { grid-template-columns:1fr; }
+  }
 
   @media (max-width: 980px) {
     .industry-layout { grid-template-columns:1fr; }
@@ -850,50 +856,54 @@ function renderIndustryCards() {
     const validImg = imgSrc && imgSrc.startsWith('http') && !badPatterns.some(p => imgSrc.toLowerCase().includes(p));
 
     const imageBlock = validImg ? `
-      <div style="flex-shrink:0;width:160px;height:108px;border-radius:10px;overflow:hidden;background:#f0f0f0;margin-left:16px">
+      <div style="width:100%;height:176px;border-radius:14px;overflow:hidden;background:#f0f0f0;margin-top:14px">
         <img src="${imgSrc}" style="width:100%;height:100%;object-fit:cover;display:block" onerror="this.parentElement.style.display='none'">
       </div>` : '';
 
     return `
-      <div style="
+      <article style="
         background:white;
-        border-radius:14px;
+        border-radius:18px;
         padding:18px 20px;
-        margin-bottom:12px;
-        box-shadow:0 2px 8px rgba(0,0,0,.06);
-        display:flex;
-        align-items:flex-start;
+        box-shadow:0 2px 10px rgba(0,0,0,.06);
         border-left:4px solid ${kwStyle.dot};
         transition:box-shadow .2s, transform .15s;
         cursor:default;
-      " onmouseenter="this.style.boxShadow='0 6px 20px rgba(0,0,0,.12)';this.style.transform='translateY(-1px)'"
-         onmouseleave="this.style.boxShadow='0 2px 8px rgba(0,0,0,.06)';this.style.transform='translateY(0)'">
-        <div style="flex:1;min-width:0">
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
-            <span style="
-              display:inline-block;
-              background:${kwStyle.bg};
-              color:${kwStyle.color};
-              font-size:11px;
-              font-weight:700;
-              padding:3px 10px;
-              border-radius:20px;
-              white-space:nowrap;
-              letter-spacing:.3px;
-            ">${kw}</span>
-            <span style="font-size:11px;color:#bbb">📅 ${item.publish_date}</span>
-          </div>
-          <div style="font-size:15px;font-weight:600;line-height:1.5;margin-bottom:8px">
-            <a href="${item.url}" target="_blank" style="color:#1a1a2e;text-decoration:none"
-               onmouseenter="this.style.color='#0f3460'" onmouseleave="this.style.color='#1a1a2e'">${item.title}</a>
-          </div>
-          ${item.desc ? `<div style="font-size:13px;color:#666;line-height:1.7;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">${item.desc}</div>` : ''}
+        min-height:168px;
+      " onmouseenter="this.style.boxShadow='0 8px 24px rgba(0,0,0,.10)';this.style.transform='translateY(-1px)'"
+         onmouseleave="this.style.boxShadow='0 2px 10px rgba(0,0,0,.06)';this.style.transform='translateY(0)'">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap">
+          <span style="
+            display:inline-block;
+            background:${kwStyle.bg};
+            color:${kwStyle.color};
+            font-size:11px;
+            font-weight:700;
+            padding:3px 10px;
+            border-radius:20px;
+            white-space:nowrap;
+            letter-spacing:.3px;
+          ">${kw}</span>
+          <span style="font-size:11px;color:#bbb">📅 ${item.publish_date}</span>
         </div>
+        <div style="font-size:16px;font-weight:600;line-height:1.55;margin-bottom:10px">
+          <a href="${item.url}" target="_blank" style="color:#1a1a2e;text-decoration:none"
+             onmouseenter="this.style.color='#0f3460'" onmouseleave="this.style.color='#1a1a2e'">${item.title}</a>
+        </div>
+        ${item.desc ? `<div style="font-size:13px;color:#666;line-height:1.75;display:-webkit-box;-webkit-line-clamp:${validImg ? 3 : 4};-webkit-box-orient:vertical;overflow:hidden">${item.desc}</div>` : ''}
         ${imageBlock}
-      </div>`;
-  }).join('');
+      </article>`;
+  });
 
-  document.getElementById('industryCardContainer').innerHTML = html;
+  const midpoint = Math.ceil(cards.length / 2);
+  const leftColumn = cards.slice(0, midpoint).join('');
+  const rightColumn = cards.slice(midpoint).join('');
+
+  document.getElementById('industryCardContainer').innerHTML = `
+    <div class="industry-main-grid">
+      <div class="industry-column">${leftColumn}</div>
+      <div class="industry-column">${rightColumn}</div>
+    </div>`;
 }
 </script>
 </div><!-- /mainApp -->
