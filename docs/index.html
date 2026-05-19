@@ -78,8 +78,8 @@ window.addEventListener('DOMContentLoaded', () => {
   .calendar-nav { display:flex; gap:6px; }
   .calendar-nav button { width:32px; height:32px; border:none; background:#f3f5f8; color:#4b5563; border-radius:999px; cursor:pointer; font-size:18px; line-height:1; }
   .calendar-nav button:hover { background:#e7edf5; color:#0f3460; }
-  .calendar-weekdays, .calendar-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:6px; }
-  .calendar-grid { position:relative; }
+  .calendar-weekdays { display:grid; grid-template-columns:repeat(7,1fr); gap:6px; }
+  .calendar-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:0; position:relative; }
   .calendar-cell { position:relative; min-height:36px; border-radius:0; }
   .calendar-cell.range-fill.available { background:#dbeafe; }
   .calendar-cell.range-fill.active { background:linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); }
