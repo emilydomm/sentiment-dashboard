@@ -593,7 +593,7 @@ function renderWechatCards() {
   document.getElementById('wechatTotalCount').textContent = filteredTotal;
   document.getElementById('wechatBrandCount').textContent = normalizedBrands.length;
 
-  const displayPeriod = (wechatData && wechatData.display_period) ? wechatData.display_period : '5.11-5.17';
+  const displayPeriod = '5/11-5/17';
   document.getElementById('wechatDateLabel').textContent = `📅 ${wechatData?.target_date || ''} 友商内容跟踪（${displayPeriod}）`;
 
   const note = wechatData && wechatData.sources_note
@@ -614,7 +614,7 @@ function renderWechatCards() {
     });
     const emptyText = keyword ? '没有符合搜索条件的内容' : '未提取到对应友商内容';
     const cards = items.length ? items.map(item => {
-      const period = item.period || '未显式标注';
+      const period = (wechatData && wechatData.display_period) ? wechatData.display_period : '5/11-5/17';
       const sourceDoc = item.source_doc || item.source || '未标注来源';
       return `
       <div class="card" style="margin-bottom:12px;padding:14px 16px;border:1px solid #eef2f7;box-shadow:none">
