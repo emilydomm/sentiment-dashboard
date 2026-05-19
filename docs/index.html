@@ -337,6 +337,7 @@ window.addEventListener('DOMContentLoaded', () => {
   </aside>
 
   <section class="industry-main">
+    <div id="wechatBrandNav" style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px"></div>
     <div id="wechatCardContainer" class="industry-card-list">
       <div class="loading">加载中...</div>
     </div>
@@ -652,6 +653,10 @@ async function loadWechatDate(date) {
   }
 }
 
+function slugifyBrandName(name) {
+  return `brand-${String(name || '').toLowerCase().replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '-')}`;
+}
+
 function renderWechatCards() {
   const keyword = document.getElementById('wechatSearchInput').value.trim().toLowerCase();
   const brands = (wechatData && Array.isArray(wechatData.brands)) ? wechatData.brands : [];
@@ -687,6 +692,23 @@ function renderWechatCards() {
     document.getElementById('wechatCardContainer').innerHTML = note + '<div class="empty">暂无数据</div>';
     return;
   }
+
+  const navHtml = filteredBrands.map(brand => {
+    const count = (brand.items || [])
+      .filter(item => {
+        const title = (item.title || '').trim();
+        const brandName = (brand.brand || '').trim();
+        if (!title) return false;
+        if (title === brandName) return false;
+        if (title === `${brandName}汽车`) return false;
+        return true;
+      })
+      .filter((item, index, arr) => {
+        const key = `${(item.url || '').trim()}__${(item.title || '').trim()}__${((item.source_doc || item.source || '').trim())}`;
+        return arr.findIndex(x => `${(x.url || '').trim()}__${(x.title || '').trim()}__${((x.source_doc || x.source || '').trim())}` === key) === index;
+      }).length;
+    return `<a href="#${slugifyBrandName(brand.brand)}" style="display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e5e7eb;color:#334155;text-decoration:none;font-size:13px;font-weight:600;box-shadow:0 1px 3px rgba(15,23,42,.04)">${brand.brand}<span style="background:#eff6ff;color:#2563eb;border-radius:999px;padding:2px 8px;font-size:12px">${count}</span></a>`;
+  }).join('');
 
   const html = filteredBrands.map(brand => {
     const items = (brand.items || [])
@@ -731,7 +753,7 @@ function renderWechatCards() {
     }).join('') : `<div class="empty" style="padding:30px">${emptyText}</div>`;
 
     return `
-      <div style="background:white;border-radius:16px;padding:18px 20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.06)">
+      <div id="${slugifyBrandName(brand.brand)}" style="background:white;border-radius:16px;padding:18px 20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.06);scroll-margin-top:18px">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:12px;flex-wrap:wrap">
           <div style="font-size:18px;font-weight:700;color:#1a1a2e">${brand.brand}</div>
           <div style="font-size:12px;color:#666;background:#f3f4f6;padding:5px 10px;border-radius:999px">${items.length} 条内容</div>
@@ -740,6 +762,7 @@ function renderWechatCards() {
       </div>`;
   }).join('');
 
+  document.getElementById('wechatBrandNav').innerHTML = navHtml;
   document.getElementById('wechatCardContainer').innerHTML = note + html;
 }
 
