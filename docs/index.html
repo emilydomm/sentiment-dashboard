@@ -344,6 +344,47 @@ let industryCalendarMonth = null;
 let wechatData = null;
 let wechatAvailableDates = [];
 
+function normalizeWechatData(raw, date) {
+  const targetDate = date || '';
+  if (!raw) return { target_date: targetDate, brands: [], sources_note: '' };
+
+  if (Array.isArray(raw.brands)) {
+    return {
+      target_date: raw.target_date || targetDate,
+      sources_note: raw.sources_note || '',
+      brands: raw.brands.map(brand => ({
+        brand: brand.brand || brand.name || '',
+        account: brand.account || brand.brand || brand.name || '',
+        items: Array.isArray(brand.items) ? brand.items : []
+      }))
+    };
+  }
+
+  if (typeof raw === 'object') {
+    const reservedKeys = new Set(['target_date', 'sources_note', 'brands']);
+    const brandEntries = Object.entries(raw)
+      .filter(([key, value]) => !reservedKeys.has(key) && Array.isArray(value))
+      .map(([brand, items]) => ({
+        brand,
+        account: brand,
+        items: items.map(item => ({
+          title: item.title || '',
+          url: item.url || '',
+          period: item.period || '未显式标注',
+          source_doc: item.source_doc || item.source || ''
+        }))
+      }));
+
+    return {
+      target_date: raw.target_date || targetDate,
+      sources_note: raw.sources_note || '',
+      brands: brandEntries
+    };
+  }
+
+  return { target_date: targetDate, brands: [], sources_note: '' };
+}
+
 const DASHBOARD_SETTINGS_KEY = 'dashboardVisibleTabs';
 const defaultVisibleTabs = { sentiment: false, industry: true, wechat: false };
 let visibleTabs = { ...defaultVisibleTabs };
@@ -514,7 +555,8 @@ async function loadWechatDate(date) {
   try {
     const res = await fetch(`data/wechat/${date}.json?v=${Date.now()}`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    wechatData = await res.json();
+    const raw = await res.json();
+    wechatData = normalizeWechatData(raw, date);
     renderWechatCards();
   } catch(e) {
     wechatData = null;
