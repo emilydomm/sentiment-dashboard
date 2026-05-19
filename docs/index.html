@@ -657,6 +657,15 @@ function slugifyBrandName(name) {
   return `brand-${String(name || '').toLowerCase().replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '-')}`;
 }
 
+function formatWechatItemTitle(item, brand) {
+  const title = (item.title || '').trim();
+  const url = (item.url || '').trim();
+  const sourceDoc = (item.source_doc || item.source || '').trim();
+  if (!title) return `${sourceDoc || brand.brand || '内容'}｜链接`;
+  if (url && title === url) return `${sourceDoc || brand.brand || '内容'}｜链接`;
+  return title;
+}
+
 function renderWechatCards() {
   const keyword = document.getElementById('wechatSearchInput').value.trim().toLowerCase();
   const brands = (wechatData && Array.isArray(wechatData.brands)) ? wechatData.brands : [];
@@ -737,12 +746,13 @@ function renderWechatCards() {
     const cards = items.length ? items.map(item => {
       const period = WECHAT_DISPLAY_PERIOD;
       const sourceDoc = item.source_doc || item.source || '未标注来源';
+      const displayTitle = formatWechatItemTitle(item, brand);
       return `
       <div class="card" style="margin-bottom:12px;padding:14px 16px;border:1px solid #eef2f7;box-shadow:none">
         <div class="card-body">
           <div class="card-title" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
             <span class="platform-badge badge-web">${period}</span>
-            ${item.url ? `<a href="${item.url}" target="_blank" rel="noopener noreferrer">${item.title}</a>` : `${item.title}`}
+            ${item.url ? `<a href="${item.url}" target="_blank" rel="noopener noreferrer">${displayTitle}</a>` : `${displayTitle}`}
           </div>
           <div class="card-meta" style="margin-top:8px">
             <span>🏷️ ${brand.brand}</span>
