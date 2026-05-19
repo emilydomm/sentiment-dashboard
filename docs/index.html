@@ -589,6 +589,16 @@ function getWechatWeekTargetDate(dateStr) {
   return map[dateStr] || dateStr;
 }
 
+function formatWechatDisplayPeriod(targetDate) {
+  const highlightDates = (wechatData && Array.isArray(wechatData.highlight_dates) && wechatData.target_date === targetDate)
+    ? wechatData.highlight_dates
+    : getWechatHighlightDates(targetDate);
+  if (!highlightDates.length) return targetDate;
+  const first = parseDateString(highlightDates[0]);
+  const last = parseDateString(highlightDates[highlightDates.length - 1]);
+  return `${first.getMonth() + 1}/${first.getDate()}-${last.getMonth() + 1}/${last.getDate()}`;
+}
+
 function renderWechatCalendar() {
   if (!wechatCalendarMonth) return;
   const grid = document.getElementById('wechatCalendarGrid');
@@ -643,8 +653,19 @@ function renderWechatCalendar() {
 
 function selectWechatDate(dateStr) {
   const targetDate = getWechatWeekTargetDate(dateStr);
-  if (!(wechatAvailableDates || []).includes(targetDate)) return;
-  loadWechatDate(targetDate);
+  if (!(wechatAvailableDates || []).includes(targetDate)) {
+    currentWechatDate = targetDate;
+    wechatData = null;
+    wechatCalendarMonth = new Date(parseDateString(targetDate).getFullYear(), parseDateString(targetDate).getMonth(), 1);
+    renderWechatCalendar();
+    document.getElementById('wechatSearchInput').value = '';
+    document.getElementById('wechatDateLabel').textContent = `📅 友商内容跟踪（${formatWechatDisplayPeriod(targetDate)}）`;
+    document.getElementById('wechatTotalCount').textContent = '0';
+    document.getElementById('wechatBrandCountInline').textContent = '0';
+    document.getElementById('wechatCardContainer').innerHTML = '<div class="empty">该时间段暂无录入内容</div>';
+    return;
+  }
+  loadWechatDate(targetDate, { allowFallback: false });
 }
 
 function changeWechatCalendarMonth(offset) {
@@ -671,7 +692,8 @@ async function initWechat() {
   await loadWechatDate(initialDate);
 }
 
-async function loadWechatDate(date) {
+async function loadWechatDate(date, options = {}) {
+  const allowFallback = options.allowFallback !== false;
   document.getElementById('wechatSearchInput').value = '';
   const loadingPeriod = (wechatData && wechatData.display_period) ? wechatData.display_period : '';
   document.getElementById('wechatDateLabel').textContent = loadingPeriod ? `📅 友商内容跟踪（${loadingPeriod}）` : '📅 友商内容跟踪';
@@ -687,25 +709,30 @@ async function loadWechatDate(date) {
     renderWechatCalendar();
     renderWechatCards();
   } catch(e) {
-    const fallback = (wechatAvailableDates || []).find(d => d < date);
-    if (fallback) {
-      try {
-        const res2 = await fetch(`data/wechat/${fallback}.json?v=${Date.now()}`);
-        if (!res2.ok) throw new Error();
-        const raw2 = await res2.json();
-        wechatData = normalizeWechatData(raw2, fallback);
-        currentWechatDate = fallback;
-        wechatCalendarMonth = new Date(parseDateString(fallback).getFullYear(), parseDateString(fallback).getMonth(), 1);
-        renderWechatCalendar();
-        renderWechatCards();
-        return;
-      } catch(e2) {}
+    if (allowFallback) {
+      const fallback = (wechatAvailableDates || []).find(d => d < date);
+      if (fallback) {
+        try {
+          const res2 = await fetch(`data/wechat/${fallback}.json?v=${Date.now()}`);
+          if (!res2.ok) throw new Error();
+          const raw2 = await res2.json();
+          wechatData = normalizeWechatData(raw2, fallback);
+          currentWechatDate = fallback;
+          wechatCalendarMonth = new Date(parseDateString(fallback).getFullYear(), parseDateString(fallback).getMonth(), 1);
+          renderWechatCalendar();
+          renderWechatCards();
+          return;
+        } catch(e2) {}
+      }
     }
     wechatData = null;
+    currentWechatDate = date;
+    wechatCalendarMonth = new Date(parseDateString(date).getFullYear(), parseDateString(date).getMonth(), 1);
     document.getElementById('wechatTotalCount').textContent = '0';
     document.getElementById('wechatBrandCountInline').textContent = '0';
+    document.getElementById('wechatDateLabel').textContent = `📅 友商内容跟踪（${formatWechatDisplayPeriod(date)}）`;
     renderWechatCalendar();
-    document.getElementById('wechatCardContainer').innerHTML = '<div class="empty">暂无数据</div>';
+    document.getElementById('wechatCardContainer').innerHTML = '<div class="empty">该时间段暂无录入内容</div>';
   }
 }
 
