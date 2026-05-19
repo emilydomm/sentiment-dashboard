@@ -846,7 +846,7 @@ function renderIndustryCards() {
     '能耗表现':   {bg:'#f0fdfa', color:'#0f766e', dot:'#14b8a6'},
   };
 
-  const html = filtered.map(item => {
+  const cards = filtered.map(item => {
     const kw = item.keyword || '行业资讯';
     const kwStyle = kwColorMap[kw] || {bg:'#f0f8ff', color:'#0369a1', dot:'#3b82f6'};
 
@@ -894,6 +894,11 @@ function renderIndustryCards() {
         ${imageBlock}
       </article>`;
   });
+
+  if (cards.length === 1) {
+    document.getElementById('industryCardContainer').innerHTML = `<div class="industry-column">${cards[0]}</div>`;
+    return;
+  }
 
   const midpoint = Math.ceil(cards.length / 2);
   const leftColumn = cards.slice(0, midpoint).join('');
