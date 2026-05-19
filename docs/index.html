@@ -376,12 +376,13 @@ const DEFAULT_WECHAT_HIGHLIGHT_DATES = [];
 function normalizeWechatData(raw, date) {
   const targetDate = date || '';
   const defaultWeeklyPeriod = DEFAULT_WECHAT_DISPLAY_PERIOD;
-  if (!raw) return { target_date: targetDate, display_period: defaultWeeklyPeriod, brands: [], sources_note: '' };
+  if (!raw) return { target_date: targetDate, display_period: defaultWeeklyPeriod, highlight_dates: [], brands: [], sources_note: '' };
 
   if (Array.isArray(raw.brands)) {
     return {
       target_date: raw.target_date || targetDate,
       display_period: raw.display_period || raw.period || defaultWeeklyPeriod,
+      highlight_dates: Array.isArray(raw.highlight_dates) ? raw.highlight_dates : [],
       sources_note: raw.sources_note || '',
       brands: raw.brands.map(brand => ({
         brand: brand.brand || brand.name || '',
@@ -409,12 +410,13 @@ function normalizeWechatData(raw, date) {
     return {
       target_date: raw.target_date || targetDate,
       display_period: raw.display_period || raw.period || defaultWeeklyPeriod,
+      highlight_dates: Array.isArray(raw.highlight_dates) ? raw.highlight_dates : [],
       sources_note: raw.sources_note || '',
       brands: brandEntries
     };
   }
 
-  return { target_date: targetDate, display_period: defaultWeeklyPeriod, brands: [], sources_note: '' };
+  return { target_date: targetDate, display_period: defaultWeeklyPeriod, highlight_dates: [], brands: [], sources_note: '' };
 }
 
 const DASHBOARD_SETTINGS_KEY = 'dashboardVisibleTabs';
