@@ -565,7 +565,7 @@ async function init() {
 function getWechatWeekTargetDate(dateStr) {
   const d = parseDateString(dateStr);
   const day = d.getDay();
-  const daysToSunday = (7 - day) % 7;
+  const daysToSunday = day === 0 ? 0 : (7 - day);
   const target = new Date(d);
   target.setDate(d.getDate() + daysToSunday);
   return formatDateString(target);
@@ -605,7 +605,7 @@ function renderWechatCalendar() {
     const targetDate = getWechatWeekTargetDate(dateStr);
     const hasData = availableSet.has(targetDate);
     const isInRange = activeHighlightDates.includes(dateStr);
-    const isSelectableWeek = targetDate !== dateStr || hasData;
+    const isSelectableWeek = hasData || dateStr === targetDate || getWechatWeekTargetDate(dateStr) !== dateStr || cellDate.getDay() === 0;
     const isActiveRange = isInRange && targetDate === activeTargetDate;
     const prevDate = new Date(cellDate); prevDate.setDate(cellDate.getDate() - 1);
     const nextDate = new Date(cellDate); nextDate.setDate(cellDate.getDate() + 1);
