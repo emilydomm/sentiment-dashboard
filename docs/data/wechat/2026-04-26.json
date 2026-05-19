@@ -1,30 +1,1152 @@
 {
-  "target_date": "2026-04-26",
-  "window": "T-7",
-  "brands": [
+  "小米": [
     {
-      "brand": "蔚来",
-      "account": "蔚来",
-      "items": []
+      "title": "小米汽车欧洲研发中心，汇聚汽车领域顶尖专家和设计师。",
+      "url": "https://v.douyin.com/GtnDvib40LA/",
+      "source_doc": "竞品排名",
+      "period": "4/20-4/26"
     },
     {
-      "brand": "小鹏汽车",
-      "account": "小鹏汽车",
-      "items": [
-        {
-          "title": "小鹏集团发布2025年ESG报告！连续3年MSCI ESG AAA全球车企最高评级引领可持续出行",
-          "url": "https://www.xiaopeng.com/news",
-          "desc": "小鹏汽车官网资讯中心公开展示内容，页面可见发布时间为2026-04-17，处于本次T-7统计窗口内。",
-          "publish_date": "2026-04-17",
-          "source": "小鹏汽车官网资讯中心"
-        }
-      ]
+      "title": "小米：小米汽车欧洲研发中心，汇聚汽车领域顶尖专家和设计师",
+      "url": "https://www.bilibili.com/video/BV1WkoVBnEPA/?spm_id_from=333.1387.homepage.video_card.click&vd_source=fde2d5de4e0f7b111e83040940e74e8c",
+      "source_doc": "竞品排名",
+      "period": "4/20-4/26"
     },
     {
-      "brand": "极氪",
-      "account": "极氪",
-      "items": []
+      "title": "小米YU7 GT ，一台适合长途旅行的跑车级SUV。",
+      "url": "https://www.xiaohongshu.com/discovery/item/69eac5f60000000012012802?source=webshare&xhsshare=pc_web&xsec_token=ABtxL5_TxR7-9kzqVXZm8af-PyLvsIto_NhgBaU9kuSDs=&xsec_source=pc_share",
+      "source_doc": "竞品排名",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "小米",
+      "url": "https://weibo.com/u/7871239944",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "#小米YU7GT#，5月底正式发布。",
+      "url": "https://weibo.com/7871239944/QCfkW6z16",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "时隔两年，北京车展依旧 绝对的超高人气！",
+      "url": "https://weibo.com/7871239944/QCgJt76O6",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "一直在想，如果@舒淇 来拍SU7会是什么样子？",
+      "url": "https://weibo.com/7871239944/QCgQKbbU0",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "小米汽车欧洲研发中心，汇聚汽车领域顶尖专家和设计师。",
+      "url": "https://weibo.com/7871239944/QCfmsznsZ",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "小米Vision GT，即将亮相2026北京国际车展",
+      "url": "https://mp.weixin.qq.com/s/doPr68NCCqM5e6k6sYyeyw",
+      "source_doc": "公众号@徐依灵",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "小米汽车最新进展，一图速览",
+      "url": "https://mp.weixin.qq.com/s/a98HxGrYDYiJFJPdDJmncw",
+      "source_doc": "公众号@徐依灵",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "小米汽车2026北京车展发布会，明早9点见",
+      "url": "https://mp.weixin.qq.com/s/Ph5zkxXIk7A8-vKUH-KwnQ",
+      "source_doc": "公众号@徐依灵",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "小米汽车",
+      "url": "https://www.douyin.com/user/MS4wLjABAAAAnvYuuz4hPuZXrepk9-BiffDg_uD76fYF-LDiMnVoiTWWlZ-gKnP_zTcusKu6oyxs?from_tab_name=main&vid=7494498504874741019",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "小米汽车欧洲研发中心，汇聚汽车领域顶尖专家和设计师。",
+      "url": "https://v.douyin.com/GtnDvib40LA/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "小米Vision GT 动态出场，帅不帅？",
+      "url": "https://v.douyin.com/eDlW9eR6iEw/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "Xiaomi Vision Gran Turismo 动态出场，帅不帅🕶️？",
+      "url": "https://weibo.com/7871239944/QCfnh7kIC",
+      "source_doc": "视频号",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "小米汽车欧洲研发中心，汇聚汽车领域顶尖专家和设计师。",
+      "url": "https://weibo.com/7871239944/QCfmsznsZ",
+      "source_doc": "视频号",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "Xiaomi Vision Gran Turismo 手机定制主题，现已上线小米主题商店。",
+      "url": "https://weibo.com/7871239944/QBWP0sXMZ",
+      "source_doc": "视频号",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "小米YU7 GT ，一台适合长途旅行的跑车级SUV。",
+      "url": "https://www.xiaohongshu.com/discovery/item/69eac5f60000000012012802?source=webshare&xhsshare=pc_web&xsec_token=ABtxL5_TxR7-9kzqVXZm8af-PyLvsIto_NhgBaU9kuSDs=&xsec_source=pc_share",
+      "source_doc": "小红书",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "小米汽车最新进展",
+      "url": "https://www.xiaohongshu.com/discovery/item/69ead30f0000000011020000?source=webshare&xhsshare=pc_web&xsec_token=ABtxL5_TxR7-9kzqVXZm8af-3YEwmFUqYsPbas6Bde6mo=&xsec_source=pc_share",
+      "source_doc": "小红书",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "大家呼声很高的——小米Vision GT合金车模，今天正式上架开售！",
+      "url": "https://www.xiaohongshu.com/discovery/item/69eac8d60000000013030800?source=webshare&xhsshare=pc_web&xsec_token=ABtxL5_TxR7-9kzqVXZm8afwdHeAtmfHKp37YzyxR1qJg=&xsec_source=pc_share",
+      "source_doc": "小红书",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "小米",
+      "url": "https://space.bilibili.com/3546389868972074?spm_id_from=333.337.0.0",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "小米汽车欧洲研发中心，汇聚汽车领域顶尖专家和设计师",
+      "url": "https://www.bilibili.com/video/BV1WkoVBnEPA/?spm_id_from=333.1387.homepage.video_card.click&vd_source=fde2d5de4e0f7b111e83040940e74e8c",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
     }
   ],
-  "sources_note": "2026-04-26执行公开检索与核实：优先尝试微信公开搜索与mp.weixin.qq.com结果，但搜索引擎对微信原文命中不稳定；随后补查品牌官方公开页面。最终仅收录本轮可公开验证、可确认官方来源且发布时间落在最近7天（2026-04-19至2026-04-26）内的内容。未能稳定核实为官方公众号/官方号且满足T-7条件的条目一律不收录。"
+  "腾势": [
+    {
+      "title": "-40°C冰原起舞，腾势Z演绎“冰雪华尔兹”。",
+      "url": "https://v.douyin.com/-f_eMT_fC7o/",
+      "source_doc": "竞品排名",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "腾势",
+      "url": "https://weibo.com/u/2664689831",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "#第二代腾势D9#后备厢126L下沉式储物空间",
+      "url": "https://weibo.com/2664689831/QCfhkqidg",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "顺大势者立天下，驭千里驰行天地",
+      "url": "https://weibo.com/2664689831/QCfFSckqD",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "#腾势Z# 全球首秀",
+      "url": "https://weibo.com/2664689831/QCacL5PJK",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "春风漫山野，美好皆可期",
+      "url": "https://weibo.com/2664689831/QC0Mq9RU5",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "#第二代腾势D9#搭载第二代刀片电池【",
+      "url": "https://weibo.com/2664689831/QC6rC6mzx",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "#全新腾势Z9GT#踏雪白内饰，正式开启交付",
+      "url": "https://weibo.com/2664689831/QC6JfetqL",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "腾势",
+      "url": "https://www.douyin.com/user/MS4wLjABAAAAiTTe3SIC4Z3wdENxetwaOdRXSS8TPc8rK1kfdLXLDrAFV9IzGlL9PazvF4RUYMZf?from_tab_name=main&relation=0&vid=7494198390155250980",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "-40°C冰原起舞，腾势Z演绎“冰雪华尔兹”。",
+      "url": "https://v.douyin.com/-f_eMT_fC7o/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "F1传奇赛车手马萨，为何想将腾势Z收入车库？",
+      "url": "https://v.douyin.com/XGsMWaoLkJo/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    }
+  ],
+  "极氪": [
+    {
+      "title": "第41集：何润东先生成为极氪8X交付官",
+      "url": "https://v.douyin.com/_JYxkowel3c/",
+      "source_doc": "竞品排名",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "极氪：1分钟看懂 dTCS 智能防滑",
+      "url": "https://www.bilibili.com/video/BV1fVoPBEEEh/?spm_id_from=333.1387.upload.video_card.click&vd_source=fde2d5de4e0f7b111e83040940e74e8c",
+      "source_doc": "竞品排名",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "极氪：何润东成为极氪8X交付官",
+      "url": "https://mp.weixin.qq.com/s/AvhJbOdgkpxGF0VWPKzoUw",
+      "source_doc": "竞品排名",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "黄晓明体验焕新极氪009",
+      "url": "https://mp.weixin.qq.com/s/1NY6axMHfAC2MO-On5XnRQ",
+      "source_doc": "竞品排名",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "极氪",
+      "url": "https://weibo.com/u/7576049404",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "近日，我们关注到@何润东 先生光临极氪门店的相关报道",
+      "url": "https://weibo.com/7576049404/QBWOGmhZS",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "我们留意到近期社交媒体上关于何润东先生和极氪8X的讨论热闹",
+      "url": "https://weibo.com/7576049404/QBFWZy13A",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "感谢极氪009车主晓明哥一直以来的偏爱与认可",
+      "url": "https://weibo.com/7576049404/QC78QuHAp",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "“是新公路之王来了”，极氪交付官@何润东 先生",
+      "url": "https://weibo.com/7576049404/QBZpzDOkk",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "奢于形，雅于内，贵自天成",
+      "url": "https://weibo.com/7576049404/QC67u0eMT",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "恭喜吴敏霞成为全新ES8玄金特别版车主",
+      "url": "https://mp.weixin.qq.com/s/HZCqX-7tgtFk_9KlhGBq1w",
+      "source_doc": "公众号@徐依灵",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "官宣：何润东先生成为极氪8X交付官",
+      "url": "https://mp.weixin.qq.com/s/AvhJbOdgkpxGF0VWPKzoUw",
+      "source_doc": "公众号@徐依灵",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "刚刚，黄晓明体验焕新极氪009：好车真气派",
+      "url": "https://mp.weixin.qq.com/s/1NY6axMHfAC2MO-On5XnRQ",
+      "source_doc": "公众号@徐依灵",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "关于网传焕新极氪009将在北京车展推出“家庭版”的回应",
+      "url": "https://mp.weixin.qq.com/s/thcNbbVOPugY4H-a-6wn-g",
+      "source_doc": "公众号@徐依灵",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "极氪ZEEKR",
+      "url": "https://www.douyin.com/user/MS4wLjABAAAAuR7BNa3Eyhz-oJ1qay5mNH6QGSJ5E8W0NQq9taZBQ2q__Aag_xfnmK_ABiUmusof?from_tab_name=main&relation=0&vid=7495280313930992915",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "第41集：何润东先生成为极氪8X交付官",
+      "url": "https://v.douyin.com/_JYxkowel3c/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "第38集：#极氪8X 首搭超级Eva",
+      "url": "https://v.douyin.com/JhKtOUr69xQ/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "第99集：从开创赛道，到定义标准",
+      "url": "https://v.douyin.com/zSqodKoS3QE/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "#尚界Z7底盘实测 全系搭载华为途灵平台",
+      "url": "https://weibo.com/3032210184/QBWrqrHMm",
+      "source_doc": "视频号",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "从开创赛道，到定义标准 焕新极氪009耀世亮相",
+      "url": "https://weibo.com/7576049404/QBNqN56Ex",
+      "source_doc": "视频号",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "#极氪8X 实力说话！ 29分钟大定破万，2天交付破千",
+      "url": "https://weibo.com/7576049404/QBFFIxmo2",
+      "source_doc": "视频号",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "#极氪8X 首搭超级Eva 会来事，更会办事",
+      "url": "https://weibo.com/7576049404/QBFx72WXj",
+      "source_doc": "视频号",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "焕新极氪009 预售发布",
+      "url": "https://www.xiaohongshu.com/discovery/item/69e6dbb70000000023022cac?source=webshare&xhsshare=pc_web&xsec_token=ABfzgeeqbRNgs9sGKaLBdY_UJJb28nqmDBPcmWpck8nKY=&xsec_source=pc_share",
+      "source_doc": "小红书",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "焕新极氪009定档北京车展预售",
+      "url": "https://www.xiaohongshu.com/discovery/item/69e9763900000000220019d4?source=webshare&xhsshare=pc_web&xsec_token=AB5uiESEx3tMXaGMEzkoKuTMXzXmpnuGE3nkH4vDA9wq8=&xsec_source=pc_share",
+      "source_doc": "小红书",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "极氪",
+      "url": "https://space.bilibili.com/1269265572?spm_id_from=333.337.0.0",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "焕新极氪009耀世亮相",
+      "url": "https://www.bilibili.com/video/BV1gJd2BHEw1/?spm_id_from=333.1387.upload.video_card.click&vd_source=fde2d5de4e0f7b111e83040940e74e8c",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "极氪8X上市即交付：2天，交付破千！",
+      "url": "https://www.bilibili.com/video/BV1tnoTB3Eyk/?spm_id_from=333.1387.upload.video_card.click&vd_source=fde2d5de4e0f7b111e83040940e74e8c",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    }
+  ],
+  "小鹏": [
+    {
+      "title": "小鹏GX车载冰箱 装得下可乐 装得下快乐",
+      "url": "https://www.bilibili.com/video/BV1jtdfBeEky/?spm_id_from=333.1387.homepage.video_card.click&vd_source=fde2d5de4e0f7b111e83040940e74e8c",
+      "source_doc": "竞品排名",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "小鹏",
+      "url": "https://weibo.com/u/5710264970",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "世界是一本摊开的书，阅读是一场移动的抵达",
+      "url": "https://weibo.com/5710264970/QC83e1ceU",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "小鹏GX静感柔风中央空调2.0",
+      "url": "https://weibo.com/5710264970/QBGw021PX",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "把#世界地球日#，过成鹏友们的普通每一天。🌿",
+      "url": "https://weibo.com/5710264970/QBXm3CFza",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "万物生长的季节，小鹏X9 Ultra 与 OPPO",
+      "url": "https://weibo.com/5710264970/QBEALpKOs",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "北京车展现场直击！大师兄跟我们分享",
+      "url": "https://weibo.com/5710264970/QCgCp4dIJ",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "丹麦小鹏P7车主跨洋过海来到中国",
+      "url": "https://weibo.com/5710264970/QCAe6yaFs",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "小鹏GX全系车色亮相北京车展",
+      "url": "https://mp.weixin.qq.com/s/fD8RJQl_MkbRexlIuTEmjg",
+      "source_doc": "公众号@徐依灵",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "小鹏集团参加国家发展改革委主任郑栅洁主持召开的民营企业座谈会【",
+      "url": "https://mp.weixin.qq.com/s/hHGQF5E5uCuSnLVzU8nn-Q",
+      "source_doc": "公众号@徐依灵",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "小鹏GX隐藏高定色首发，物理AI科技北京车展抢先看！",
+      "url": "https://mp.weixin.qq.com/s/mDy6NHOPYqSI9geJTcVUvg",
+      "source_doc": "公众号@徐依灵",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "小鹏",
+      "url": "https://www.douyin.com/user/MS4wLjABAAAA3cnsgL0urArJhp1BjZrb9gVhGxzHsdh9Eq1H6Wu0IiY?from_tab_name=main&relation=0&vid=7494255949876563258",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "第20集：作为中国首款全栈自研的 Robotaxi 量产车型",
+      "url": "https://v.douyin.com/MNh6uYQMss0/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "第23集：今日北京车展，小鹏旗舰SUV GX高定双拼色首亮相",
+      "url": "https://v.douyin.com/igCrT7sVmpY/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "第23集：#用OPPOFindX9Ultra拍小鹏X9Ultra#",
+      "url": "https://v.douyin.com/8Nu0Q3lv_JY/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "全新ES8开启交付215天即达成第100,000台新车交付里程碑",
+      "url": "https://weibo.com/5675889356/QCrr0fAox",
+      "source_doc": "视频号",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "北京车展现场直击！大师兄跟我们分享了第二代VLA的几组智驾核心数据",
+      "url": "https://weibo.com/5710264970/QCgCp4dIJ",
+      "source_doc": "视频号",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "小鹏GX车载冰箱，凭什么让朱广权直呼“太厉害了”？",
+      "url": "https://weibo.com/5710264970/QBDMwfEGB",
+      "source_doc": "视频号",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "🎮腾讯联合小鹏GX发布首个线控赛车游戏",
+      "url": "https://www.xiaohongshu.com/discovery/item/69e8266f00000000230176b8?source=webshare&xhsshare=pc_web&xsec_token=AB46f_18J7phGeZQb2YEcTZOZWcFneAAt0brXKQiFMd4c=&xsec_source=pc_share",
+      "source_doc": "小红书",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "🌟小鹏GX推出行业首个无菌风冷车载冰箱",
+      "url": "https://www.xiaohongshu.com/discovery/item/69e57b910000000020038af2?source=webshare&xhsshare=pc_web&xsec_token=ABh8qNxgTmZvLvmH09ahDPf6c3fwjIzxXUhYNaZM4C6fo=&xsec_source=pc_share",
+      "source_doc": "小红书",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "小鹏",
+      "url": "https://space.bilibili.com/24674998?spm_id_from=333.337.0.0",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "小鹏GX车载冰箱 装得下可乐 装得下快乐",
+      "url": "https://www.bilibili.com/video/BV1jtdfBeEky/?spm_id_from=333.1387.homepage.video_card.click&vd_source=fde2d5de4e0f7b111e83040940e74e8c",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "跟小鹏X9Ultra 一起追逐春天",
+      "url": "https://www.bilibili.com/video/BV1CCoPBZEdg/?spm_id_from=333.1387.homepage.video_card.click&vd_source=fde2d5de4e0f7b111e83040940e74e8c",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "小鹏GX×美的联合研发 无菌风冷无霜双开门冰箱",
+      "url": "https://www.bilibili.com/video/BV1VvdfBfE6v/?spm_id_from=333.1387.homepage.video_card.click&vd_source=fde2d5de4e0f7b111e83040940e74e8c",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    }
+  ],
+  "问界": [
+    {
+      "title": "问界M6丨新锐王牌 瞩目登场",
+      "url": "https://www.xiaohongshu.com/discovery/item/69e98589000000002200277f?source=webshare&xhsshare=pc_web&xsec_token=AB5uiESEx3tMXaGMEzkoKuTHXzZpzH55uyfgJu32vgXmg=&xsec_source=pc_share",
+      "source_doc": "竞品排名",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "问界M6 心动之选 时尚同频",
+      "url": "https://www.xiaohongshu.com/discovery/item/69ec1236000000001b020f1d?source=webshare&xhsshare=pc_web&xsec_token=ABlEOm_jB_G94SB6I51WFbvWAOXLFLEsmLt4eza2RJuzw=&xsec_source=pc_share",
+      "source_doc": "竞品排名",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "问界汽车",
+      "url": "https://weibo.com/u/7049279553",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "问界品牌挚友白敬亭即将亮相问界展台",
+      "url": "https://weibo.com/7049279553/QC6tVxRe9",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "问界品牌挚友#白敬亭为问界M6车主交车#",
+      "url": "https://weibo.com/7049279553/QCzjnoaHv",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "#魔方技术平台创新发布会# 技术再创新，豪华再进阶！",
+      "url": "https://weibo.com/7049279553/QChn3bRBq",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "品牌挚友白敬亭亮相问界展台，与赛力斯汽车董事长张正萍",
+      "url": "https://weibo.com/7049279553/QCoIrqArY",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "新锐智慧SUV#问界M6#，实力登场，新锐不止一面！",
+      "url": "https://weibo.com/7049279553/QCjCYmSsy",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "您好，北京！问界即将亮相2026北京国际车展",
+      "url": "https://weibo.com/7049279553/QCbBTzAGB",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "问界M6丨新锐王牌 瞩目登场",
+      "url": "https://mp.weixin.qq.com/s/rBuuri0CBlWb2QBMsY1M3Q",
+      "source_doc": "公众号@徐依灵",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "全新一代问界M9系列丨领世而上，一图看懂",
+      "url": "https://mp.weixin.qq.com/s/qSNRGOZWFBO4kHhXxZKzBw",
+      "source_doc": "公众号@徐依灵",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "问界M6丨新锐智慧SUV，25.98万元起，发布即交付！",
+      "url": "https://mp.weixin.qq.com/s/LRMrIMLPjkpwDmRAKUoNTA",
+      "source_doc": "公众号@徐依灵",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "年轻不是重复已知的路线，而是赢得未知的挑战。",
+      "url": "https://v.douyin.com/osCecU8TIZI/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "在给全新一代#问界M9 拍视频，结果TA惊喜入镜！",
+      "url": "https://v.douyin.com/S1TfVTe748E/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "第209集：全新一代#问界M9系列领世而来！",
+      "url": "https://v.douyin.com/Pwxcq7GTEAM/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "新锐智慧SUV#问界M6正式登场，售价25.98万元起。",
+      "url": "https://v.douyin.com/jZNlGDz-mHU/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "全新一代#问界M9系列全面进化，领世而上",
+      "url": "https://v.douyin.com/y1j-Eu83ad0/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "问界以创新引领、创新驱动、创新实践和五大体系",
+      "url": "https://weibo.com/7049279553/QC5RsADsi",
+      "source_doc": "视频号",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "全新一代#问界M9 系列全面进化，领世而上",
+      "url": "https://weibo.com/7049279553/QC2bntjhk",
+      "source_doc": "视频号",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "品牌挚友白敬亭亮相问界展台，与赛力斯汽车董事长",
+      "url": "https://weibo.com/7049279553/QCoIrqArY",
+      "source_doc": "视频号",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "问界M6丨新锐王牌 瞩目登场",
+      "url": "https://www.xiaohongshu.com/discovery/item/69e98589000000002200277f?source=webshare&xhsshare=pc_web&xsec_token=AB5uiESEx3tMXaGMEzkoKuTHXzZpzH55uyfgJu32vgXmg=&xsec_source=pc_share",
+      "source_doc": "小红书",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "问界M6 心动之选 时尚同频",
+      "url": "https://www.xiaohongshu.com/discovery/item/69ec1236000000001b020f1d?source=webshare&xhsshare=pc_web&xsec_token=ABlEOm_jB_G94SB6I51WFbvWAOXLFLEsmLt4eza2RJuzw=&xsec_source=pc_share",
+      "source_doc": "小红书",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "问界品牌挚友白敬亭为问界M6车主交车",
+      "url": "https://www.xiaohongshu.com/discovery/item/69ed8db6000000003502ee1a?source=webshare&xhsshare=pc_web&xsec_token=ABZchLshN5XIbr48bKorxens-OIHvHCyLKkKmwkr4Iit4=&xsec_source=pc_share",
+      "source_doc": "小红书",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "问界",
+      "url": "https://space.bilibili.com/355828177?spm_id_from=333.337.0.0",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "问界M6 新锐王牌 实力登场",
+      "url": "https://www.bilibili.com/video/BV1bno8B6E74/?spm_id_from=333.1387.upload.video_card.click",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "您好，北京！问界即将亮相2026北京国际车展",
+      "url": "https://www.bilibili.com/video/BV1JqoTB8EUK/?spm_id_from=333.1387.upload.video_card.click&vd_source=fde2d5de4e0f7b111e83040940e74e8c",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "问界M9 全面进化 领世而上 听听媒体怎么说",
+      "url": "https://www.bilibili.com/video/BV1ngo4BSEGS/?spm_id_from=333.1387.upload.video_card.click",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    }
+  ],
+  "乐道": [
+    {
+      "title": "乐道：2026款乐道L90上市，26.58万元起",
+      "url": "https://mp.weixin.qq.com/s/SDPObMMg9QRk70nI08U6ZA",
+      "source_doc": "竞品排名",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "从开创赛道，到定义标准【",
+      "url": "https://weibo.com/7576049404/QBNqN56Ex",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "乐道",
+      "url": "https://weibo.com/u/7892483716",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "旗舰智能，领先一代，2026款乐道L90上市【",
+      "url": "https://weibo.com/7892483716/QBRZca9KL",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "2026款乐道L90正式上市。整车购买26.58万元起",
+      "url": "https://weibo.com/7892483716/QBSwHBnJP",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "智能双舱大五座旗舰SUV乐道L80",
+      "url": "https://weibo.com/7892483716/QCfMsk3gy",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "旗舰智能，领先一代，4月21日19:30",
+      "url": "https://weibo.com/7892483716/QBEFD3kBo",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "2026款乐道L90现已正式上市。",
+      "url": "https://weibo.com/7892483716/QBZU0mWQS",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "旗舰智能，领先一代，2026款乐道L90上市，26.58万元起",
+      "url": "https://mp.weixin.qq.com/s/SDPObMMg9QRk70nI08U6ZA",
+      "source_doc": "公众号@徐依灵",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "旗舰智能，领先一代，2026款乐道L90，4月21日19:30见！",
+      "url": "https://mp.weixin.qq.com/s/6I6wpwaOkZKXQd_-5ej2Tw",
+      "source_doc": "公众号@徐依灵",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "科技为家，智能旗舰，一图看懂2026款乐道L90",
+      "url": "https://mp.weixin.qq.com/s/ClJrdAwJQcAKihnHUGwBFw",
+      "source_doc": "公众号@徐依灵",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "赛博无人驾驶电动车Cybercab在北美正式投产🚗",
+      "url": "https://weibo.com/3615027564/QCheybgVu",
+      "source_doc": "视频号",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "「杭州的椰子」正片上线！沙溢胡可欢乐闯关！",
+      "url": "https://weibo.com/7892483716/QBZuyB9Dv",
+      "source_doc": "视频号",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "2026款乐道L90现已上市，听说车里藏着一位“神秘的高手”",
+      "url": "https://weibo.com/7892483716/QC7OC3z8I",
+      "source_doc": "视频号",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "大五座SUV革新之作 乐道L80，4月28日见",
+      "url": "https://www.xiaohongshu.com/discovery/item/69ead28c00000000230165e5?source=webshare&xhsshare=pc_web&xsec_token=ABtxL5_TxR7-9kzqVXZm8af79o-SCixvg8dbZqWsoCdWU=&xsec_source=pc_share",
+      "source_doc": "小红书",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "乐道",
+      "url": "https://space.bilibili.com/3546598877432082?spm_id_from=333.337.0.0",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "7分钟全面了解 2026款乐道L90",
+      "url": "https://www.bilibili.com/video/BV1Z9osBrEUx/?spm_id_from=333.1387.homepage.video_card.click&vd_source=fde2d5de4e0f7b111e83040940e74e8c",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    }
+  ],
+  "蔚来": [
+    {
+      "title": "蔚来：全新ES8玄金特别版上市",
+      "url": "https://mp.weixin.qq.com/s/GDhz060hBn2YZ4XO5Fr-0w",
+      "source_doc": "竞品排名",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "蔚来全新ES8完成第100,000台新车交付",
+      "url": "https://mp.weixin.qq.com/s/ED_cSRWH9TYDLsaNHGgCbw",
+      "source_doc": "竞品排名",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "蔚来公司三大品牌、全系车型同台亮相",
+      "url": "https://weibo.com/7892483716/QCfF91ZQt",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "蔚来",
+      "url": "https://weibo.com/u/5675889356",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "24日上午，全新ES8玄金特别版在北京车展蔚来展台正式发布并上市。",
+      "url": "https://weibo.com/5675889356/QChziAz8t",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "全新ES8玄金特别版现已上市，全新雅丹橙内饰主题",
+      "url": "https://weibo.com/5675889356/QChvlk52w",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "全新ES8开启交付215天即达成第100,000台新车交付里程碑",
+      "url": "https://weibo.com/5675889356/QCrr0fAox",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "蔚来ET5、ET5T自然奇境版",
+      "url": "https://weibo.com/5675889356/QBZaOtm1P",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "全新ES8玄金特别版现已上市",
+      "url": "https://mp.weixin.qq.com/s/GDhz060hBn2YZ4XO5Fr-0w",
+      "source_doc": "公众号@徐依灵",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "开启交付215天，蔚来全新ES8完成第100,000台新车交付",
+      "url": "https://mp.weixin.qq.com/s/ED_cSRWH9TYDLsaNHGgCbw",
+      "source_doc": "公众号@徐依灵",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "春风漫山野，美好皆可期",
+      "url": "https://v.douyin.com/FFo_0LBRDng/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "蔚来",
+      "url": "https://www.douyin.com/user/MS4wLjABAAAANFyChEER21BqNSwpPFA-D5JIFHu-OH17q0Dpm4zioQQ?from_tab_name=main&vid=7493886653153414410",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "第54集：蔚来ET5、ET5T自然奇境版",
+      "url": "https://v.douyin.com/9jcIuzsrtqI/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "第55集：蔚来ET5、ET5T自然奇境版",
+      "url": "https://v.douyin.com/GzhfGGqcVJA/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "第80集：2026北京国际车展，蔚来展台的「ET9地平线音乐会」",
+      "url": "https://v.douyin.com/zVbtcXXytIY/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "玄蕴锋芒，金曜从容，全新ES8 玄金特别版，现已正式上市。",
+      "url": "https://weibo.com/5675889356/QCfRIpECn",
+      "source_doc": "视频号",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "蔚来ES9首次亮相北京车展，作为下订ES9的媒体用户们",
+      "url": "https://weibo.com/5675889356/QCqpi8t5K",
+      "source_doc": "视频号",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "北京车展蔚来公司发布会亮点速览",
+      "url": "https://www.xiaohongshu.com/discovery/item/69eb1a0a0000000020006001?source=webshare&xhsshare=pc_web&xsec_token=AB-yZU9TlbDNA7yEJbn9ceBRANSKhmLUixK480KPKTk74=&xsec_source=pc_share",
+      "source_doc": "小红书",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "蔚来全新ES8完成第100,000台新车交付",
+      "url": "https://www.xiaohongshu.com/discovery/item/69e991f40000000023027dbf?source=webshare&xhsshare=pc_web&xsec_token=AB5uiESEx3tMXaGMEzkoKuTA0j2Nliqlf-Dw_A4ImC2Vc=&xsec_source=pc_share",
+      "source_doc": "小红书",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "北京车展蔚来公司展台，一镜到底 先睹为快",
+      "url": "https://www.xiaohongshu.com/discovery/item/69eacf4b00000000230156cc?source=webshare&xhsshare=pc_web&xsec_token=ABtxL5_TxR7-9kzqVXZm8af8I2oixbB6S7DE1oIy07ys8=&xsec_source=pc_share",
+      "source_doc": "小红书",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "蔚来",
+      "url": "https://space.bilibili.com/238623328?spm_id_from=333.337.0.0",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "北京车展蔚来公司发布会亮点速览",
+      "url": "https://www.bilibili.com/video/BV1wNoLBsEtZ/?spm_id_from=333.1387.homepage.video_card.click&vd_source=fde2d5de4e0f7b111e83040940e74e8c",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "一镜到底，看全蔚来公司北京车展超长展台",
+      "url": "https://www.bilibili.com/video/BV1rZogBkEPN/?spm_id_from=333.1387.homepage.video_card.click&vd_source=fde2d5de4e0f7b111e83040940e74e8c",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    }
+  ],
+  "理想": [
+    {
+      "title": "Xiaomi Vision Gran Turismo 动态出场，帅不帅🕶️？",
+      "url": "https://weibo.com/7871239944/QCfnh7kIC",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "全新理想L9 Livis亮相！品牌代言人易烊千玺邀你来逛北京车展",
+      "url": "https://mp.weixin.qq.com/s/_T1c-QYQWF8-igTv2f5sQQ?token=1790452599&lang=zh_CN",
+      "source_doc": "公众号@徐依灵",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "一图看懂全新理想L9 Livis北京车展亮相发布会",
+      "url": "https://mp.weixin.qq.com/s/NIGUU2iANmkD0hrx6xkhRg?token=1790452599&lang=zh_CN",
+      "source_doc": "公众号@徐依灵",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "全新理想L9 Livis：旗舰设计进化论，以家的最高标准，打造新旗舰。",
+      "url": "https://mp.weixin.qq.com/s/LyCbyi9RtwpmtZmNW7FQHg?token=1790452599&lang=zh_CN",
+      "source_doc": "公众号@徐依灵",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "拍什么都是舒适区，这就是@舒淇 和新SU7的实力！",
+      "url": "https://v.douyin.com/WdTi2_S1OWA/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "全新理想L9 Livis“修路”能力有多强？",
+      "url": "https://v.douyin.com/TCMvDTqgGUM/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "全新理想L9 Livis北京车展亮相发布会完整版。",
+      "url": "https://v.douyin.com/6j5O-CwSbwI/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "全新理想L9 Livis 北京车展亮相发布会。",
+      "url": "https://v.douyin.com/LCupIJcy3p4/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "理想",
+      "url": "https://space.bilibili.com/2054075556?spm_id_from=333.337.0.0",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "全新理想L9 Livis 北京车展亮相发布会",
+      "url": "https://www.bilibili.com/video/BV1udoNBzEjT/",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "全新理想L9 Livis“修路”能力有多强？",
+      "url": "https://www.bilibili.com/video/BV1SUoGBtEtk/",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "全新理想L9 Livis北京车展亮相发布会完整版。",
+      "url": "https://www.bilibili.com/video/BV1MRo5BwE2v/",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "理想汽车首发！高速不吵、夏天不热，增强隔音+超隔热PVB膜下线。",
+      "url": "https://mp.weixin.qq.com/s/yTCbMa3JMMHC05RswgYIeA",
+      "source_doc": "有个理想@徐依灵",
+      "period": "4/20-4/26"
+    }
+  ],
+  "特斯拉": [
+    {
+      "title": "特斯拉",
+      "url": "https://weibo.com/u/3615027564",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "特斯拉2026年第一季度财报",
+      "url": "https://weibo.com/3615027564/QC5sEwhIB",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "它看见的，是我们共同的绿色将来🌏",
+      "url": "https://weibo.com/3615027564/QBWwRsdgq",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "北京新店，有点儿东西👀",
+      "url": "https://weibo.com/3615027564/QBHnWqNPR",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "特斯拉人形机器人将成为",
+      "url": "https://weibo.com/3615027564/QC7vsBeFf",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "赛博无人驾驶电动车Cybercab在北美正式投",
+      "url": "https://weibo.com/3615027564/QCheybgVu",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "特斯拉2026新篇章：Model Y L多国热销，AI业务全速推进",
+      "url": "https://mp.weixin.qq.com/s/ZXf1TknoeP9KYGO5la-cOQ",
+      "source_doc": "公众号@徐依灵",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "特斯拉",
+      "url": "https://www.douyin.com/user/MS4wLjABAAAArRDQIhxT8GI_ihcX6g9vxBEiFLPO69zRaccikSBUsEE?from_tab_name=main&vid=7493089166830341426",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "特斯拉人形机器人将成为有史以来生产规模最大的产品",
+      "url": "https://v.douyin.com/7pr0Zr6d7G8/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "赛博无人驾驶电动车Cybercab在北美正式投产",
+      "url": "https://v.douyin.com/ywz3bCr6Umg/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "特斯拉无人驾驶网约车持续扩大服务版图",
+      "url": "https://v.douyin.com/F1EWa1UQlN4/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "特斯拉人形机器人将成为有史以来生产规模最大的产品 🎉",
+      "url": "https://weibo.com/3615027564/QC7vsBeFf",
+      "source_doc": "视频号",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "忘了把车停哪儿了？ 特斯拉“寻车指针”功能 ⬆️",
+      "url": "https://weibo.com/3615027564/QBE4M6rK6",
+      "source_doc": "视频号",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "特斯拉无人驾驶网约车🗺️持续扩大服务版图",
+      "url": "https://weibo.com/3615027564/QCfY8uC7q",
+      "source_doc": "视频号",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "特斯拉",
+      "url": "https://space.bilibili.com/491190876",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "找车神器 还得特斯拉",
+      "url": "https://www.bilibili.com/video/BV1JeoNB9Eir/?spm_id_from=333.1387.homepage.video_card.click&vd_source=fde2d5de4e0f7b111e83040940e74e8c",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    }
+  ],
+  "鸿蒙智行": [
+    {
+      "title": "旗舰MPV，耀目登场。",
+      "url": "https://weibo.com/7861851237/QCgbDCici",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "鸿蒙智行",
+      "url": "https://weibo.com/u/3032210184",
+      "source_doc": "微博@张博群",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "鸿蒙智行",
+      "url": "https://www.douyin.com/user/MS4wLjABAAAA-gabPfI6LCalkvpyoikUqrvRk6-JztM7oHu6gtZq3vg19iP1s5gApj1cJ5bPWylF?from_tab_name=main&relation=0&vid=7493803827196333323",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "鸿蒙智行尚界品牌代言人，实力「尚」场，明日揭晓！",
+      "url": "https://v.douyin.com/xuD6UTE9oPY/",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "鸿蒙智行尚界品牌代言人，实力「尚」场",
+      "url": "https://weibo.com/3032210184/QBNqdCm3O",
+      "source_doc": "视频号",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "年轻不是重复已知的路线，而是赢得未知的挑战",
+      "url": "https://weibo.com/3032210184/QC0KKiZ1M",
+      "source_doc": "视频号",
+      "period": "4/20-4/26"
+    },
+    {
+      "title": "鸿蒙智行",
+      "url": "https://space.bilibili.com/1293414361?spm_id_from=333.337.0.0",
+      "source_doc": "B站@廖中南@苏爱",
+      "period": "4/20-4/26"
+    }
+  ],
+  "AITO汽车": [
+    {
+      "title": "AITO汽车",
+      "url": "https://www.douyin.com/user/MS4wLjABAAAAoaVfyJroqxkOiaM7on1arCU-xXe4fTwF73Ybgxntx0E?from_tab_name=main",
+      "source_doc": "抖音@廖中南",
+      "period": "4/20-4/26"
+    }
+  ]
 }
