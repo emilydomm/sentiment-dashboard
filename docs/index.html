@@ -80,25 +80,23 @@ window.addEventListener('DOMContentLoaded', () => {
   .calendar-nav button:hover { background:#e7edf5; color:#0f3460; }
   .calendar-weekdays, .calendar-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:6px; }
   .calendar-grid { position:relative; }
-  .calendar-range-track { position:absolute; background:#eaf2ff; border-radius:999px; z-index:0; pointer-events:none; }
+  .calendar-range-track { position:absolute; z-index:0; pointer-events:none; }
+  .calendar-range-track.available { background:#dbeafe; border-radius:999px; }
+  .calendar-range-track.active { background:linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); border-radius:999px; }
   .calendar-cell { position:relative; min-height:36px; }
   .calendar-weekdays div { text-align:center; font-size:12px; color:#9aa1ad; padding:4px 0; }
-  .calendar-day { border:none; background:transparent; min-height:36px; border-radius:10px; font-size:14px; color:#1f2937; cursor:pointer; position:relative; z-index:1; }
-  .calendar-day:hover { background:#f5f7fb; }
-  .calendar-day.muted { color:#c0c6d0; }
+  .calendar-day { border:none; background:transparent; min-height:36px; border-radius:10px; font-size:14px; color:#c0c6d0; cursor:default; position:relative; z-index:1; box-shadow:none; }
+  .calendar-day:hover { background:transparent; }
+  .calendar-day.muted { color:#d1d5db; }
   .calendar-day.disabled { color:#d4d8df; cursor:default; }
-  .calendar-day.has-data { font-weight:600; background:#f8fafc; }
-  .calendar-day.has-data::before { content:''; position:absolute; bottom:5px; left:50%; transform:translateX(-50%); width:5px; height:5px; border-radius:999px; background:#93c5fd; }
-  .calendar-day.range-selected { color:#9aa1ad; background:transparent; border:none; box-shadow:none; border-radius:0; font-weight:400; }
-  .calendar-day.range-selected.has-data { background:transparent !important; }
+  .calendar-day.has-data { font-weight:500; background:transparent; }
+  .calendar-day.has-data::before { content:none; }
+  .calendar-day.range-selected { color:#6b7280; background:transparent !important; border:none; box-shadow:none; border-radius:0; font-weight:500; }
+  .calendar-day.range-selected.available { cursor:pointer; }
+  .calendar-day.range-selected.active { color:#ffffff; font-weight:700; }
   .calendar-day.range-selected::after { content:none; }
-  .calendar-day.range-selected.has-data::before { content:none; }
-  .calendar-day.selected { color:#1f2937; background:transparent; box-shadow:none; border:none; }
-  .calendar-day.selected.range-selected { color:#9aa1ad; background:transparent; box-shadow:none; border:none; font-weight:400; }
-  .calendar-day.selected.range-selected::before { content:none; }
-  .calendar-day.selected:not(.range-selected) { background:#dbeafe; border-radius:14px; box-shadow:inset 0 0 0 1.5px #60a5fa; }
-  .calendar-day.selected:not(.range-selected)::before { background:#2563eb; }
-  .calendar-day.today::after { content:'今'; position:absolute; right:5px; top:4px; font-size:10px; color:#94a3b8; }
+  .calendar-day.selected { background:transparent; box-shadow:none; border:none; }
+  .calendar-day.today::after { content:none; }
   .filter-btn { padding: 7px 14px; border-radius: 20px; border: 1px solid #ddd; background: white; font-size: 13px; cursor: pointer; transition: all .2s; }
   .filter-btn.active { background: #0f3460; color: white; border-color: #0f3460; }
   
@@ -599,6 +597,7 @@ function renderWechatCalendar() {
 
   const availableSet = new Set(wechatAvailableDates || []);
   const activeHighlightDates = (wechatData && Array.isArray(wechatData.highlight_dates)) ? wechatData.highlight_dates : DEFAULT_WECHAT_HIGHLIGHT_DATES;
+  const activeTargetDate = (wechatData && wechatData.target_date) ? wechatData.target_date : currentWechatDate;
   let html = '';
   const tracks = [];
 
@@ -609,20 +608,21 @@ function renderWechatCalendar() {
     const inMonth = cellDate.getMonth() === wechatCalendarMonth.getMonth();
     const targetDate = getWechatWeekTargetDate(dateStr);
     const hasData = availableSet.has(targetDate);
-    const isSelected = currentWechatDate === dateStr;
     const isInRange = activeHighlightDates.includes(dateStr);
+    const isActiveRange = isInRange && targetDate === activeTargetDate;
     const cls = [
       'calendar-day',
       inMonth ? '' : 'muted',
       hasData ? 'has-data' : 'disabled',
-      isSelected ? 'selected' : '',
-      isInRange ? 'range-selected' : ''
+      isInRange ? 'range-selected' : '',
+      hasData && isInRange ? 'available' : '',
+      isActiveRange ? 'active' : ''
     ].filter(Boolean).join(' ');
 
     if (isInRange) {
       const col = (i % 7) + 1;
       const row = Math.floor(i / 7) + 1;
-      tracks.push({ col, row, dateStr });
+      tracks.push({ col, row, targetDate, active: targetDate === activeTargetDate, available: hasData });
     }
 
     html += `<div class="calendar-cell"><button type="button" class="${cls}" ${hasData ? `onclick="selectWechatDate('${dateStr}')"` : 'tabindex="-1"'}>${cellDate.getDate()}</button></div>`;
@@ -630,18 +630,19 @@ function renderWechatCalendar() {
 
   const grouped = new Map();
   for (const item of tracks) {
-    if (!grouped.has(item.row)) grouped.set(item.row, []);
-    grouped.get(item.row).push(item);
+    const key = `${item.row}-${item.targetDate}-${item.active}-${item.available}`;
+    if (!grouped.has(key)) grouped.set(key, []);
+    grouped.get(key).push(item);
   }
 
   let trackHtml = '';
-  for (const [row, items] of grouped.entries()) {
+  for (const items of grouped.values()) {
     items.sort((a, b) => a.col - b.col);
+    const row = items[0].row;
     const startCol = items[0].col;
     const endCol = items[items.length - 1].col;
-    const single = startCol === endCol;
-    const radius = single ? '999px' : '999px';
-    trackHtml += `<div class="calendar-range-track" style="grid-column:${startCol} / ${endCol + 1}; grid-row:${row}; margin:6px 0; border-radius:${radius};"></div>`;
+    const trackCls = ['calendar-range-track', items[0].available ? 'available' : '', items[0].active ? 'active' : ''].filter(Boolean).join(' ');
+    trackHtml += `<div class="${trackCls}" style="grid-column:${startCol} / ${endCol + 1}; grid-row:${row}; margin:6px 0;"></div>`;
   }
 
   grid.innerHTML = trackHtml + html;
