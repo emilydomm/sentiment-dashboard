@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>智能电动传播资讯</title>
+<link rel="icon" type="image/png" href="favicon.png">
 <script>
 // 密码保护已移除 - 直接加载应用
 window.addEventListener('DOMContentLoaded', () => {
@@ -14,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { overflow: hidden; height: 100%; margin: 0; padding: 0; }
+  html, body { overflow-y: auto; overflow-x: hidden; min-height: 100%; margin: 0; padding: 0; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f7fa; color: #333; display: flex; flex-direction: column; }
   
   .header { background: linear-gradient(135deg, #0f172a 0%, #16213e 42%, #1d4ed8 100%); color: white; padding: 26px 32px 24px; display:flex; align-items:flex-start; justify-content:space-between; gap:20px; }
@@ -91,10 +92,10 @@ window.addEventListener('DOMContentLoaded', () => {
   .stat-card.neg .num { color: #ef4444; }
   .stat-card.neu .num { color: #f59e0b; }
   
-  #mainApp { display: none; flex-direction: column; height: 100%; overflow: hidden; }
+  #mainApp { display: none; flex-direction: column; min-height: 100vh; }
   #mainApp.visible { display: flex; }
-  #sentiment-panel, #industry-panel, #wechat-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
-  .content { padding: 0 32px 32px; flex: 1; overflow-y: auto; }
+  #sentiment-panel, #industry-panel, #wechat-panel { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+  .content { padding: 0 32px 32px; flex: 1; overflow: visible; }
   .date-label { font-size: 13px; color: #888; margin: 16px 0 10px; }
 
   /* 三栏布局 */
