@@ -609,7 +609,7 @@ function renderWechatCalendar() {
     const inMonth = cellDate.getMonth() === wechatCalendarMonth.getMonth();
     const targetDate = getWechatWeekTargetDate(dateStr);
     const hasData = availableSet.has(targetDate);
-    const isSelected = currentWechatDate === targetDate;
+    const isSelected = currentWechatDate === dateStr;
     const isInRange = activeHighlightDates.includes(dateStr);
     const cls = [
       'calendar-day',
