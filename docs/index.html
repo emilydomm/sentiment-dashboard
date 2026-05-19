@@ -608,7 +608,7 @@ function renderWechatCalendar() {
     const isRangeStart = isInRange && !activeHighlightDates.includes(prevDateStr);
     const isRangeEnd = isInRange && !activeHighlightDates.includes(nextDateStr);
     const isRangeSingle = isRangeStart && isRangeEnd;
-    const isToday = todayStr === dateStr;
+    const isToday = todayStr === dateStr && !isInRange;
     const cls = [
       'calendar-day',
       inMonth ? '' : 'muted',
