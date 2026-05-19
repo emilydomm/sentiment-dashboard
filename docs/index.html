@@ -689,12 +689,28 @@ function renderWechatCards() {
   }
 
   const html = filteredBrands.map(brand => {
-    const items = (brand.items || []).slice().sort((a, b) => {
-      const pa = a.period || '';
-      const pb = b.period || '';
-      if (pa !== pb) return pa.localeCompare(pb) * -1;
-      return (a.source_doc || '').localeCompare(b.source_doc || '');
-    });
+    const items = (brand.items || [])
+      .filter(item => {
+        const title = (item.title || '').trim();
+        const brandName = (brand.brand || '').trim();
+        if (!title) return false;
+        if (title === brandName) return false;
+        if (title === `${brandName}汽车`) return false;
+        return true;
+      })
+      .filter((item, index, arr) => {
+        const url = (item.url || '').trim();
+        const title = (item.title || '').trim();
+        const sourceDoc = (item.source_doc || item.source || '').trim();
+        const key = `${url}__${title}__${sourceDoc}`;
+        return arr.findIndex(x => `${(x.url || '').trim()}__${(x.title || '').trim()}__${((x.source_doc || x.source || '').trim())}` === key) === index;
+      })
+      .sort((a, b) => {
+        const pa = a.period || '';
+        const pb = b.period || '';
+        if (pa !== pb) return pa.localeCompare(pb) * -1;
+        return (a.source_doc || '').localeCompare(b.source_doc || '');
+      });
     const emptyText = keyword ? '没有符合搜索条件的内容' : '未提取到对应友商内容';
     const cards = items.length ? items.map(item => {
       const period = WECHAT_DISPLAY_PERIOD;
