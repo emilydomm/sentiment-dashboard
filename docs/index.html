@@ -346,11 +346,13 @@ let wechatAvailableDates = [];
 
 function normalizeWechatData(raw, date) {
   const targetDate = date || '';
-  if (!raw) return { target_date: targetDate, brands: [], sources_note: '' };
+  const defaultWeeklyPeriod = '5.11-5.17';
+  if (!raw) return { target_date: targetDate, display_period: defaultWeeklyPeriod, brands: [], sources_note: '' };
 
   if (Array.isArray(raw.brands)) {
     return {
       target_date: raw.target_date || targetDate,
+      display_period: raw.display_period || raw.period || defaultWeeklyPeriod,
       sources_note: raw.sources_note || '',
       brands: raw.brands.map(brand => ({
         brand: brand.brand || brand.name || '',
@@ -361,7 +363,7 @@ function normalizeWechatData(raw, date) {
   }
 
   if (typeof raw === 'object') {
-    const reservedKeys = new Set(['target_date', 'sources_note', 'brands']);
+    const reservedKeys = new Set(['target_date', 'sources_note', 'brands', 'display_period', 'period']);
     const brandEntries = Object.entries(raw)
       .filter(([key, value]) => !reservedKeys.has(key) && Array.isArray(value))
       .map(([brand, items]) => ({
@@ -370,19 +372,20 @@ function normalizeWechatData(raw, date) {
         items: items.map(item => ({
           title: item.title || '',
           url: item.url || '',
-          period: item.period || '未显式标注',
+          period: item.period || defaultWeeklyPeriod,
           source_doc: item.source_doc || item.source || ''
         }))
       }));
 
     return {
       target_date: raw.target_date || targetDate,
+      display_period: raw.display_period || raw.period || defaultWeeklyPeriod,
       sources_note: raw.sources_note || '',
       brands: brandEntries
     };
   }
 
-  return { target_date: targetDate, brands: [], sources_note: '' };
+  return { target_date: targetDate, display_period: defaultWeeklyPeriod, brands: [], sources_note: '' };
 }
 
 const DASHBOARD_SETTINGS_KEY = 'dashboardVisibleTabs';
@@ -589,6 +592,9 @@ function renderWechatCards() {
   const filteredTotal = filteredBrands.reduce((sum, b) => sum + (b.items || []).length, 0);
   document.getElementById('wechatTotalCount').textContent = filteredTotal;
   document.getElementById('wechatBrandCount').textContent = normalizedBrands.length;
+
+  const displayPeriod = (wechatData && wechatData.display_period) ? wechatData.display_period : '5.11-5.17';
+  document.getElementById('wechatDateLabel').textContent = `📅 ${wechatData?.target_date || ''} 友商内容跟踪（${displayPeriod}）`;
 
   const note = wechatData && wechatData.sources_note
     ? `<div style="background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;padding:12px 14px;border-radius:10px;margin-bottom:14px;font-size:13px;line-height:1.7">⚠️ ${wechatData.sources_note}</div>`
