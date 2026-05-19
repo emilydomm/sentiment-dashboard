@@ -86,14 +86,13 @@ window.addEventListener('DOMContentLoaded', () => {
   .calendar-day.disabled { color:#d4d8df; cursor:default; }
   .calendar-day.has-data { font-weight:600; background:#f8fafc; }
   .calendar-day.has-data::before { content:''; position:absolute; bottom:5px; left:50%; transform:translateX(-50%); width:5px; height:5px; border-radius:999px; background:#93c5fd; }
-  .calendar-day.range-selected { background:#eaf2ff; color:#2563eb; box-shadow:none; border-radius:0; border:0; position:relative; }
-  .calendar-day.range-selected::after { content:''; position:absolute; inset:0; background:#eaf2ff; z-index:-1; }
+  .calendar-day.range-selected { background:#eaf2ff; color:#2563eb; box-shadow:none; border:none; border-radius:0; }
   .calendar-day.range-start { border-radius:14px 0 0 14px; }
   .calendar-day.range-end { border-radius:0 14px 14px 0; }
   .calendar-day.range-single { border-radius:14px; }
-  .calendar-day.range-selected::before { background:#60a5fa; }
-  .calendar-day.selected { background:#2563eb; color:#ffffff; box-shadow:none; border-radius:14px; }
-  .calendar-day.selected::before { background:#ffffff; }
+  .calendar-day.range-selected::before { background:#60a5fa; opacity:.9; }
+  .calendar-day.selected { background:#dbeafe; color:#1d4ed8; box-shadow:inset 0 0 0 1.5px #60a5fa; border-radius:14px; }
+  .calendar-day.selected::before { background:#2563eb; }
   .calendar-day.today::after { content:'今'; position:absolute; right:5px; top:4px; font-size:10px; color:#94a3b8; }
   .filter-btn { padding: 7px 14px; border-radius: 20px; border: 1px solid #ddd; background: white; font-size: 13px; cursor: pointer; transition: all .2s; }
   .filter-btn.active { background: #0f3460; color: white; border-color: #0f3460; }
@@ -609,7 +608,7 @@ function renderWechatCalendar() {
     const isRangeStart = isInRange && !activeHighlightDates.includes(prevDateStr);
     const isRangeEnd = isInRange && !activeHighlightDates.includes(nextDateStr);
     const isRangeSingle = isRangeStart && isRangeEnd;
-    const isToday = todayStr === dateStr && !isInRange;
+    const isToday = false;
     const cls = [
       'calendar-day',
       inMonth ? '' : 'muted',
