@@ -84,7 +84,9 @@ window.addEventListener('DOMContentLoaded', () => {
   .calendar-day.disabled { color:#d4d8df; cursor:default; }
   .calendar-day.has-data { font-weight:600; background:#f8fafc; }
   .calendar-day.has-data::before { content:''; position:absolute; bottom:5px; left:50%; transform:translateX(-50%); width:5px; height:5px; border-radius:999px; background:#93c5fd; }
-  .calendar-day.selected { background:#eef4ff; color:#2563eb; box-shadow:inset 0 0 0 2px #3b82f6; }
+  .calendar-day.range-selected { background:#eef4ff; color:#2563eb; box-shadow:inset 0 0 0 1px rgba(59,130,246,.22); }
+  .calendar-day.range-selected::before { background:#60a5fa; }
+  .calendar-day.selected { background:#dbeafe; color:#1d4ed8; box-shadow:inset 0 0 0 2px #3b82f6; }
   .calendar-day.selected::before { background:#2563eb; }
   .calendar-day.today::after { content:'今'; position:absolute; right:5px; top:4px; font-size:10px; color:#94a3b8; }
   .filter-btn { padding: 7px 14px; border-radius: 20px; border: 1px solid #ddd; background: white; font-size: 13px; cursor: pointer; transition: all .2s; }
@@ -365,10 +367,12 @@ let wechatData = null;
 let wechatAvailableDates = [];
 let currentWechatDate = null;
 let wechatCalendarMonth = null;
+const WECHAT_DISPLAY_PERIOD = '5/11-5/17';
+const WECHAT_HIGHLIGHT_DATES = ['2026-05-11','2026-05-12','2026-05-13','2026-05-14','2026-05-15','2026-05-16','2026-05-17'];
 
 function normalizeWechatData(raw, date) {
   const targetDate = date || '';
-  const defaultWeeklyPeriod = '5.11-5.17';
+  const defaultWeeklyPeriod = WECHAT_DISPLAY_PERIOD;
   if (!raw) return { target_date: targetDate, display_period: defaultWeeklyPeriod, brands: [], sources_note: '' };
 
   if (Array.isArray(raw.brands)) {
@@ -569,12 +573,14 @@ function renderWechatCalendar() {
     const inMonth = cellDate.getMonth() === wechatCalendarMonth.getMonth();
     const hasData = availableSet.has(dateStr);
     const isSelected = currentWechatDate === dateStr;
+    const isInRange = WECHAT_HIGHLIGHT_DATES.includes(dateStr);
     const isToday = todayStr === dateStr;
     const cls = [
       'calendar-day',
       inMonth ? '' : 'muted',
       hasData ? 'has-data' : 'disabled',
       isSelected ? 'selected' : '',
+      isInRange ? 'range-selected' : '',
       isToday ? 'today' : ''
     ].filter(Boolean).join(' ');
 
@@ -617,7 +623,7 @@ async function initWechat() {
 
 async function loadWechatDate(date) {
   document.getElementById('wechatSearchInput').value = '';
-  document.getElementById('wechatDateLabel').textContent = `📅 ${date} 友商内容跟踪`;
+  document.getElementById('wechatDateLabel').textContent = `📅 友商内容跟踪（${WECHAT_DISPLAY_PERIOD}）`;
   document.getElementById('wechatCardContainer').innerHTML = '<div class="loading">加载中...</div>';
 
   try {
@@ -676,8 +682,8 @@ function renderWechatCards() {
   document.getElementById('wechatTotalCount').textContent = filteredTotal;
   document.getElementById('wechatBrandCount').textContent = normalizedBrands.length;
 
-  const displayPeriod = '5/11-5/17';
-  document.getElementById('wechatDateLabel').textContent = `📅 ${wechatData?.target_date || ''} 友商内容跟踪（${displayPeriod}）`;
+  const displayPeriod = WECHAT_DISPLAY_PERIOD;
+  document.getElementById('wechatDateLabel').textContent = `📅 友商内容跟踪（${displayPeriod}）`;
 
   const note = wechatData && wechatData.sources_note
     ? `<div style="background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;padding:12px 14px;border-radius:10px;margin-bottom:14px;font-size:13px;line-height:1.7">⚠️ ${wechatData.sources_note}</div>`
@@ -697,7 +703,7 @@ function renderWechatCards() {
     });
     const emptyText = keyword ? '没有符合搜索条件的内容' : '未提取到对应友商内容';
     const cards = items.length ? items.map(item => {
-      const period = (wechatData && wechatData.display_period) ? wechatData.display_period : '5/11-5/17';
+      const period = WECHAT_DISPLAY_PERIOD;
       const sourceDoc = item.source_doc || item.source || '未标注来源';
       return `
       <div class="card" style="margin-bottom:12px;padding:14px 16px;border:1px solid #eef2f7;box-shadow:none">
