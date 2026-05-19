@@ -623,6 +623,7 @@ function renderWechatCalendar() {
     const targetDate = getWechatWeekTargetDate(dateStr);
     const hasData = availableSet.has(targetDate);
     const isInRange = activeHighlightDates.includes(dateStr);
+    const isSelectableWeek = targetDate !== dateStr || hasData;
     const isActiveRange = isInRange && targetDate === activeTargetDate;
     const prevDate = new Date(cellDate); prevDate.setDate(cellDate.getDate() - 1);
     const nextDate = new Date(cellDate); nextDate.setDate(cellDate.getDate() + 1);
@@ -631,7 +632,7 @@ function renderWechatCalendar() {
     const cellCls = [
       'calendar-cell',
       isInRange ? 'range-fill' : '',
-      hasData && isInRange ? 'available' : '',
+      isSelectableWeek && isInRange ? 'available' : '',
       isActiveRange ? 'active' : '',
       isInRange && !prevInRange ? 'range-start' : '',
       isInRange && !nextInRange ? 'range-end' : ''
@@ -639,13 +640,13 @@ function renderWechatCalendar() {
     const cls = [
       'calendar-day',
       inMonth ? '' : 'muted',
-      hasData ? 'has-data' : 'disabled',
+      isSelectableWeek ? 'has-data' : 'disabled',
       isInRange ? 'range-selected' : '',
-      hasData && isInRange ? 'available' : '',
+      isSelectableWeek && isInRange ? 'available' : '',
       isActiveRange ? 'active' : ''
     ].filter(Boolean).join(' ');
 
-    html += `<div class="${cellCls}"><button type="button" class="${cls}" ${hasData ? `onclick="selectWechatDate('${dateStr}')"` : 'tabindex="-1"'}>${cellDate.getDate()}</button></div>`;
+    html += `<div class="${cellCls}"><button type="button" class="${cls}" ${isSelectableWeek ? `onclick="selectWechatDate('${dateStr}')"` : 'tabindex="-1"'}>${cellDate.getDate()}</button></div>`;
   }
 
   grid.innerHTML = html;
@@ -653,18 +654,6 @@ function renderWechatCalendar() {
 
 function selectWechatDate(dateStr) {
   const targetDate = getWechatWeekTargetDate(dateStr);
-  if (!(wechatAvailableDates || []).includes(targetDate)) {
-    currentWechatDate = targetDate;
-    wechatData = null;
-    wechatCalendarMonth = new Date(parseDateString(targetDate).getFullYear(), parseDateString(targetDate).getMonth(), 1);
-    renderWechatCalendar();
-    document.getElementById('wechatSearchInput').value = '';
-    document.getElementById('wechatDateLabel').textContent = `📅 友商内容跟踪（${formatWechatDisplayPeriod(targetDate)}）`;
-    document.getElementById('wechatTotalCount').textContent = '0';
-    document.getElementById('wechatBrandCountInline').textContent = '0';
-    document.getElementById('wechatCardContainer').innerHTML = '<div class="empty">该时间段暂无录入内容</div>';
-    return;
-  }
   loadWechatDate(targetDate, { allowFallback: false });
 }
 
@@ -1020,7 +1009,7 @@ function renderIndustryCalendar() {
     const cls = [
       'calendar-day',
       inMonth ? '' : 'muted',
-      hasData ? 'has-data' : 'disabled',
+      isSelectableWeek ? 'has-data' : 'disabled',
       isSelected ? 'selected' : '',
       isToday ? 'today' : ''
     ].filter(Boolean).join(' ');
