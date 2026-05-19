@@ -304,27 +304,47 @@ window.addEventListener('DOMContentLoaded', () => {
 </div><!-- /industry-panel -->
 
 <div id="wechat-panel" style="display:none">
-<div class="toolbar">
-  <select id="wechatDateSelect" onchange="loadWechatDate(this.value)"></select>
-  <input type="text" id="wechatSearchInput" placeholder="🔍 搜索品牌/标题/摘要..." oninput="renderWechatCards()">
-</div>
+<div class="industry-layout">
+  <aside class="industry-sidebar">
+    <div class="industry-sidebar-card">
+      <div class="industry-kicker">Competitor Digest</div>
+      <div class="industry-summary-line">
+        <span class="summary-date" id="wechatDateLabel">2026-05-19 友商内容跟踪</span>
+        <span><strong id="wechatTotalCount">-</strong> 条内容</span>
+        <span class="summary-sub">按日期浏览友商内容跟踪，点击左侧日期即可切换到当天内容。</span>
+      </div>
+    </div>
+    <div class="industry-search-panel">
+      <div class="industry-search-wrap">
+        <input type="text" id="wechatSearchInput" placeholder="🔍 搜索品牌/标题/来源..." oninput="renderWechatCards()">
+      </div>
+    </div>
+    <div class="calendar-card">
+      <div class="calendar-header">
+        <button class="calendar-title-btn" type="button" id="wechatCalendarTitle">2026年5月</button>
+        <div class="calendar-nav">
+          <button type="button" onclick="changeWechatCalendarMonth(-1)">‹</button>
+          <button type="button" onclick="changeWechatCalendarMonth(1)">›</button>
+        </div>
+      </div>
+      <div class="calendar-weekdays">
+        <div>日</div><div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div>
+      </div>
+      <div class="calendar-grid" id="wechatCalendarGrid"></div>
+    </div>
+  </aside>
 
-<div class="stats">
-  <div class="stat-card" style="max-width:180px">
-    <div class="num" id="wechatTotalCount">-</div>
-    <div class="label">📬 T-7内容条数</div>
-  </div>
-  <div class="stat-card" style="max-width:220px">
-    <div class="num" id="wechatBrandCount">-</div>
-    <div class="label">🏷️ 跟踪品牌数</div>
-  </div>
-</div>
-
-<div class="content" style="padding-top:8px">
-  <div class="date-label" id="wechatDateLabel" style="margin-bottom:16px;font-size:14px;color:#666;font-weight:500"></div>
-  <div id="wechatCardContainer" style="max-width:980px">
-    <div class="loading">加载中...</div>
-  </div>
+  <section class="industry-main">
+    <div class="stats" style="padding:0;gap:12px">
+      <div class="stat-card" style="max-width:220px">
+        <div class="num" id="wechatBrandCount">-</div>
+        <div class="label">🏷️ 跟踪品牌数</div>
+      </div>
+    </div>
+    <div id="wechatCardContainer" class="industry-card-list">
+      <div class="loading">加载中...</div>
+    </div>
+  </section>
 </div>
 </div><!-- /wechat-panel -->
 
@@ -343,6 +363,8 @@ let industryCalendarMonth = null;
 // 友商公众号跟踪数据
 let wechatData = null;
 let wechatAvailableDates = [];
+let currentWechatDate = null;
+let wechatCalendarMonth = null;
 
 function normalizeWechatData(raw, date) {
   const targetDate = date || '';
@@ -525,8 +547,56 @@ async function init() {
   applyTabVisibility();
 }
 
+function renderWechatCalendar() {
+  if (!wechatCalendarMonth) return;
+  const grid = document.getElementById('wechatCalendarGrid');
+  const title = document.getElementById('wechatCalendarTitle');
+  if (!grid || !title) return;
+
+  title.textContent = `${wechatCalendarMonth.getFullYear()}年${wechatCalendarMonth.getMonth() + 1}月`;
+  const monthStart = new Date(wechatCalendarMonth.getFullYear(), wechatCalendarMonth.getMonth(), 1);
+  const gridStart = new Date(monthStart);
+  gridStart.setDate(monthStart.getDate() - monthStart.getDay());
+
+  const todayStr = formatDateString(new Date());
+  const availableSet = new Set(wechatAvailableDates || []);
+  let html = '';
+
+  for (let i = 0; i < 42; i++) {
+    const cellDate = new Date(gridStart);
+    cellDate.setDate(gridStart.getDate() + i);
+    const dateStr = formatDateString(cellDate);
+    const inMonth = cellDate.getMonth() === wechatCalendarMonth.getMonth();
+    const hasData = availableSet.has(dateStr);
+    const isSelected = currentWechatDate === dateStr;
+    const isToday = todayStr === dateStr;
+    const cls = [
+      'calendar-day',
+      inMonth ? '' : 'muted',
+      hasData ? 'has-data' : 'disabled',
+      isSelected ? 'selected' : '',
+      isToday ? 'today' : ''
+    ].filter(Boolean).join(' ');
+
+    html += `<button type="button" class="${cls}" ${hasData ? `onclick="selectWechatDate('${dateStr}')"` : 'tabindex="-1"'}>${cellDate.getDate()}</button>`;
+  }
+
+  grid.innerHTML = html;
+}
+
+function selectWechatDate(dateStr) {
+  if (!(wechatAvailableDates || []).includes(dateStr)) return;
+  loadWechatDate(dateStr);
+}
+
+function changeWechatCalendarMonth(offset) {
+  if (!wechatCalendarMonth) return;
+  wechatCalendarMonth = new Date(wechatCalendarMonth.getFullYear(), wechatCalendarMonth.getMonth() + offset, 1);
+  renderWechatCalendar();
+}
+
 async function initWechat() {
-  const todayStr = new Date().toLocaleDateString('zh-CN', {timeZone:'Asia/Shanghai'}).replace(/\//g, '-').replace(/(\d+)-(\d+)-(\d+)/, (_, y, m, d) => `${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`);
+  const todayStr = formatDateString(new Date());
   let dates = [];
   try {
     const res = await fetch(`data/wechat/dates.json?v=${Date.now()}`);
@@ -534,20 +604,15 @@ async function initWechat() {
   } catch(e) {}
   if (!Array.isArray(dates)) dates = [];
   if (!dates.includes(todayStr)) dates.push(todayStr);
-  dates.sort().reverse();
+  dates = [...new Set(dates)].sort().reverse();
   wechatAvailableDates = dates;
 
-  const select = document.getElementById('wechatDateSelect');
-  select.innerHTML = '';
-  dates.forEach(d => {
-    const opt = document.createElement('option');
-    opt.value = d;
-    opt.textContent = d + (d === todayStr ? ' (今日)' : '');
-    select.appendChild(opt);
-  });
-
-  select.value = todayStr;
-  loadWechatDate(todayStr);
+  const initialDate = dates.includes(todayStr) ? todayStr : dates[0];
+  currentWechatDate = initialDate;
+  wechatCalendarMonth = parseDateString(initialDate);
+  wechatCalendarMonth = new Date(wechatCalendarMonth.getFullYear(), wechatCalendarMonth.getMonth(), 1);
+  renderWechatCalendar();
+  loadWechatDate(initialDate);
 }
 
 async function loadWechatDate(date) {
@@ -560,11 +625,29 @@ async function loadWechatDate(date) {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const raw = await res.json();
     wechatData = normalizeWechatData(raw, date);
+    currentWechatDate = date;
+    wechatCalendarMonth = new Date(parseDateString(date).getFullYear(), parseDateString(date).getMonth(), 1);
+    renderWechatCalendar();
     renderWechatCards();
   } catch(e) {
+    const fallback = (wechatAvailableDates || []).find(d => d < date);
+    if (fallback) {
+      try {
+        const res2 = await fetch(`data/wechat/${fallback}.json?v=${Date.now()}`);
+        if (!res2.ok) throw new Error();
+        const raw2 = await res2.json();
+        wechatData = normalizeWechatData(raw2, fallback);
+        currentWechatDate = fallback;
+        wechatCalendarMonth = new Date(parseDateString(fallback).getFullYear(), parseDateString(fallback).getMonth(), 1);
+        renderWechatCalendar();
+        renderWechatCards();
+        return;
+      } catch(e2) {}
+    }
     wechatData = null;
     document.getElementById('wechatTotalCount').textContent = '0';
     document.getElementById('wechatBrandCount').textContent = '0';
+    renderWechatCalendar();
     document.getElementById('wechatCardContainer').innerHTML = '<div class="empty">暂无数据</div>';
   }
 }
