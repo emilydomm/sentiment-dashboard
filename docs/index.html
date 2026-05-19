@@ -84,7 +84,10 @@ window.addEventListener('DOMContentLoaded', () => {
   .calendar-day.disabled { color:#d4d8df; cursor:default; }
   .calendar-day.has-data { font-weight:600; background:#f8fafc; }
   .calendar-day.has-data::before { content:''; position:absolute; bottom:5px; left:50%; transform:translateX(-50%); width:5px; height:5px; border-radius:999px; background:#93c5fd; }
-  .calendar-day.range-selected { background:#eef4ff; color:#2563eb; box-shadow:inset 0 0 0 1px rgba(59,130,246,.22); }
+  .calendar-day.range-selected { background:#eef4ff; color:#2563eb; box-shadow:none; border-radius:0; }
+  .calendar-day.range-start { border-radius:10px 0 0 10px; }
+  .calendar-day.range-end { border-radius:0 10px 10px 0; }
+  .calendar-day.range-single { border-radius:10px; }
   .calendar-day.range-selected::before { background:#60a5fa; }
   .calendar-day.selected { background:#dbeafe; color:#1d4ed8; box-shadow:inset 0 0 0 2px #3b82f6; }
   .calendar-day.selected::before { background:#2563eb; }
@@ -546,6 +549,26 @@ async function init() {
   applyTabVisibility();
 }
 
+function getWechatWeekTargetDate(dateStr) {
+  const map = {
+    '2026-04-20': '2026-04-26',
+    '2026-04-21': '2026-04-26',
+    '2026-04-22': '2026-04-26',
+    '2026-04-23': '2026-04-26',
+    '2026-04-24': '2026-04-26',
+    '2026-04-25': '2026-04-26',
+    '2026-04-26': '2026-04-26',
+    '2026-05-11': '2026-05-19',
+    '2026-05-12': '2026-05-19',
+    '2026-05-13': '2026-05-19',
+    '2026-05-14': '2026-05-19',
+    '2026-05-15': '2026-05-19',
+    '2026-05-16': '2026-05-19',
+    '2026-05-17': '2026-05-19'
+  };
+  return map[dateStr] || dateStr;
+}
+
 function renderWechatCalendar() {
   if (!wechatCalendarMonth) return;
   const grid = document.getElementById('wechatCalendarGrid');
@@ -559,6 +582,7 @@ function renderWechatCalendar() {
 
   const todayStr = formatDateString(new Date());
   const availableSet = new Set(wechatAvailableDates || []);
+  const activeHighlightDates = (wechatData && Array.isArray(wechatData.highlight_dates)) ? wechatData.highlight_dates : DEFAULT_WECHAT_HIGHLIGHT_DATES;
   let html = '';
 
   for (let i = 0; i < 42; i++) {
@@ -566,10 +590,15 @@ function renderWechatCalendar() {
     cellDate.setDate(gridStart.getDate() + i);
     const dateStr = formatDateString(cellDate);
     const inMonth = cellDate.getMonth() === wechatCalendarMonth.getMonth();
-    const hasData = availableSet.has(dateStr);
-    const isSelected = currentWechatDate === dateStr;
-    const activeHighlightDates = (wechatData && Array.isArray(wechatData.highlight_dates)) ? wechatData.highlight_dates : DEFAULT_WECHAT_HIGHLIGHT_DATES;
+    const targetDate = getWechatWeekTargetDate(dateStr);
+    const hasData = availableSet.has(targetDate);
+    const isSelected = currentWechatDate === targetDate;
     const isInRange = activeHighlightDates.includes(dateStr);
+    const prevDateStr = formatDateString(new Date(cellDate.getFullYear(), cellDate.getMonth(), cellDate.getDate() - 1));
+    const nextDateStr = formatDateString(new Date(cellDate.getFullYear(), cellDate.getMonth(), cellDate.getDate() + 1));
+    const isRangeStart = isInRange && !activeHighlightDates.includes(prevDateStr);
+    const isRangeEnd = isInRange && !activeHighlightDates.includes(nextDateStr);
+    const isRangeSingle = isRangeStart && isRangeEnd;
     const isToday = todayStr === dateStr;
     const cls = [
       'calendar-day',
@@ -577,6 +606,9 @@ function renderWechatCalendar() {
       hasData ? 'has-data' : 'disabled',
       isSelected ? 'selected' : '',
       isInRange ? 'range-selected' : '',
+      isRangeStart ? 'range-start' : '',
+      isRangeEnd ? 'range-end' : '',
+      isRangeSingle ? 'range-single' : '',
       isToday ? 'today' : ''
     ].filter(Boolean).join(' ');
 
@@ -587,8 +619,9 @@ function renderWechatCalendar() {
 }
 
 function selectWechatDate(dateStr) {
-  if (!(wechatAvailableDates || []).includes(dateStr)) return;
-  loadWechatDate(dateStr);
+  const targetDate = getWechatWeekTargetDate(dateStr);
+  if (!(wechatAvailableDates || []).includes(targetDate)) return;
+  loadWechatDate(targetDate);
 }
 
 function changeWechatCalendarMonth(offset) {
