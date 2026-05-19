@@ -51,8 +51,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
   .industry-toolbar { background:white; border-bottom:1px solid #e8e8e8; padding:16px 32px 12px; }
   .industry-toolbar-top { display:flex; align-items:flex-start; justify-content:space-between; gap:20px; flex-wrap:wrap; }
-  .industry-search-wrap input { width:220px; padding:8px 12px; border:1px solid #ddd; border-radius:8px; font-size:14px; outline:none; }
-  .industry-search-wrap input:focus { border-color:#0f3460; }
+  .industry-search-wrap { min-width:260px; margin-left:auto; display:flex; align-items:flex-start; justify-content:flex-end; padding-top:2px; }
+  .industry-search-wrap input { width:260px; padding:10px 14px; border:1px solid #ddd; border-radius:10px; font-size:14px; outline:none; background:#fff; }
+  .industry-search-wrap input:focus { border-color:#0f3460; box-shadow:0 0 0 3px rgba(15,52,96,.08); }
   .industry-summary-line { margin-top:12px; font-size:13px; color:#666; display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
   .industry-summary-line strong { color:#1a1a2e; font-size:15px; }
   .calendar-card { background:#fff; border:1px solid #eceff3; border-radius:16px; padding:14px 16px 12px; box-shadow:0 2px 10px rgba(15,52,96,.06); min-width:320px; }
@@ -67,8 +68,10 @@ window.addEventListener('DOMContentLoaded', () => {
   .calendar-day:hover { background:#f5f7fb; }
   .calendar-day.muted { color:#c0c6d0; }
   .calendar-day.disabled { color:#d4d8df; cursor:default; }
-  .calendar-day.has-data { font-weight:600; }
+  .calendar-day.has-data { font-weight:600; background:#f8fafc; }
+  .calendar-day.has-data::before { content:''; position:absolute; bottom:5px; left:50%; transform:translateX(-50%); width:5px; height:5px; border-radius:999px; background:#93c5fd; }
   .calendar-day.selected { background:#eef4ff; color:#2563eb; box-shadow:inset 0 0 0 2px #3b82f6; }
+  .calendar-day.selected::before { background:#2563eb; }
   .calendar-day.today::after { content:'今'; position:absolute; right:5px; top:4px; font-size:10px; color:#94a3b8; }
   .filter-btn { padding: 7px 14px; border-radius: 20px; border: 1px solid #ddd; background: white; font-size: 13px; cursor: pointer; transition: all .2s; }
   .filter-btn.active { background: #0f3460; color: white; border-color: #0f3460; }
@@ -132,7 +135,7 @@ window.addEventListener('DOMContentLoaded', () => {
     .stats { flex-wrap: wrap; }
     .stat-card { min-width: calc(50% - 8px); }
     .calendar-card { min-width:100%; }
-    .industry-search-wrap { width:100%; }
+    .industry-search-wrap { width:100%; min-width:0; margin-left:0; justify-content:flex-start; }
     .industry-search-wrap input { width:100%; }
   }
 </style>
