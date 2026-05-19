@@ -48,6 +48,28 @@ window.addEventListener('DOMContentLoaded', () => {
   .toolbar select, .toolbar input { padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; outline: none; }
   .toolbar input { width: 220px; }
   .toolbar input:focus, .toolbar select:focus { border-color: #0f3460; }
++
++  .industry-toolbar { background:white; border-bottom:1px solid #e8e8e8; padding:16px 32px 12px; }
++  .industry-toolbar-top { display:flex; align-items:flex-start; justify-content:space-between; gap:20px; flex-wrap:wrap; }
++  .industry-search-wrap input { width:220px; padding:8px 12px; border:1px solid #ddd; border-radius:8px; font-size:14px; outline:none; }
++  .industry-search-wrap input:focus { border-color:#0f3460; }
++  .industry-summary-line { margin-top:12px; font-size:13px; color:#666; display:flex; gap:14px; align-items:center; flex-wrap:wrap; }
++  .industry-summary-line strong { color:#1a1a2e; font-size:15px; }
++  .calendar-card { background:#fff; border:1px solid #eceff3; border-radius:16px; padding:14px 16px 12px; box-shadow:0 2px 10px rgba(15,52,96,.06); min-width:320px; }
++  .calendar-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
++  .calendar-title-btn { border:none; background:none; padding:0; font-size:16px; font-weight:700; color:#1a1a2e; display:flex; align-items:center; gap:6px; cursor:default; }
++  .calendar-nav { display:flex; gap:6px; }
++  .calendar-nav button { width:32px; height:32px; border:none; background:#f3f5f8; color:#4b5563; border-radius:999px; cursor:pointer; font-size:18px; line-height:1; }
++  .calendar-nav button:hover { background:#e7edf5; color:#0f3460; }
++  .calendar-weekdays, .calendar-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:6px; }
++  .calendar-weekdays div { text-align:center; font-size:12px; color:#9aa1ad; padding:4px 0; }
++  .calendar-day { border:none; background:transparent; min-height:36px; border-radius:10px; font-size:14px; color:#1f2937; cursor:pointer; position:relative; }
++  .calendar-day:hover { background:#f5f7fb; }
++  .calendar-day.muted { color:#c0c6d0; }
++  .calendar-day.disabled { color:#d4d8df; cursor:default; }
++  .calendar-day.has-data { font-weight:600; }
++  .calendar-day.selected { background:#eef4ff; color:#2563eb; box-shadow:inset 0 0 0 2px #3b82f6; }
++  .calendar-day.today::after { content:'今'; position:absolute; right:5px; top:4px; font-size:10px; color:#94a3b8; }
   .filter-btn { padding: 7px 14px; border-radius: 20px; border: 1px solid #ddd; background: white; font-size: 13px; cursor: pointer; transition: all .2s; }
   .filter-btn.active { background: #0f3460; color: white; border-color: #0f3460; }
   
@@ -103,12 +125,15 @@ window.addEventListener('DOMContentLoaded', () => {
   .loading { text-align: center; padding: 60px; color: #888; }
 
   @media (max-width: 600px) {
-    .header, .toolbar, .stats, .content { padding-left: 16px; padding-right: 16px; }
+    .header, .toolbar, .stats, .content, .industry-toolbar { padding-left: 16px; padding-right: 16px; }
     .header { flex-direction: column; align-items: stretch; }
     .header-actions { align-self: flex-end; }
     .settings-panel { width: min(280px, calc(100vw - 32px)); }
     .stats { flex-wrap: wrap; }
     .stat-card { min-width: calc(50% - 8px); }
+    .calendar-card { min-width:100%; }
+    .industry-search-wrap { width:100%; }
+    .industry-search-wrap input { width:100%; }
   }
 </style>
 <style>
@@ -211,20 +236,32 @@ window.addEventListener('DOMContentLoaded', () => {
 </div><!-- /sentiment-panel -->
 
 <div id="industry-panel">
-<div class="toolbar">
-  <select id="industryDateSelect" onchange="loadIndustryDate(this.value)"></select>
-  <input type="text" id="industrySearchInput" placeholder="🔍 搜索标题/关键词..." oninput="renderIndustryCards()">
-</div>
-
-<div class="stats">
-  <div class="stat-card" style="max-width:180px">
-    <div class="num" id="industryTotalCount">-</div>
-    <div class="label">📊 今日资讯条数</div>
+<div class="industry-toolbar">
+  <div class="industry-toolbar-top">
+    <div class="calendar-card">
+      <div class="calendar-header">
+        <button class="calendar-title-btn" type="button" id="industryCalendarTitle">2026年5月</button>
+        <div class="calendar-nav">
+          <button type="button" onclick="changeIndustryCalendarMonth(-1)">‹</button>
+          <button type="button" onclick="changeIndustryCalendarMonth(1)">›</button>
+        </div>
+      </div>
+      <div class="calendar-weekdays">
+        <div>日</div><div>一</div><div>二</div><div>三</div><div>四</div><div>五</div><div>六</div>
+      </div>
+      <div class="calendar-grid" id="industryCalendarGrid"></div>
+    </div>
+    <div class="industry-search-wrap">
+      <input type="text" id="industrySearchInput" placeholder="🔍 搜索标题/关键词..." oninput="renderIndustryCards()">
+    </div>
+  </div>
+  <div class="industry-summary-line">
+    <span id="industryDateLabel">📅 2026-05-19 行业资讯</span>
+    <span>共 <strong id="industryTotalCount">-</strong> 条资讯</span>
   </div>
 </div>
 
-<div class="content" style="padding-top:8px">
-  <div class="date-label" id="industryDateLabel" style="margin-bottom:16px;font-size:14px;color:#666;font-weight:500"></div>
+<div class="content" style="padding-top:16px">
   <div id="industryCardContainer" style="max-width:900px">
     <div class="loading">加载中...</div>
   </div>
@@ -265,6 +302,8 @@ let availableDates = [];
 // 行业资讯数据
 let industryData = [];
 let industryAvailableDates = [];
+let currentIndustryDate = null;
+let industryCalendarMonth = null;
 
 // 友商公众号跟踪数据
 let wechatData = null;
@@ -632,33 +671,85 @@ function renderCards() {
 
 // ========== 行业资讯相关函数 ==========
 
-async function initIndustry() {
-  const todayStr = new Date().toLocaleDateString('zh-CN', {timeZone:'Asia/Shanghai'}).replace(/\//g, '-').replace(/(\d+)-(\d+)-(\d+)/, (_, y, m, d) => `${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`);
+function parseDateString(dateStr) {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
 
-  // 读取 dates.json，获取所有可用日期
+function formatDateString(date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
+function renderIndustryCalendar() {
+  if (!industryCalendarMonth) return;
+  const grid = document.getElementById('industryCalendarGrid');
+  const title = document.getElementById('industryCalendarTitle');
+  if (!grid || !title) return;
+
+  title.textContent = `${industryCalendarMonth.getFullYear()}年${industryCalendarMonth.getMonth() + 1}月`;
+  const monthStart = new Date(industryCalendarMonth.getFullYear(), industryCalendarMonth.getMonth(), 1);
+  const gridStart = new Date(monthStart);
+  gridStart.setDate(monthStart.getDate() - monthStart.getDay());
+
+  const todayStr = formatDateString(new Date());
+  const availableSet = new Set(industryAvailableDates || []);
+  let html = '';
+
+  for (let i = 0; i < 42; i++) {
+    const cellDate = new Date(gridStart);
+    cellDate.setDate(gridStart.getDate() + i);
+    const dateStr = formatDateString(cellDate);
+    const inMonth = cellDate.getMonth() === industryCalendarMonth.getMonth();
+    const hasData = availableSet.has(dateStr);
+    const isSelected = currentIndustryDate === dateStr;
+    const isToday = todayStr === dateStr;
+    const cls = [
+      'calendar-day',
+      inMonth ? '' : 'muted',
+      hasData ? 'has-data' : 'disabled',
+      isSelected ? 'selected' : '',
+      isToday ? 'today' : ''
+    ].filter(Boolean).join(' ');
+
+    html += `<button type="button" class="${cls}" ${hasData ? `onclick="selectIndustryDate('${dateStr}')"` : 'tabindex="-1"'}>${cellDate.getDate()}</button>`;
+  }
+
+  grid.innerHTML = html;
+}
+
+function selectIndustryDate(dateStr) {
+  if (!(industryAvailableDates || []).includes(dateStr)) return;
+  loadIndustryDate(dateStr);
+}
+
+function changeIndustryCalendarMonth(offset) {
+  if (!industryCalendarMonth) return;
+  industryCalendarMonth = new Date(industryCalendarMonth.getFullYear(), industryCalendarMonth.getMonth() + offset, 1);
+  renderIndustryCalendar();
+}
+
+async function initIndustry() {
+  const todayStr = formatDateString(new Date());
+
   let availableDates = [];
   try {
     const res = await fetch(`data/industry/dates.json?v=${Date.now()}`);
     if (res.ok) availableDates = await res.json();
   } catch(e) {}
 
-  // 加入今天（如果没有也先放进去，loadIndustryDate 内会处理回退）
   if (!availableDates.includes(todayStr)) availableDates.push(todayStr);
-  availableDates.sort().reverse();
+  availableDates = [...new Set(availableDates)].sort().reverse();
   industryAvailableDates = availableDates;
 
-  const dateSelect = document.getElementById('industryDateSelect');
-  dateSelect.innerHTML = '';
-  availableDates.forEach(d => {
-    const opt = document.createElement('option');
-    opt.value = d;
-    opt.textContent = d + (d === todayStr ? ' (今日)' : '');
-    dateSelect.appendChild(opt);
-  });
-
-  dateSelect.value = todayStr;
-  // 先尝试今天，若无数据自动回退到最近一天
-  loadIndustryDate(todayStr);
+  const initialDate = availableDates.includes(todayStr) ? todayStr : availableDates[0];
+  currentIndustryDate = initialDate;
+  industryCalendarMonth = parseDateString(initialDate);
+  industryCalendarMonth = new Date(industryCalendarMonth.getFullYear(), industryCalendarMonth.getMonth(), 1);
+  renderIndustryCalendar();
+  loadIndustryDate(initialDate);
 }
 
 async function loadIndustryDate(date) {
@@ -671,24 +762,29 @@ async function loadIndustryDate(date) {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     industryData = await res.json();
     if (!Array.isArray(industryData) || industryData.length === 0) throw new Error('empty');
+    currentIndustryDate = date;
+    industryCalendarMonth = new Date(parseDateString(date).getFullYear(), parseDateString(date).getMonth(), 1);
+    renderIndustryCalendar();
     renderIndustryCards();
   } catch(e) {
-    // 若当前日期没有数据，自动回退到 dates.json 中最近一天
     const fallback = (industryAvailableDates || []).find(d => d < date);
     if (fallback) {
-      document.getElementById('industryDateLabel').textContent = `📅 ${fallback} 行业资讯（最新可用）`;
-      document.getElementById('industryDateSelect').value = fallback;
       try {
         const res2 = await fetch(`data/industry/${fallback}.json?v=${Date.now()}`);
         if (!res2.ok) throw new Error();
         industryData = await res2.json();
         if (!Array.isArray(industryData)) industryData = [];
+        currentIndustryDate = fallback;
+        document.getElementById('industryDateLabel').textContent = `📅 ${fallback} 行业资讯（最新可用）`;
+        industryCalendarMonth = new Date(parseDateString(fallback).getFullYear(), parseDateString(fallback).getMonth(), 1);
+        renderIndustryCalendar();
         renderIndustryCards();
         return;
       } catch(e2) {}
     }
     industryData = [];
     document.getElementById('industryTotalCount').textContent = '0';
+    renderIndustryCalendar();
     document.getElementById('industryCardContainer').innerHTML = '<div class="empty">暂无数据</div>';
   }
 }
@@ -767,21 +863,7 @@ function renderIndustryCards() {
             <a href="${item.url}" target="_blank" style="color:#1a1a2e;text-decoration:none"
                onmouseenter="this.style.color='#0f3460'" onmouseleave="this.style.color='#1a1a2e'">${item.title}</a>
           </div>
-          ${item.desc ? `<div style="font-size:13px;color:#666;line-height:1.7;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:8px">${item.desc}</div>` : ''}
-          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-            <span style="
-              display:inline-block;
-              background:${kwStyle.bg};
-              color:${kwStyle.color};
-              font-size:11px;
-              font-weight:700;
-              padding:3px 10px;
-              border-radius:20px;
-              white-space:nowrap;
-              letter-spacing:.3px;
-            ">${kw}</span>
-            <span style="font-size:11px;color:#bbb">📅 ${item.publish_date}</span>
-          </div>
+          ${item.desc ? `<div style="font-size:13px;color:#666;line-height:1.7;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">${item.desc}</div>` : ''}
         </div>
         ${imageBlock}
       </div>`;
