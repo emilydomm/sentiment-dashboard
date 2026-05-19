@@ -90,7 +90,7 @@ window.addEventListener('DOMContentLoaded', () => {
   .calendar-day.has-data { font-weight:600; background:#f8fafc; }
   .calendar-day.has-data::before { content:''; position:absolute; bottom:5px; left:50%; transform:translateX(-50%); width:5px; height:5px; border-radius:999px; background:#93c5fd; }
   .calendar-day.range-selected { color:#9aa1ad; background:transparent; border:none; box-shadow:none; border-radius:0; font-weight:400; }
-  .calendar-day.range-selected.has-data { background:transparent; }
+  .calendar-day.range-selected.has-data { background:transparent !important; }
   .calendar-day.range-selected::after { content:none; }
   .calendar-day.range-selected.has-data::before { content:none; }
   .calendar-day.selected { color:#1f2937; background:transparent; box-shadow:none; border:none; }
