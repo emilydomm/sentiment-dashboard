@@ -420,7 +420,7 @@ function normalizeWechatData(raw, date) {
 }
 
 const DASHBOARD_SETTINGS_KEY = 'dashboardVisibleTabs';
-const defaultVisibleTabs = { sentiment: false, industry: true, wechat: false };
+const defaultVisibleTabs = { sentiment: false, industry: true, wechat: true };
 let visibleTabs = { ...defaultVisibleTabs };
 let currentTab = 'industry';
 
@@ -433,7 +433,7 @@ function loadTabSettings() {
     visibleTabs = {
       sentiment: !!saved.sentiment,
       industry: saved.industry !== undefined ? !!saved.industry : true,
-      wechat: !!saved.wechat,
+      wechat: saved.wechat !== undefined ? !!saved.wechat : true,
     };
   } catch (e) {
     visibleTabs = { ...defaultVisibleTabs };
