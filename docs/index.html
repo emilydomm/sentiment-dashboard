@@ -729,6 +729,7 @@ async function loadWechatDate(date, options = {}) {
     wechatCalendarMonth = new Date(parseDateString(date).getFullYear(), parseDateString(date).getMonth(), 1);
     document.getElementById('wechatTotalCount').textContent = '0';
     document.getElementById('wechatBrandCountInline').textContent = '0';
+    document.getElementById('wechatBrandNav').innerHTML = '';
     document.getElementById('wechatDateLabel').textContent = `📅 友商内容跟踪（${formatWechatDisplayPeriod(date)}）`;
     renderWechatCalendar();
     document.getElementById('wechatCardContainer').innerHTML = '<div class="empty">该时间段暂无录入内容</div>';
@@ -786,6 +787,7 @@ function renderWechatCards() {
   const note = '';
 
   if (!normalizedBrands.length) {
+    document.getElementById('wechatBrandNav').innerHTML = '';
     document.getElementById('wechatCardContainer').innerHTML = note + '<div class="empty">暂无数据</div>';
     return;
   }
