@@ -564,6 +564,19 @@ async function init() {
 
 function getWechatWeekTargetDate(dateStr) {
   const d = parseDateString(dateStr);
+  if (Number.isNaN(d.getTime())) return dateStr;
+  const availableSet = new Set(wechatAvailableDates || []);
+  const direct = formatDateString(d);
+  if (availableSet.has(direct)) return direct;
+
+  for (const availableDate of (wechatAvailableDates || [])) {
+    if (!availableSet.has(availableDate)) continue;
+    const displayDates = (wechatData && wechatData.target_date === availableDate && Array.isArray(wechatData.highlight_dates) && wechatData.highlight_dates.length)
+      ? wechatData.highlight_dates
+      : getWechatHighlightDates(availableDate);
+    if (displayDates.includes(direct)) return availableDate;
+  }
+
   const day = d.getDay();
   const daysToSunday = day === 0 ? 0 : (7 - day);
   const target = new Date(d);
