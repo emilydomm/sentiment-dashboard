@@ -571,6 +571,19 @@ function getWechatWeekTargetDate(dateStr) {
   return formatDateString(target);
 }
 
+function getWechatHighlightDates(targetDate) {
+  if (!targetDate) return [];
+  const end = parseDateString(targetDate);
+  if (Number.isNaN(end.getTime())) return [];
+  const dates = [];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date(end);
+    d.setDate(end.getDate() - i);
+    dates.push(formatDateString(d));
+  }
+  return dates;
+}
+
 function formatWechatDisplayPeriod(targetDate) {
   const highlightDates = (wechatData && Array.isArray(wechatData.highlight_dates) && wechatData.target_date === targetDate)
     ? wechatData.highlight_dates
