@@ -991,7 +991,7 @@ function renderIndustryCalendar() {
     const cls = [
       'calendar-day',
       inMonth ? '' : 'muted',
-      isSelectableWeek ? 'has-data' : 'disabled',
+      hasData ? 'has-data' : 'disabled',
       isSelected ? 'selected' : '',
       isToday ? 'today' : ''
     ].filter(Boolean).join(' ');
