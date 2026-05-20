@@ -770,7 +770,15 @@ function renderWechatCards() {
 
   const filteredTotal = filteredBrands.reduce((sum, b) => sum + (b.items || []).length, 0);
   document.getElementById('wechatTotalCount').textContent = filteredTotal;
-  document.getElementById('wechatBrandCountInline').textContent = normalizedBrands.length;
+  const visibleBrandCount = filteredBrands.filter(brand => (brand.items || []).some(item => {
+    const title = (item.title || '').trim();
+    const brandName = (brand.brand || '').trim();
+    if (!title) return false;
+    if (title === brandName) return false;
+    if (title === `${brandName}汽车`) return false;
+    return true;
+  })).length;
+  document.getElementById('wechatBrandCountInline').textContent = visibleBrandCount;
 
   const displayPeriod = (wechatData && wechatData.display_period) ? wechatData.display_period : '';
   document.getElementById('wechatDateLabel').textContent = displayPeriod ? `📅 友商内容跟踪（${displayPeriod}）` : '📅 友商内容跟踪';
@@ -782,7 +790,7 @@ function renderWechatCards() {
     return;
   }
 
-  const navHtml = filteredBrands.map(brand => {
+  const navBrands = filteredBrands.map(brand => {
     const count = (brand.items || [])
       .filter(item => {
         const title = (item.title || '').trim();
@@ -796,6 +804,10 @@ function renderWechatCards() {
         const key = `${(item.url || '').trim()}__${(item.title || '').trim()}__${((item.source_doc || item.source || '').trim())}`;
         return arr.findIndex(x => `${(x.url || '').trim()}__${(x.title || '').trim()}__${((x.source_doc || x.source || '').trim())}` === key) === index;
       }).length;
+    return { brand, count };
+  }).filter(({ count }) => count > 0);
+
+  const navHtml = navBrands.map(({ brand, count }) => {
     return `<a href="#${slugifyBrandName(brand.brand)}" style="display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #e5e7eb;color:#334155;text-decoration:none;font-size:13px;font-weight:600;box-shadow:0 1px 3px rgba(15,23,42,.04)">${brand.brand}<span style="background:#eff6ff;color:#2563eb;border-radius:999px;padding:2px 8px;font-size:12px">${count}</span></a>`;
   }).join('');
 
