@@ -1,0 +1,32 @@
+[
+  {
+    "platform": "web",
+    "note_id": "web_20260515_l9_5c_plan",
+    "title": "理想汽车：将翻倍部署5C超充桩",
+    "desc": "5月15日理想发布最新超充网络规划：已建成1300座高速超充站，贯通160条高速路线，覆盖里程超10万公里，并宣布2026年底5C超充枪数量将从约4100根翻倍至8300根，属于本周较明确的官方正向进展。",
+    "author": "新浪新闻",
+    "publish_date": "2026-05-15",
+    "url": "https://k.sina.cn/article_5953190046_162d6789e067034x0u.html",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260515_l9_network_update",
+    "title": "全新理想L9上市，理想汽车更新超充网络布局",
+    "desc": "在全新一代理想L9发布会上，理想同步披露超充网络进展：全国已建成1300座高速超充站、贯通160条高速路线，并计划继续扩大5C超充枪规模。内容以官方网络建设与补能能力提升为主，整体偏正向。",
+    "author": "中证金牛座/东方财富网",
+    "publish_date": "2026-05-15",
+    "url": "https://wap.eastmoney.com/a/202605153739179281.html",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20250523_idle_fee_complaint",
+    "title": "凌晨充电睡着被收200多，充电站未明示有此费用",
+    "desc": "5月23日黑猫投诉显示，用户在理想超充站充电后因睡着未及时挪车，被收取约200元占桩费。投诉核心并非充电失败，而是对占桩费标准和提示充分性不满，反映收费透明度与用户教育仍有争议。",
+    "author": "黑猫投诉用户“洞察喵”",
+    "publish_date": "2025-05-23",
+    "url": "https://sd.tousu.sina.cn/complaint/view/17383260056/?sld=5a716fb1e99bae72f3468eb161f65146",
+    "sentiment": "negative"
+  }
+]
