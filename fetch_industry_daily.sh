@@ -10,18 +10,7 @@ mkdir -p /workspace/sentiment-dashboard/logs
 
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] 开始抓取行业资讯..." >> "$LOG_FILE"
 
-# 调用OpenClaw会话发送消息给Agent执行抓取任务
-# 注意：这需要OpenClaw API或消息队列支持
-
-# 临时方案：通过Python脚本调用web_search
 python3 << 'PYTHON_SCRIPT'
-import sys
-sys.path.insert(0, '/workspace/sentiment-dashboard')
-
-# 这里需要实际调用OpenClaw的web_search工具
-# 由于脚本环境无法直接调用工具，需要通过其他方式触发
-
-# 方案：创建一个标记文件，让heartbeat检查并执行
 import json
 from datetime import date
 
@@ -39,3 +28,16 @@ print(f"[INFO] 已创建任务标记: {flag_file}")
 PYTHON_SCRIPT
 
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] 任务标记已创建，等待Agent执行" >> "$LOG_FILE"
+
+INDUSTRY_JSON="/workspace/sentiment-dashboard/docs/data/industry/${DATE}.json"
+CARD_SCRIPT="/workspace/sentiment-dashboard/send_industry_feishu_card.py"
+
+if [ -f "$INDUSTRY_JSON" ]; then
+  echo "[$(date '+%Y-%m-%d %H:%M:%S')] 检测到行业资讯文件已存在，生成飞书卡片 payload" >> "$LOG_FILE"
+  if [ ! -f "$CARD_SCRIPT" ]; then
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] 缺少卡片脚本，终止执行" >> "$LOG_FILE"
+    exit 1
+  fi
+  python3 "$CARD_SCRIPT" --date "$DATE" >> "$LOG_FILE" 2>&1 || exit 1
+  echo "[$(date '+%Y-%m-%d %H:%M:%S')] 卡片 payload 已生成；禁止回退普通文本发送" >> "$LOG_FILE"
+fi

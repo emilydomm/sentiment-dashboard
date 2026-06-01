@@ -8,6 +8,8 @@
 - Forbidden group target example: `chat:oc_1e7043c8d90c241ad6b4a1dabab8a0e8`
 - If any existing script, cron job, legacy config, remembered target, or auto-generated send step conflicts with this rule, this rule overrides it.
 - Treat this as a hard constraint, not a preference: if a run summary shows any group send for industry news, it is a bug and must be removed before the next run.
+- Delivery format is also a hard constraint: industry news must be sent as a **Feishu card**, never plain text.
+- Fixed sender script: `/workspace/sentiment-dashboard/send_industry_feishu_card.py`
 - Double-insurance check: before running or editing the industry-news automation, verify both of these are true:
   1. the only allowed delivery target is `user:ou_dfa6d78ac7f1e08b474d766109b9fea7`
   2. no prompt / config / summary text contains any group target, group chat_id, or instruction to send to a group

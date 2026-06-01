@@ -1,0 +1,67 @@
+[2026-05-31 21:27:34] 开始抓取行业资讯...
+[2026-05-31 21:27:34] 任务标记已创建，等待Agent执行
+[2026-05-31 21:27:34] 检测到行业资讯文件已存在，生成飞书卡片 payload
+{
+  "action": "send",
+  "channel": "feishu",
+  "target": "user:ou_dfa6d78ac7f1e08b474d766109b9fea7",
+  "presentation": {
+    "title": "📰 今日行业资讯｜2026-05-31",
+    "tone": "info",
+    "blocks": [
+      {
+        "type": "context",
+        "text": "📅 2026-05-31｜共 8 条｜仅发送最终资讯与看板链接"
+      },
+      {
+        "type": "divider"
+      },
+      {
+        "type": "text",
+        "text": "1. 【新车发布】领克10与领克10+上市 限时售16.99万元起 最大续航816km 最高900V\n2026-05-29｜领克10与领克10+正式上市，限时售价16.99万元起，续航最高816km，平台电压最高900V。\n原文：https://www.autohome.com.cn/news/202605/1314588.html"
+      },
+      {
+        "type": "text",
+        "text": "2. 【新车发布】10.49万起 一汽悦意08开启预售 增程/纯电双动力 还有高阶智驾\n2026-05-29｜一汽悦意08开启预售，提供增程和纯电双动力，并配备8295P座舱芯片与激光雷达等高阶智驾硬件。\n原文：https://www.autohome.com.cn/news/202605/1314587.html"
+      },
+      {
+        "type": "text",
+        "text": "3. 【智能驾驶】搭载猎鹰700驾驶辅助系统 2026款星途ES官图发布\n2026-05-29｜2026款星途ES官图发布，升级猎鹰700驾驶辅助系统，并引入基于Carmind AI大模型的智能座舱能力。\n原文：https://www.autohome.com.cn/news/202605/1314585.html"
+      },
+      {
+        "type": "text",
+        "text": "4. 【智能驾驶】支持高速/城市NOA 综合续航超2000km！ID.ERA 5S将于三季度上市\n2026-05-29｜上汽大众ID.ERA 5S披露更多信息，支持高速和城市NOA，综合续航超过2000km，计划三季度上市。\n原文：https://www.autohome.com.cn/news/202605/1314575.html"
+      },
+      {
+        "type": "text",
+        "text": "5. 【充电技术】延迟一天交付 赠一天免费闪充 比亚迪发布闪充车型新权益\n2026-05-29｜比亚迪针对闪充车型推出新权益，交付延期按天补偿免费闪充权益，并再次强化其高功率快充体系卖点。\n原文：https://www.autohome.com.cn/news/202605/1314574.html"
+      },
+      {
+        "type": "text",
+        "text": "6. 【电池技术】电池租用方案售39万起/7月31日前锁单有限时权益 蔚来ES9开启交付\n2026-05-29｜蔚来ES9开启交付，提供电池租用购买方案，电池租用价39万元起，延续车电分离模式。\n原文：https://www.autohome.com.cn/news/202605/1314558.html"
+      },
+      {
+        "type": "text",
+        "text": "7. 【智能驾驶】驾驶辅助能力提升 长城汽车推送坦克400首次OTA升级\n2026-05-28｜长城汽车为坦克400推送首次OTA，涉及19项功能优化，重点提升驾驶辅助能力与点对点出行体验。\n原文：https://www.autohome.com.cn/news/202605/1314552.html"
+      },
+      {
+        "type": "text",
+        "text": "8. 【智能驾驶】Banyan、Cedar等系统车型可享 蔚来世界模型即将迎来新一轮更新\n2026-05-30｜蔚来世界模型即将更新，覆盖Banyan、Cedar和Cedar S系统车型，相关能力将在6月继续推送。\n原文：https://www.autohome.com.cn/news/202605/1314596.html"
+      },
+      {
+        "type": "divider"
+      },
+      {
+        "type": "buttons",
+        "buttons": [
+          {
+            "label": "查看看板",
+            "url": "https://emilydomm.github.io/sentiment-dashboard/",
+            "style": "primary"
+          }
+        ]
+      }
+    ]
+  }
+}
+[2026-05-31 21:27:34] 卡片 payload 已生成；禁止回退普通文本发送
