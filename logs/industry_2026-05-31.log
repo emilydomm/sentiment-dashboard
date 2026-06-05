@@ -65,3 +65,17 @@
   }
 }
 [2026-05-31 21:27:34] 卡片 payload 已生成；禁止回退普通文本发送
+[2026-06-04 10:15:22] 开始发送飞书卡片，目标=user:ou_dfa6d78ac7f1e08b474d766109b9fea7，dry_run=true
+[2026-06-04 10:15:26] 发送返回: │
+◇  Config warnings ────────────────────────────────────────────────────────╮
+│                                                                          │
+│  - plugins.entries.feishu: plugin feishu: installed plugin package       │
+│    requires compiled runtime output for TypeScript entry index.ts:       │
+│    expected ./dist/index.js, ./dist/index.mjs, ./dist/index.cjs,         │
+│    index.js, index.mjs, index.cjs                                        │
+│  - plugins.entries.openviking: plugin disabled (disabled in config) but  │
+│    config is present                                                     │
+│                                                                          │
+├──────────────────────────────────────────────────────────────────────────╯
+✅ Sent via Feishu. Message ID: unknown
+[2026-06-04 10:15:26] 发送完成
