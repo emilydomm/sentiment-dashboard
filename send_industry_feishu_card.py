@@ -19,6 +19,11 @@ DASHBOARD_URL = "https://emilydomm.github.io/sentiment-dashboard/"
 BASE_DIR = Path('/workspace/sentiment-dashboard')
 DATA_DIR = BASE_DIR / 'docs' / 'data' / 'industry'
 LOG_DIR = BASE_DIR / 'logs'
+STRICT_TEXT = (
+    "行业资讯发送硬约束：仅允许发送飞书卡片；"
+    f"目标必须且只能是 {TARGET}；"
+    "禁止普通文本、禁止群聊、禁止过程说明。"
+)
 
 
 def load_items(report_date: str):
@@ -36,7 +41,22 @@ def trim(text: str, limit: int) -> str:
     return text if len(text) <= limit else text[: limit - 1] + '…'
 
 
+def normalize_items(report_date: str, items):
+    if not isinstance(items, list) or not items:
+        append_log(report_date, '发送失败：行业资讯数据不是非空列表')
+        raise ValueError('行业资讯数据不是非空列表，禁止发送')
+    normalized = []
+    for idx, item in enumerate(items, 1):
+        if isinstance(item, dict):
+            normalized.append(item)
+            continue
+        append_log(report_date, f'发送失败：第 {idx} 条不是对象，类型={type(item).__name__}')
+        raise ValueError(f'行业资讯第 {idx} 条不是对象，禁止发送')
+    return normalized
+
+
 def build_presentation(report_date: str, items: list[dict]):
+    items = normalize_items(report_date, items)
     blocks = [
         {
             "type": "context",
@@ -83,6 +103,32 @@ def append_log(report_date: str, message: str):
         f.write(f'[{timestamp}] {message}\n')
 
 
+def validate_card_payload(report_date: str, presentation: dict):
+    if not isinstance(presentation, dict):
+        append_log(report_date, '发送失败：presentation 不是 dict')
+        raise ValueError('发送失败：presentation 必须是飞书卡片结构(dict)')
+    blocks = presentation.get('blocks')
+    if not isinstance(blocks, list) or not blocks:
+        append_log(report_date, '发送失败：presentation.blocks 缺失或为空')
+        raise ValueError('发送失败：缺少卡片 blocks，禁止回退普通文本发送')
+    title = presentation.get('title')
+    if not isinstance(title, str) or not title.strip():
+        append_log(report_date, '发送失败：presentation.title 缺失')
+        raise ValueError('发送失败：缺少卡片 title，禁止发送')
+
+
+def ensure_card_only_command(report_date: str, cmd: list[str]):
+    joined = ' '.join(cmd)
+    if '--presentation' not in cmd:
+        append_log(report_date, f'发送失败：命令未携带 --presentation：{joined}')
+        raise ValueError('发送失败：未检测到卡片参数 --presentation，禁止发送')
+    forbidden_flags = {'--message', '--text', '--markdown', '--md'}
+    bad = [flag for flag in forbidden_flags if flag in cmd]
+    if bad:
+        append_log(report_date, f'发送失败：检测到文本发送参数 {bad}：{joined}')
+        raise ValueError(f'发送失败：检测到普通文本发送参数 {bad}，禁止发送')
+
+
 def send_card(report_date: str, presentation: dict, dry_run: bool):
     payload = {
         "action": "send",
@@ -95,8 +141,14 @@ def send_card(report_date: str, presentation: dict, dry_run: bool):
         append_log(report_date, f'发送失败：目标非法，必须且只能是 {TARGET}')
         raise ValueError(f"发送目标非法，必须且只能是馨姐个人飞书: {TARGET}")
 
+    validate_card_payload(report_date, presentation)
+
+    append_log(report_date, STRICT_TEXT)
     append_log(report_date, f'开始发送飞书卡片，目标={TARGET}，dry_run={str(dry_run).lower()}')
     print(json.dumps(payload, ensure_ascii=False, indent=2))
+
+    payload_path = BASE_DIR / '.tmp_industry_card_payload.json'
+    payload_path.write_text(json.dumps(presentation, ensure_ascii=False), encoding='utf-8')
 
     cmd = [
         "openclaw", "message", "send",
@@ -105,12 +157,16 @@ def send_card(report_date: str, presentation: dict, dry_run: bool):
         "--presentation", json.dumps(presentation, ensure_ascii=False),
     ]
 
+    ensure_card_only_command(report_date, cmd)
+
     if dry_run:
         cmd.append("--dry-run")
 
-    result = subprocess.run(cmd, capture_output=True, text=True, check=False)
+    result = subprocess.run(cmd, capture_output=True, text=True, check=False, cwd=str(BASE_DIR))
     stdout = (result.stdout or '').strip()
     stderr = (result.stderr or '').strip()
+
+    payload_path.unlink(missing_ok=True)
 
     if stdout:
         print(stdout)
@@ -122,7 +178,7 @@ def send_card(report_date: str, presentation: dict, dry_run: bool):
         append_log(report_date, f'发送失败，exit_code={result.returncode}')
         raise SystemExit(result.returncode)
 
-    append_log(report_date, '发送完成')
+    append_log(report_date, '发送完成（卡片路径）')
     return 0
 
 

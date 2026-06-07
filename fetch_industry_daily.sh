@@ -38,6 +38,7 @@ if [ -f "$INDUSTRY_JSON" ]; then
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] 缺少卡片脚本，终止执行" >> "$LOG_FILE"
     exit 1
   fi
+  echo "[$(date '+%Y-%m-%d %H:%M:%S')] 执行卡片发送硬校验：仅允许馨姐个人飞书卡片，禁止普通文本" >> "$LOG_FILE"
   python3 "$CARD_SCRIPT" --date "$DATE" >> "$LOG_FILE" 2>&1 || exit 1
-  echo "[$(date '+%Y-%m-%d %H:%M:%S')] 卡片 payload 已生成；禁止回退普通文本发送" >> "$LOG_FILE"
+  echo "[$(date '+%Y-%m-%d %H:%M:%S')] 卡片发送完成；禁止回退普通文本发送" >> "$LOG_FILE"
 fi

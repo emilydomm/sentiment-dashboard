@@ -1,0 +1,21 @@
+[2026-06-06 17:48:11] 行业资讯发送硬约束：仅允许发送飞书卡片；目标必须且只能是 user:ou_dfa6d78ac7f1e08b474d766109b9fea7；禁止普通文本、禁止群聊、禁止过程说明。
+[2026-06-06 17:48:11] 开始发送飞书卡片，目标=user:ou_dfa6d78ac7f1e08b474d766109b9fea7，dry_run=true
+[2026-06-06 17:48:11] 发送报错: Traceback (most recent call last):
+  File "<string>", line 3, in <module>
+ModuleNotFoundError: No module named 'openclaw_runtime'
+[2026-06-06 17:48:11] 发送失败，exit_code=1
+[2026-06-06 17:48:24] 行业资讯发送硬约束：仅允许发送飞书卡片；目标必须且只能是 user:ou_dfa6d78ac7f1e08b474d766109b9fea7；禁止普通文本、禁止群聊、禁止过程说明。
+[2026-06-06 17:48:24] 开始发送飞书卡片，目标=user:ou_dfa6d78ac7f1e08b474d766109b9fea7，dry_run=true
+[2026-06-06 17:48:28] 发送返回: │
+◇  Config warnings ────────────────────────────────────────────────────────╮
+│                                                                          │
+│  - plugins.entries.feishu: plugin feishu: installed plugin package       │
+│    requires compiled runtime output for TypeScript entry index.ts:       │
+│    expected ./dist/index.js, ./dist/index.mjs, ./dist/index.cjs,         │
+│    index.js, index.mjs, index.cjs                                        │
+│  - plugins.entries.openviking: plugin disabled (disabled in config) but  │
+│    config is present                                                     │
+│                                                                          │
+├──────────────────────────────────────────────────────────────────────────╯
+✅ Sent via Feishu. Message ID: unknown
+[2026-06-06 17:48:28] 发送完成（卡片路径）
