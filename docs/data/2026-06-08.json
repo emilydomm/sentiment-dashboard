@@ -1,0 +1,42 @@
+[
+  {
+    "platform": "web",
+    "note_id": "web_20260605_lixiang_may_update",
+    "title": "理想超充站，5月上新速递来啦！",
+    "desc": "理想汽车官微6月5日发布5月超充网络更新，属于官方网络建设进展信息，反映理想超充站点仍在持续上新扩容。",
+    "author": "理想汽车",
+    "publish_date": "2026-06-05",
+    "url": "https://finance.sina.cn/2026-06-05/detail-iniakfhq8379851.d.html",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260515_l9_network_plan",
+    "title": "全新理想L9上市，理想汽车更新超充网络布局",
+    "desc": "5月15日发布会披露，理想已建成1300座高速超充站、贯通160条高速路线，且计划到2026年底把5C超充枪由约4100根翻倍到8300根，属于明确的网络扩张进展。",
+    "author": "中国证券报/东方财富",
+    "publish_date": "2026-05-15",
+    "url": "https://wap.eastmoney.com/a/202605153739179281.html",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260515_5c_guns_double",
+    "title": "理想汽车：将翻倍部署5C超充桩",
+    "desc": "新浪财经5月15日快讯称，理想已建成1300座高速超充站，计划至2026年底将5C超充枪数量翻倍至8300根，体现官方对补能网络加码。",
+    "author": "新浪财经",
+    "publish_date": "2026-05-15",
+    "url": "https://finance.sina.com.cn/7x24/2026-05-15/doc-inhxyimm3352677.shtml",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260605_blackcat_occupy_fee",
+    "title": "理想快充乱收取占位费",
+    "desc": "黑猫投诉页面显示，6月5日有用户投诉在北京红星美凯龙北五环店理想超充站充电结束后，在站内无排队车辆情况下被收取200元占位费，质疑收费公示和处理方式不合理。",
+    "author": "黑猫投诉用户",
+    "publish_date": "2026-06-05",
+    "url": "https://jl.tousu.sina.com.cn/company/view/?couid=6001272153",
+    "sentiment": "negative"
+  }
+]
