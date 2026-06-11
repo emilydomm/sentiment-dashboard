@@ -14,6 +14,8 @@ import subprocess
 from datetime import datetime
 from pathlib import Path
 
+
+
 TARGET = "user:ou_dfa6d78ac7f1e08b474d766109b9fea7"
 DASHBOARD_URL = "https://emilydomm.github.io/sentiment-dashboard/"
 BASE_DIR = Path('/workspace/sentiment-dashboard')
@@ -55,43 +57,52 @@ def normalize_items(report_date: str, items):
     return normalized
 
 
-def build_presentation(report_date: str, items: list[dict]):
+def build_feishu_card(report_date: str, items: list[dict]):
     items = normalize_items(report_date, items)
-    blocks = [
+    elements = [
         {
-            "type": "context",
-            "text": f"📅 {report_date}｜共 {len(items)} 条｜仅发送最终资讯与看板链接"
+            "tag": "markdown",
+            "content": f"📅 {report_date}｜共 {len(items)} 条｜仅发送最终资讯与看板链接"
         },
-        {"type": "divider"},
+        {"tag": "hr"},
     ]
 
     for idx, item in enumerate(items[:8], 1):
-        keyword = item.get('keyword') or '行业资讯'
+        keyword = trim(item.get('keyword') or '行业资讯', 20)
         title = trim(item.get('title') or '未命名资讯', 72)
         desc = trim(item.get('desc') or '', 100)
         publish_date = item.get('publish_date') or '未知日期'
         url = item.get('url') or DASHBOARD_URL
-        line = f"{idx}. 【{keyword}】{title}\n{publish_date}｜{desc}\n原文：{url}"
-        blocks.append({"type": "text", "text": line})
+        text = (
+            f"**{idx}. 【{keyword}】{title}**\n"
+            f"{publish_date}｜{desc}\n"
+            f"[原文链接]({url})"
+        )
+        elements.append({"tag": "markdown", "content": text})
 
-    blocks.extend([
-        {"type": "divider"},
+    elements.extend([
+        {"tag": "hr"},
         {
-            "type": "buttons",
-            "buttons": [
+            "tag": "action",
+            "actions": [
                 {
-                    "label": "查看看板",
-                    "url": DASHBOARD_URL,
-                    "style": "primary"
+                    "tag": "button",
+                    "text": {"tag": "plain_text", "content": "查看看板"},
+                    "type": "primary",
+                    "multi_url": {"url": DASHBOARD_URL}
                 }
             ]
         }
     ])
 
     return {
-        "title": f"📰 今日行业资讯｜{report_date}",
-        "tone": "info",
-        "blocks": blocks,
+        "schema": "2.0",
+        "config": {"width_mode": "fill"},
+        "header": {
+            "title": {"tag": "plain_text", "content": f"📰 今日行业资讯｜{report_date}"},
+            "template": "blue"
+        },
+        "body": {"elements": elements}
     }
 
 
@@ -103,58 +114,67 @@ def append_log(report_date: str, message: str):
         f.write(f'[{timestamp}] {message}\n')
 
 
-def validate_card_payload(report_date: str, presentation: dict):
-    if not isinstance(presentation, dict):
-        append_log(report_date, '发送失败：presentation 不是 dict')
-        raise ValueError('发送失败：presentation 必须是飞书卡片结构(dict)')
-    blocks = presentation.get('blocks')
-    if not isinstance(blocks, list) or not blocks:
-        append_log(report_date, '发送失败：presentation.blocks 缺失或为空')
-        raise ValueError('发送失败：缺少卡片 blocks，禁止回退普通文本发送')
-    title = presentation.get('title')
-    if not isinstance(title, str) or not title.strip():
-        append_log(report_date, '发送失败：presentation.title 缺失')
-        raise ValueError('发送失败：缺少卡片 title，禁止发送')
+def validate_card_payload(report_date: str, card: dict):
+    if not isinstance(card, dict):
+        append_log(report_date, '发送失败：card 不是 dict')
+        raise ValueError('发送失败：card 必须是飞书 interactive card 结构(dict)')
+    if card.get('schema') != '2.0':
+        append_log(report_date, f"发送失败：card.schema 非法：{card.get('schema')}")
+        raise ValueError('发送失败：card.schema 必须为 2.0')
+    header = card.get('header')
+    if not isinstance(header, dict) or not isinstance(header.get('title'), dict):
+        append_log(report_date, '发送失败：card.header/title 缺失')
+        raise ValueError('发送失败：card.header/title 缺失')
+    body = card.get('body')
+    elements = body.get('elements') if isinstance(body, dict) else None
+    if not isinstance(elements, list) or not elements:
+        append_log(report_date, '发送失败：card.body.elements 缺失或为空')
+        raise ValueError('发送失败：card.body.elements 缺失或为空')
+    has_action = any(isinstance(el, dict) and el.get('tag') == 'action' for el in elements)
+    if not has_action:
+        append_log(report_date, '发送失败：card 缺少 action 按钮区')
+        raise ValueError('发送失败：card 缺少 action 按钮区')
 
 
 def ensure_card_only_command(report_date: str, cmd: list[str]):
     joined = ' '.join(cmd)
-    if '--presentation' not in cmd:
-        append_log(report_date, f'发送失败：命令未携带 --presentation：{joined}')
-        raise ValueError('发送失败：未检测到卡片参数 --presentation，禁止发送')
-    forbidden_flags = {'--message', '--text', '--markdown', '--md'}
+    if '--card' not in cmd:
+        append_log(report_date, f'发送失败：命令未携带 --card：{joined}')
+        raise ValueError('发送失败：未检测到原生卡片参数 --card，禁止发送')
+    forbidden_flags = {'--message', '--text', '--markdown', '--md', '--presentation'}
     bad = [flag for flag in forbidden_flags if flag in cmd]
     if bad:
-        append_log(report_date, f'发送失败：检测到文本发送参数 {bad}：{joined}')
-        raise ValueError(f'发送失败：检测到普通文本发送参数 {bad}，禁止发送')
+        append_log(report_date, f'发送失败：检测到非原生卡片参数 {bad}：{joined}')
+        raise ValueError(f'发送失败：检测到非原生卡片发送参数 {bad}，禁止发送')
 
 
-def send_card(report_date: str, presentation: dict, dry_run: bool):
+def send_card(report_date: str, card: dict, dry_run: bool):
     payload = {
         "action": "send",
         "channel": "feishu",
         "target": TARGET,
-        "presentation": presentation,
+        "card": card,
     }
+
+    if 'message' in payload or 'text' in payload or 'markdown' in payload or 'presentation' in payload:
+        append_log(report_date, '发送失败：payload 出现普通文本或通用 presentation 字段')
+        raise ValueError('发送失败：payload 出现普通文本或通用 presentation 字段，禁止发送')
 
     if payload["target"] != TARGET or not payload["target"].startswith("user:"):
         append_log(report_date, f'发送失败：目标非法，必须且只能是 {TARGET}')
         raise ValueError(f"发送目标非法，必须且只能是馨姐个人飞书: {TARGET}")
 
-    validate_card_payload(report_date, presentation)
+    validate_card_payload(report_date, card)
 
     append_log(report_date, STRICT_TEXT)
-    append_log(report_date, f'开始发送飞书卡片，目标={TARGET}，dry_run={str(dry_run).lower()}')
+    append_log(report_date, f'开始发送飞书原生 interactive card，目标={TARGET}，dry_run={str(dry_run).lower()}')
     print(json.dumps(payload, ensure_ascii=False, indent=2))
-
-    payload_path = BASE_DIR / '.tmp_industry_card_payload.json'
-    payload_path.write_text(json.dumps(presentation, ensure_ascii=False), encoding='utf-8')
 
     cmd = [
         "openclaw", "message", "send",
         "--channel", "feishu",
         "--target", TARGET,
-        "--presentation", json.dumps(presentation, ensure_ascii=False),
+        "--card", json.dumps(card, ensure_ascii=False),
     ]
 
     ensure_card_only_command(report_date, cmd)
@@ -162,11 +182,10 @@ def send_card(report_date: str, presentation: dict, dry_run: bool):
     if dry_run:
         cmd.append("--dry-run")
 
+    append_log(report_date, '发送前自检通过：仅最终资讯、仅原生 interactive card、仅个人飞书目标')
     result = subprocess.run(cmd, capture_output=True, text=True, check=False, cwd=str(BASE_DIR))
     stdout = (result.stdout or '').strip()
     stderr = (result.stderr or '').strip()
-
-    payload_path.unlink(missing_ok=True)
 
     if stdout:
         print(stdout)
@@ -189,8 +208,8 @@ def main():
     args = parser.parse_args()
 
     _, items = load_items(args.date)
-    presentation = build_presentation(args.date, items)
-    return send_card(args.date, presentation, args.dry_run)
+    card = build_feishu_card(args.date, items)
+    return send_card(args.date, card, args.dry_run)
 
 
 if __name__ == '__main__':
