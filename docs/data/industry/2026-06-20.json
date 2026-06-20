@@ -1,0 +1,79 @@
+[
+  {
+    "platform": "web",
+    "note_id": "https://m.toutiao.com/article/7653024556503859762/",
+    "title": "理想分线：L系坚守增程i系纯电，明确双线战略",
+    "desc": "2026年6月19日，理想官方明确回应：L系列将专注深耕增程路线，纯电SUV的担子完全交给i系列。i系列1-5月累计销量9.89万辆，占总销量67%，理想的增长已从增程彻底切换到纯电。i6起售价24.98万元，连续三个月交付破2万辆。",
+    "author": "行业资讯",
+    "publish_date": "2026-06-19",
+    "url": "https://m.toutiao.com/article/7653024556503859762/",
+    "sentiment": "neutral",
+    "keyword": "增程"
+  },
+  {
+    "platform": "web",
+    "note_id": "https://m.toutiao.com/article/7653015824692740644/",
+    "title": "理想纯电SUV全归i系列，避免内部竞争",
+    "desc": "理想再次重申产品线划分：L系列只做增程，纯电SUV全归i系列。两者不是同一款车的不同动力版本，而是两条独立产品序列，分别服务无焦虑长途和极致城市通勤两类用户。L8城市快速路纯电续航测试已突破400公里。",
+    "author": "行业资讯",
+    "publish_date": "2026-06-19",
+    "url": "https://m.toutiao.com/article/7653015824692740644/",
+    "sentiment": "neutral",
+    "keyword": "纯电"
+  },
+  {
+    "platform": "web",
+    "note_id": "https://m.toutiao.com/a7648797852759507490/",
+    "title": "国产轴向磁通电机实现规模化量产，打破两百年技术空白",
+    "desc": "2026年6月5日，盘毂动力联合中科院宁波材料所正式发布国产高性能轴向磁通电机，实现全球首次规模化量产、万台级交付。该技术不用增大电池即可实现续航大幅提升、能耗大幅下降、车身重量大幅减轻，终结了国外企业两百年的技术垄断。",
+    "author": "行业资讯",
+    "publish_date": "2026-06-13",
+    "url": "https://m.toutiao.com/a7648797852759507490/",
+    "sentiment": "positive",
+    "keyword": "电机"
+  },
+  {
+    "platform": "web",
+    "note_id": "https://m.toutiao.com/w/1867659143758025/",
+    "title": "2026年6月重点新车：比亚迪大唐EV搭载1000V平台和10C兆瓦闪充",
+    "desc": "比亚迪大唐EV 6月中旬上市，定位王朝旗舰D级SUV，预售25-32万元。核心搭载全域1000V高压架构、10C兆瓦级闪充（5分钟10%-70%）、第二代刀片电池135kWh、云辇-A空气悬架+后轮转向，续航950km，零百3.9秒。",
+    "author": "行业资讯",
+    "publish_date": "2026-06-15",
+    "url": "https://m.toutiao.com/w/1867659143758025/",
+    "sentiment": "positive",
+    "keyword": "充电"
+  },
+  {
+    "platform": "web",
+    "note_id": "https://m.toutiao.com/a7646697730747679272/",
+    "title": "理想L8预计6月底发布，乐道L60新款搭载900V平台",
+    "desc": "2026年6月十余款自主新车密集上市。全新理想L8预计6月底发布并启动交付。乐道L60新款6月11日上市，新增激光雷达，搭载全域900V高压平台（3分钟换电+25分钟快充），续航740km，蔚来5nm神玑NX9031芯片。",
+    "author": "行业资讯",
+    "publish_date": "2026-06-16",
+    "url": "https://m.toutiao.com/a7646697730747679272/",
+    "sentiment": "neutral",
+    "keyword": "三电"
+  },
+  {
+    "platform": "web",
+    "note_id": "https://m.toutiao.com/a7634357934679491126/",
+    "title": "2026新能源汽车进入油电同速新纪元：兆瓦闪充落地",
+    "desc": "2026年磷酸铁锂能量密度突破190Wh/kg，800V高压平台普及，比亚迪兆瓦闪充技术实现1秒≈2公里补体验（10%-70%仅5分钟），2026年将建成4000座自营闪充站。半固态电池量产落地，钠离子电池加速渗透。",
+    "author": "行业资讯",
+    "publish_date": "2026-06-14",
+    "url": "https://m.toutiao.com/a7634357934679491126/",
+    "sentiment": "positive",
+    "keyword": "充电"
+  },
+  {
+    "platform": "web",
+    "note_id": "https://news.m.yiche.com/info/108968530.html",
+    "title": "新款理想L6/L7搭载800V+5C超充，下半年上市",
+    "desc": "新款理想L6和L7路试谍照曝光，正在进行冬季测试接近量产。2026年全系升级800V高压平台与5C超充电池，10分钟补能约500公里。理想规划2026年建成约4800座超充站，高速桩占比超35%。售价大概率与现款保持一致。",
+    "author": "行业资讯",
+    "publish_date": "2026-06-17",
+    "url": "https://news.m.yiche.com/info/108968530.html",
+    "sentiment": "positive",
+    "keyword": "超充"
+  }
+]
