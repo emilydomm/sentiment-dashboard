@@ -1,0 +1,90 @@
+[
+  {
+    "platform": "web",
+    "note_id": "web_20260627_ithome_auto_station",
+    "title": "充电全程不用下车：理想行业首座全自动充电站落地，5C超充桩已突破5000根",
+    "desc": "IT之家6月27日报道，理想汽车Q2超充报告显示累计充电量突破10亿度，5C超充桩突破5000根，全5C站超600座。行业首座全车位全自动充电站上线，机械臂自动插拔枪，车主全程无需下车。Q3将通过OTA向ADMax用户开放。",
+    "author": "IT之家",
+    "ip_location": "",
+    "publish_date": "2026-06-27",
+    "url": "https://www.ithome.com/0/969/518.htm",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260625_kkj_auto_station",
+    "title": "充电全程不用下车 自动插拔枪！理想自动充电站首站落地",
+    "desc": "快科技6月25日报道，理想发布2026年Q2超充报告，累计充电量突破10亿度，服务超3900万次。5C超充桩突破5000根，覆盖160条高速、10万公里。行业首座全自动充电站上线，机械臂替代人工插拔枪，解决雨雪低温充电痛点。",
+    "author": "快科技",
+    "ip_location": "河南",
+    "publish_date": "2026-06-25",
+    "url": "https://m.163.com/dy/article/L09O7T2R0511CPVM.html",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260625_cnmo_q2_report",
+    "title": "理想超充2026年Q2季报发布：累计充电量突破10亿度",
+    "desc": "CNMO科技6月25日报道，理想超充网络全国已有4092座超充站、22573根超充桩，覆盖31省290城，高速站1330座、城市站2762座。五一期间单日充电量突破600万度创历史新高，高速充电量占全国高速充电总量超15%。",
+    "author": "CNMO科技",
+    "ip_location": "北京",
+    "publish_date": "2026-06-25",
+    "url": "https://chejiahao.autohome.com.cn/info/25802590",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260625_sohu_q2_achievements",
+    "title": "理想超充Q2成绩亮眼：充电量破10亿度 全自动站开启'无感充'新篇",
+    "desc": "ITBear/搜狐6月25日报道，理想超充Q2报告亮点：累计充电量超10亿度，5C桩突破5000根，全5C站超600座。全自动充电站由机械臂完成插枪、充电、拔枪全流程，用户无需下车。同时与支付宝、京东、高德地图达成合作拓展生态。",
+    "author": "ITBear科技资讯",
+    "ip_location": "",
+    "publish_date": "2026-06-25",
+    "url": "https://m.itbear.com.cn/html/2026-06/1412823.html",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260625_toutiao_competition",
+    "title": "4088座超充站后，理想5C+增程组合如何出牌？",
+    "desc": "今日头条分析文章指出，理想手握4088座超充站入局补能市场，与比亚迪闪充、宁德时代换电形成三方竞争。理想策略是深耕高速路网，1300座高速站贯通160条高速，占高速总里程一半以上。计划年底5C超充枪翻倍至8300根。",
+    "author": "今日头条",
+    "ip_location": "",
+    "publish_date": "2026-06-25",
+    "url": "https://m.toutiao.com/a7654109444258726452/",
+    "sentiment": "neutral"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260625_sina_eco_partners",
+    "title": "理想超充携手支付宝、京东、高德地图拓展充电服务生态",
+    "desc": "新浪财经6月25日报道，理想超充支付宝小程序正式上线，专属充电卡在京东商城开售，高德地图全面支持理想超充站点扫码即充功能。多平台合作让用户补能更便捷实惠。",
+    "author": "新浪财经",
+    "ip_location": "",
+    "publish_date": "2026-06-25",
+    "url": "https://finance.sina.cn/tech/2026-06-25/detail-inierihq1025110.d.html",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260625_zol_q2_summary",
+    "title": "理想发布2026年Q2超充报告：10亿度充电量+行业首座全自动充电站落地",
+    "desc": "中关村在线6月25日报道，理想Q2超充报告核心数据：累计充电量突破10亿度，5C桩逾5000根，覆盖160条高速公路。全自动充电站实现车辆全程无需下车完成补能，机械臂自主完成插枪充电，Q3面向ADMax用户开放。",
+    "author": "中关村在线",
+    "ip_location": "",
+    "publish_date": "2026-06-25",
+    "url": "https://m.zol.com.cn/article/12049820.html",
+    "sentiment": "positive"
+  },
+  {
+    "platform": "web",
+    "note_id": "web_20260625_ifeng_auto_station",
+    "title": "理想超充Q2报告：首座全自动充电站上线 全程不下车完成补能",
+    "desc": "凤凰网科技6月25日报道，理想发布2026年Q2超充报告，累计充电量突破10亿度，5C超充桩突破5000根，覆盖160条高速、10万公里高速里程。同步上线行业首座全车位全自动充电站，标志着'无感充'时代开启。",
+    "author": "凤凰网科技",
+    "ip_location": "",
+    "publish_date": "2026-06-25",
+    "url": "https://tech.ifeng.com/c/8uFQRIObFJC",
+    "sentiment": "positive"
+  }
+]
