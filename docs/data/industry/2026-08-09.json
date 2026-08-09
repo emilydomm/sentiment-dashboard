@@ -1,72 +1,58 @@
 [
   {
-    "title": "阿维塔07L正式上市，800V超充+华为乾崑ADS 5.0智驾",
-    "keywords": ["800V", "超充", "智驾", "电池", "底盘"],
-    "publish_date": "2026-08-08",
-    "summary": "阿维塔07L正式上市，售价22.99-27.99万元。全系标配800V碳化硅高压快充平台、宁德时代5C神行电池（89.33kWh），CLTC续航最高725km。搭载华为乾崑ADS 5.0全场景智驾系统，Ultra三电机性能版综合功率712kW，高配搭载魔毯空气悬架+CDC电磁减振。",
-    "url": "https://mparticle.uc.cn/article.html?uc_param_str=frdnsnpfvecpntnwprdssskt#!wm_aid=951a4978fd9148f382b6f3b34ea7abf9!!wm_id=46d6f7befe85486d9d29e0b6a7a644ab"
-  },
-  {
-    "title": "ICV·2026银川国际智能汽车展开幕，近百款新车亮相",
-    "keywords": ["车展", "固态电池", "800V", "三电", "智驾"],
-    "publish_date": "2026-08-02",
-    "summary": "ICV·2026银川国际智能汽车展在宁夏国际会展中心开放，比亚迪、蔚来、小鹏、理想、极氪、问界及特斯拉等数十品牌参展，集中展出近100款量产及概念车型，涵盖L3级自动驾驶、800V高压快充平台新车、固态电池量产样车及光储充一体化充电解决方案。首日入场观众超3.2万人次。",
-    "url": "https://m.sohu.com/a/1057889274_122066679/"
-  },
-  {
-    "title": "东风新能源L系三车首发，覆盖纯电/插混/增程三条路线",
-    "keywords": ["增程", "插混", "纯电", "800V", "智驾", "电池"],
-    "publish_date": "2026-08-06",
-    "summary": "8月5日东风新能源L系风神L8Y、L8+、L9三款车型首发，覆盖纯电、插混、增程三种动力，8月起陆续上市。L8+首搭天元T800智驾系统，搭载4nm ThorU 700TOPS芯片，融合Momenta R7世界模型；L9纯电版搭载全栈800V 4C超充，车长5米轴距3米。",
-    "url": "https://chejiahao.autohome.com.cn/info/26134926"
-  },
-  {
-    "title": "鸿蒙智行8月5日发布会：尊界V800/V680上市，享界G9开启预订",
-    "keywords": ["发布会", "上市", "智驾", "激光雷达"],
-    "publish_date": "2026-08-05",
-    "summary": "鸿蒙智行于8月5日举办新品发布会，尊界V800、V680百万级豪华MPV正式上市，搭载六颗激光雷达、乾崑ADS高阶智驾，预售23天订单已破万。享界G9科技豪华硬派SUV开启预订，三季度正式上市。",
-    "url": "https://m.toutiao.com/article/7667521334528541224/"
-  },
-  {
-    "title": "小米龙甲电池首次亮相，选择欣旺达和中创新航作为供应商",
-    "keywords": ["电池", "小米"],
-    "publish_date": "2026-08-05",
-    "summary": "小米在澎程犀利产品上首次亮出龙甲电池品牌。小米深度参与电芯设计和电池包全流程质量管控，BMU、BDU和CMU独立空间布局，BDU采用独特液冷设计。供应商从宁德时代/比亚迪切换为欣旺达和中创新航。",
-    "url": "http://finance.sina.com.cn/cj/2026-08-05/doc-inimfmyv1586632.shtml"
-  },
-  {
-    "title": "上汽通用合资续约20年，聚焦电动化转型与本土化研发",
-    "keywords": ["电池", "电动化"],
-    "publish_date": "2026-08-05",
-    "summary": "8月5日上汽集团与通用汽车在上海签署合资续约协议，将上汽通用合资期限延长20年至2047年。双方明确继续在技术研发、供应链和全球市场资源层面给予支持，重点聚焦电动化转型、本土化研发能力建设及海外业务拓展。",
-    "url": "http://finance.sina.com.cn/tech/roll/2026-08-05/doc-inimfshi3611624.shtml"
-  },
-  {
-    "title": "2026年800V高压平台加速下沉，10-15万级市场普及超快充",
-    "keywords": ["800V", "超充", "充电", "三电", "能耗"],
-    "publish_date": "2026-08-05",
-    "summary": "800V高压平台在2026年加速普及，零跑B01/B10、吉利银河星舰7 EV、长安启源A06等已将800V价格线推进到8.99-12.58万元区间。比亚迪宋Ultra EV实现10%-70%仅5分钟闪充，极狐阿尔法S5 5C超充30%-80%约9分钟。",
-    "url": "https://k.sina.cn/article_7879996679_1d5af350706803512y.html"
-  },
-  {
-    "title": "哈弗猛龙2026款定档8月19日上市，第二代Hi4+200km纯电续航",
-    "keywords": ["增程", "插混", "电池", "上市"],
-    "publish_date": "2026-08-06",
-    "summary": "2026款哈弗猛龙PHEV将于8月19日上市，搭载全新1.5T+第二代Hi4技术，纯电续航200公里，5.9秒破百，新增35.43kWh电池包与五种潮流配色，内饰升级怀挡+14.6英寸大屏。",
-    "url": "https://m.zol.com.cn/article/10332565.html"
-  },
-  {
-    "title": "理想L9 Livis搭载800V全主动悬架+全线控底盘",
-    "keywords": ["底盘", "悬架", "增程", "三电", "电池"],
-    "publish_date": "2026-08-05",
-    "summary": "理想L9 Livis搭载第三代1.5T低油耗增程器+72.7kWh大容量电池，CLTC纯电续航420km。车身之下落地800V全主动悬架系统，支持毫秒级响应和单轮抬举；全线控底盘结合EMB全电控机械制动+线控转向+后轮转向，实现动态操控全覆盖。",
-    "url": "https://m.dongchedi.com/article/7610714474445750808"
-  },
-  {
-    "title": "2026年国内新能源渗透率突破55%，行业进入技术价值战阶段",
-    "keywords": ["三电", "电池", "智驾", "能耗"],
+    "title": "我国充电基础设施总数突破2300万个",
+    "url": "https://www.cqn.com.cn/auto/content/2026-08/03/content_9166791.htm",
     "publish_date": "2026-08-03",
-    "summary": "2026年国内新能源渗透率稳定突破55%，行业彻底告别补贴红利，进入三电自研、智能驾驶、电池安全、补能生态、全产业链成本控制五大硬核赛道竞争。比亚迪三电100%自研，理想垄断家庭增程赛道，全固态电池3-5年逐步量产，800V/1000V高压平台全面普及。",
-    "url": "https://m.toutiao.com/article/7658561205501608494/"
+    "keyword": "充电技术",
+    "desc": "国家能源局披露截至6月底全国电动汽车充电基础设施总数达2305.7万个，大功率充电枪超过18万个，县域覆盖率升至98.61%。",
+    "image": "https://m.cqn.com.cn/auto/img/2026-08/03/9166791_412e3c27-ef30-44ec-a0c1-0fe00156dad5.jpg.2"
+  },
+  {
+    "title": "首部L3、L4级自动驾驶强制国标发布",
+    "url": "http://finance.sina.com.cn/jjxw/2026-08-06/doc-inimmazc0423251.shtml",
+    "publish_date": "2026-08-06",
+    "keyword": "智能驾驶",
+    "desc": "《智能网联汽车 自动驾驶系统安全要求》GB 44721—2026发布，明确L3、L4自动驾驶安全准入基线，推动行业从功能竞争转向合规安全竞争。",
+    "image": "https://n.sinaimg.cn/finance/c30320b4/20210712/wx_poster_finance1.png"
+  },
+  {
+    "title": "蔚来首批第五代换电站上线",
+    "url": "https://finance.sina.com.cn/roll/2026-08-07/doc-inimnzsi3124515.shtml",
+    "publish_date": "2026-08-07",
+    "keyword": "充电技术",
+    "desc": "蔚来第4000座换电站暨首座第五代换电站落成，兼容蔚来、乐道和firefly萤火虫全系车型，支持3分钟换电与电池健康扫描。",
+    "image": "https://n.sinaimg.cn/finance/c30320b4/20210712/wx_poster_finance1.png"
+  },
+  {
+    "title": "江淮新能源EZ6全球上市",
+    "url": "https://m.163.com/dy/article/L3P13PTT05476ZPQ.html",
+    "publish_date": "2026-08-07",
+    "keyword": "新车发布",
+    "desc": "江淮新能源EZ6在合肥正式上市，提供针对冷链、长途、极寒和重载场景的多版本配置，并支持充电倍率可调与双枪智能分流。",
+    "image": "https://nimg.ws.126.net/?url=http%3A%2F%2Fdingyue.ws.126.net%2F2026%2F0807%2F8f7da58bj00tjenr5002kd000rs00ikm.jpg&thumbnail=750x2147483647&quality=75&type=jpg"
+  },
+  {
+    "title": "阿维塔07L正式上市前夕公布核心配置",
+    "url": "https://finance.sina.com.cn/roll/2026-08-02/doc-inikvxrt0144076.shtml",
+    "publish_date": "2026-08-02",
+    "keyword": "新车发布",
+    "desc": "阿维塔07L在8月8日上市前披露核心卖点，覆盖800V高压平台、华为乾崑智驾和最高725公里CLTC续航，瞄准25万元级大五座SUV市场。",
+    "image": "https://n.sinaimg.cn/finance/c30320b4/20210712/wx_poster_finance1.png"
+  },
+  {
+    "title": "比亚迪大汉将于8月成都车展首秀",
+    "url": "https://www.cqn.com.cn/auto/content/2026-08/03/content_9166791.htm",
+    "publish_date": "2026-08-03",
+    "keyword": "新车发布",
+    "desc": "比亚迪王朝网9系旗舰轿车大汉确认将在8月成都车展亮相，纯电版最高CLTC续航1008公里，同时提供插混版本。",
+    "image": "https://m.cqn.com.cn/auto/img/2026-08/03/9166791_412e3c27-ef30-44ec-a0c1-0fe00156dad5.jpg.2"
+  },
+  {
+    "title": "小米澎程系列开启预售",
+    "url": "https://www.cqn.com.cn/auto/content/2026-08/03/content_9166791.htm",
+    "publish_date": "2026-08-03",
+    "keyword": "新车发布",
+    "desc": "小米汽车澎程N70 Max和N90 Max于7月30日开启预售，采用昆仑超级增程系统，纯电续航最高分别达到505公里和464公里。",
+    "image": "https://m.cqn.com.cn/auto/img/2026-08/03/9166791_412e3c27-ef30-44ec-a0c1-0fe00156dad5.jpg.2"
   }
 ]
