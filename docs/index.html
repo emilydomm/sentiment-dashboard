@@ -66,6 +66,11 @@ window.addEventListener('DOMContentLoaded', () => {
   .calendar-card { background:#fff; border:1px solid #eceff3; border-radius:20px; padding:14px 16px 12px; box-shadow:inset 0 1px 0 rgba(255,255,255,.7); }
   .industry-main { min-width:0; display:flex; flex-direction:column; gap:16px; }
   .industry-main-grid { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:16px; align-items:start; }
+  .industry-section-title { font-size:18px; font-weight:700; color:#1a1a2e; padding:10px 0 4px; display:flex; align-items:center; gap:8px; border-bottom:2px solid #f0f2f5; margin-bottom:14px; }
+  .industry-section-title .section-badge { font-size:12px; font-weight:600; padding:3px 10px; border-radius:999px; }
+  .section-badge-li { background:#fef3c7; color:#92400e; }
+  .section-badge-others { background:#e0e7ff; color:#3730a3; }
+  .industry-section-list { display:flex; flex-direction:column; gap:16px; margin-bottom:20px; }
   .industry-search-wrap { min-width:0; display:flex; align-items:flex-start; justify-content:flex-start; }
   .industry-search-wrap input { width:100%; padding:12px 16px; border:1px solid #d9e0ea; border-radius:999px; font-size:14px; outline:none; background:#fff; }
   .industry-search-wrap input:focus { border-color:#0f3460; box-shadow:0 0 0 4px rgba(15,52,96,.08); }
@@ -309,6 +314,8 @@ window.addEventListener('DOMContentLoaded', () => {
   </aside>
 
   <section class="industry-main">
+    <div id="industryLiContainer" class="industry-section-list"></div>
+    <div id="industryOthersContainer" class="industry-section-list"></div>
     <div id="industryCardContainer" class="industry-card-list">
       <div class="loading">加载中...</div>
     </div>
@@ -1111,21 +1118,20 @@ async function loadIndustryDate(date) {
   }
 }
 
-function renderIndustryCards() {
-  const keyword = document.getElementById('industrySearchInput').value.trim().toLowerCase();
-  let filtered = industryData.filter(item => {
-    if (keyword && !item.title.toLowerCase().includes(keyword) && !(item.desc||'').toLowerCase().includes(keyword) && !(item.keyword||'').toLowerCase().includes(keyword)) return false;
-    return true;
-  });
+function classifyIndustryBrand(item) {
+  if (item.brand) return item.brand;
+  const title = (item.title || '');
+  const desc = (item.desc || '');
+  const url = (item.url || '').toLowerCase();
+  const combined = (title + ' ' + desc + ' ' + url).toLowerCase();
+  // 理想汽车相关
+  if (title.includes('理想') || combined.includes('li auto')) return '理想汽车';
+  // 其他品牌
+  return '其他品牌';
+}
 
-  document.getElementById('industryTotalCount').textContent = filtered.length;
-
-  if (filtered.length === 0) {
-    document.getElementById('industryCardContainer').innerHTML = '<div class="empty">没有符合条件的内容</div>';
-    return;
-  }
-
-  // 行业资讯卡片布局
+function makeIndustryCardHTML(item) {
+  const kw = item.keyword || '行业资讯';
   const kwColorMap = {
     '电池技术':   {bg:'#fff7ed', color:'#c2410c', dot:'#f97316'},
     '充电技术':   {bg:'#eff6ff', color:'#1d4ed8', dot:'#3b82f6'},
@@ -1137,64 +1143,93 @@ function renderIndustryCards() {
     '悬架技术':   {bg:'#f0fdf4', color:'#166534', dot:'#16a34a'},
     '能耗表现':   {bg:'#f0fdfa', color:'#0f766e', dot:'#14b8a6'},
   };
+  const kwStyle = kwColorMap[kw] || {bg:'#f0f8ff', color:'#0369a1', dot:'#3b82f6'};
 
-  const cards = filtered.map(item => {
-    const kw = item.keyword || '行业资讯';
-    const kwStyle = kwColorMap[kw] || {bg:'#f0f8ff', color:'#0369a1', dot:'#3b82f6'};
+  return `
+    <article style="
+      background:white;
+      border-radius:18px;
+      padding:14px 18px;
+      box-shadow:0 2px 10px rgba(0,0,0,.06);
+      border-left:4px solid ${kwStyle.dot};
+      transition:box-shadow .2s, transform .15s;
+      cursor:default;
+    " onmouseenter="this.style.boxShadow='0 8px 24px rgba(0,0,0,.10)';this.style.transform='translateY(-1px)'"
+       onmouseleave="this.style.boxShadow='0 2px 10px rgba(0,0,0,.06)';this.style.transform='translateY(0)'">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
+        <span style="
+          display:inline-block;
+          background:${kwStyle.bg};
+          color:${kwStyle.color};
+          font-size:11px;
+          font-weight:700;
+          padding:3px 10px;
+          border-radius:20px;
+          white-space:nowrap;
+          letter-spacing:.3px;
+        ">${kw}</span>
+        <span style="font-size:11px;color:#bbb">📅 ${item.publish_date}</span>
+      </div>
+      <div style="font-size:16px;font-weight:600;line-height:1.45;margin-bottom:8px">
+        <a href="${item.url}" target="_blank" style="color:#1a1a2e;text-decoration:none"
+           onmouseenter="this.style.color='#0f3460'" onmouseleave="this.style.color='#1a1a2e'">${item.title}</a>
+      </div>
+      ${item.desc ? `<div style="font-size:13px;color:#666;line-height:1.65;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">${item.desc}</div>` : ''}
+    </article>`;
+}
 
-    let imgSrc = item.image || '';
-    if (imgSrc.startsWith('//')) imgSrc = 'https:' + imgSrc;
-    const badPatterns = ['logo','icon','avatar','placeholder','default','sprite','blank','searchbox','/gcp/','qrcode','watermark','/brand/','favicon'];
-    const validImg = imgSrc && imgSrc.startsWith('http') && !badPatterns.some(p => imgSrc.toLowerCase().includes(p));
-
-    return `
-      <article style="
-        background:white;
-        border-radius:18px;
-        padding:14px 18px;
-        box-shadow:0 2px 10px rgba(0,0,0,.06);
-        border-left:4px solid ${kwStyle.dot};
-        transition:box-shadow .2s, transform .15s;
-        cursor:default;
-        min-height:${filtered.length <= 4 ? 164 : 150}px;
-      " onmouseenter="this.style.boxShadow='0 8px 24px rgba(0,0,0,.10)';this.style.transform='translateY(-1px)'"
-         onmouseleave="this.style.boxShadow='0 2px 10px rgba(0,0,0,.06)';this.style.transform='translateY(0)'">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
-          <span style="
-            display:inline-block;
-            background:${kwStyle.bg};
-            color:${kwStyle.color};
-            font-size:11px;
-            font-weight:700;
-            padding:3px 10px;
-            border-radius:20px;
-            white-space:nowrap;
-            letter-spacing:.3px;
-          ">${kw}</span>
-          <span style="font-size:11px;color:#bbb">📅 ${item.publish_date}</span>
-        </div>
-        <div style="font-size:16px;font-weight:600;line-height:1.45;margin-bottom:8px">
-          <a href="${item.url}" target="_blank" style="color:#1a1a2e;text-decoration:none"
-             onmouseenter="this.style.color='#0f3460'" onmouseleave="this.style.color='#1a1a2e'">${item.title}</a>
-        </div>
-        ${item.desc ? `<div style="font-size:13px;color:#666;line-height:1.65;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">${item.desc}</div>` : ''}
-      </article>`;
+function renderIndustryCards() {
+  const keyword = document.getElementById('industrySearchInput').value.trim().toLowerCase();
+  let filtered = industryData.filter(item => {
+    if (keyword && !item.title.toLowerCase().includes(keyword) && !(item.desc||'').toLowerCase().includes(keyword) && !(item.keyword||'').toLowerCase().includes(keyword)) return false;
+    return true;
   });
 
-  if (cards.length === 1) {
-    document.getElementById('industryCardContainer').innerHTML = `<div class="industry-column">${cards[0]}</div>`;
+  document.getElementById('industryTotalCount').textContent = filtered.length;
+
+  if (filtered.length === 0) {
+    document.getElementById('industryLiContainer').innerHTML = '';
+    document.getElementById('industryOthersContainer').innerHTML = '';
+    document.getElementById('industryCardContainer').innerHTML = '<div class="empty">没有符合条件的内容</div>';
+    document.getElementById('industryLiContainer').style.display = 'none';
+    document.getElementById('industryOthersContainer').style.display = 'none';
     return;
   }
 
-  const midpoint = Math.ceil(cards.length / 2);
-  const leftColumn = cards.slice(0, midpoint).join('');
-  const rightColumn = cards.slice(midpoint).join('');
+  // 按品牌分两组
+  const liItems = filtered.filter(item => classifyIndustryBrand(item) === '理想汽车');
+  const otherItems = filtered.filter(item => classifyIndustryBrand(item) === '其他品牌');
 
-  document.getElementById('industryCardContainer').innerHTML = `
-    <div class="industry-main-grid">
-      <div class="industry-column">${leftColumn}</div>
-      <div class="industry-column">${rightColumn}</div>
-    </div>`;
+  // 渲染理想汽车区域
+  const liEl = document.getElementById('industryLiContainer');
+  if (liItems.length > 0) {
+    liEl.innerHTML = `
+      <div class="industry-section-title">
+        🟡 理想汽车 <span class="section-badge section-badge-li">${liItems.length} 条</span>
+      </div>
+      ${liItems.map(makeIndustryCardHTML).join('')}`;
+    liEl.style.display = 'flex';
+  } else {
+    liEl.innerHTML = '';
+    liEl.style.display = 'none';
+  }
+
+  // 渲染友商动态区域
+  const othersEl = document.getElementById('industryOthersContainer');
+  if (otherItems.length > 0) {
+    othersEl.innerHTML = `
+      <div class="industry-section-title">
+        🔵 友商动态 <span class="section-badge section-badge-others">${otherItems.length} 条</span>
+      </div>
+      ${otherItems.map(makeIndustryCardHTML).join('')}`;
+    othersEl.style.display = 'flex';
+  } else {
+    othersEl.innerHTML = '';
+    othersEl.style.display = 'none';
+  }
+
+  // 隐藏旧容器
+  document.getElementById('industryCardContainer').style.display = 'none';
 }
 </script>
 </div><!-- /mainApp -->
