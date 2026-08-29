@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 发送行业资讯飞书卡片（固定只发给馨姐个人飞书）
+分品牌推送：🟡 理想汽车 + 🔵 友商动态
 
 用法：
   python3 send_industry_feishu_card.py --date 2026-05-31
@@ -57,8 +58,26 @@ def normalize_items(report_date: str, items):
     return normalized
 
 
+def classify_brand(item):
+    """判断资讯属于理想汽车还是友商动态。"""
+    if item.get('brand'):
+        return item['brand']
+    title = item.get('title', '')
+    desc = item.get('desc', '')
+    url = item.get('url', '').lower()
+    combined = (title + ' ' + desc + ' ' + url).lower()
+    if '理想' in title or 'li auto' in combined:
+        return '理想汽车'
+    return '友商动态'
+
+
 def build_feishu_card(report_date: str, items: list[dict]):
     items = normalize_items(report_date, items)
+
+    # 按品牌分两组
+    li_items = [item for item in items if classify_brand(item) == '理想汽车']
+    other_items = [item for item in items if classify_brand(item) == '友商动态']
+
     elements = [
         {
             "tag": "markdown",
@@ -67,18 +86,44 @@ def build_feishu_card(report_date: str, items: list[dict]):
         {"tag": "hr"},
     ]
 
-    for idx, item in enumerate(items[:8], 1):
-        keyword = trim(item.get('keyword') or '行业资讯', 20)
-        title = trim(item.get('title') or '未命名资讯', 72)
-        desc = trim(item.get('desc') or '', 100)
-        publish_date = item.get('publish_date') or '未知日期'
-        url = item.get('url') or DASHBOARD_URL
-        text = (
-            f"**{idx}. 【{keyword}】{title}**\n"
-            f"{publish_date}｜{desc}\n"
-            f"[原文链接]({url})"
-        )
-        elements.append({"tag": "markdown", "content": text})
+    # 理想汽车板块
+    if li_items:
+        elements.append({
+            "tag": "markdown",
+            "content": f"**🟡 理想汽车（{len(li_items)}条）**"
+        })
+        for idx, item in enumerate(li_items[:6], 1):
+            keyword = trim(item.get('keyword') or '行业资讯', 20)
+            title = trim(item.get('title') or '未命名资讯', 72)
+            desc = trim(item.get('desc') or '', 100)
+            publish_date = item.get('publish_date') or '未知日期'
+            url = item.get('url') or DASHBOARD_URL
+            text = (
+                f"**{idx}. 【{keyword}】{title}**\n"
+                f"{publish_date}｜{desc}\n"
+                f"[原文链接]({url})"
+            )
+            elements.append({"tag": "markdown", "content": text})
+        elements.append({"tag": "hr"})
+
+    # 友商动态板块
+    if other_items:
+        elements.append({
+            "tag": "markdown",
+            "content": f"**🔵 友商动态（{len(other_items)}条）**"
+        })
+        for idx, item in enumerate(other_items[:6], 1):
+            keyword = trim(item.get('keyword') or '行业资讯', 20)
+            title = trim(item.get('title') or '未命名资讯', 72)
+            desc = trim(item.get('desc') or '', 100)
+            publish_date = item.get('publish_date') or '未知日期'
+            url = item.get('url') or DASHBOARD_URL
+            text = (
+                f"**{idx}. 【{keyword}】{title}**\n"
+                f"{publish_date}｜{desc}\n"
+                f"[原文链接]({url})"
+            )
+            elements.append({"tag": "markdown", "content": text})
 
     elements.extend([
         {"tag": "hr"},
@@ -110,11 +155,7 @@ def append_log(report_date: str, message: str):
     LOG_DIR.mkdir(parents=True, exist_ok=True)
     log_path = LOG_DIR / f'industry_{report_date}.log'
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    with log_path.open('a', encoding='utf-8') as f:
-        f.write(f'[{timestamp}] {message}\n')
-
-
-def validate_card_payload(report_date: str, card: dict):
+    with log_path.open('a', encoding='utf-8') as f:\n        f.write(f'[{timestamp}] {message}\n')\n\n\ndef validate_card_payload(report_date: str, card: dict):
     if not isinstance(card, dict):
         append_log(report_date, '发送失败：card 不是 dict')
         raise ValueError('发送失败：card 必须是飞书 interactive card 结构(dict)')
