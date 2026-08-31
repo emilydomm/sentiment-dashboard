@@ -1200,33 +1200,27 @@ function renderIndustryCards() {
   const liItems = filtered.filter(item => classifyIndustryBrand(item) === '理想汽车');
   const otherItems = filtered.filter(item => classifyIndustryBrand(item) === '其他品牌');
 
-  // 渲染理想汽车区域
+  // 渲染理想汽车区域（始终显示）
   const liEl = document.getElementById('industryLiContainer');
-  if (liItems.length > 0) {
-    liEl.innerHTML = `
-      <div class="industry-section-title">
-        🟡 理想汽车 <span class="section-badge section-badge-li">${liItems.length} 条</span>
-      </div>
-      ${liItems.map(makeIndustryCardHTML).join('')}`;
-    liEl.style.display = 'flex';
-  } else {
-    liEl.innerHTML = '';
-    liEl.style.display = 'none';
-  }
+  liEl.innerHTML = `
+    <div class="industry-section-title">
+      🟡 理想汽车 <span class="section-badge section-badge-li">${liItems.length} 条</span>
+    </div>
+    ${liItems.length > 0
+      ? liItems.map(makeIndustryCardHTML).join('')
+      : '<div class="empty" style="padding:30px;color:#999">今天暂无理想汽车相关行业资讯</div>'}`;
+  liEl.style.display = 'flex';
 
-  // 渲染友商动态区域
+  // 渲染友商动态区域（始终显示）
   const othersEl = document.getElementById('industryOthersContainer');
-  if (otherItems.length > 0) {
-    othersEl.innerHTML = `
-      <div class="industry-section-title">
-        🔵 友商动态 <span class="section-badge section-badge-others">${otherItems.length} 条</span>
-      </div>
-      ${otherItems.map(makeIndustryCardHTML).join('')}`;
-    othersEl.style.display = 'flex';
-  } else {
-    othersEl.innerHTML = '';
-    othersEl.style.display = 'none';
-  }
+  othersEl.innerHTML = `
+    <div class="industry-section-title">
+      🔵 友商动态 <span class="section-badge section-badge-others">${otherItems.length} 条</span>
+    </div>
+    ${otherItems.length > 0
+      ? otherItems.map(makeIndustryCardHTML).join('')
+      : '<div class="empty" style="padding:30px;color:#999">今天暂无友商动态</div>'}`;
+  othersEl.style.display = 'flex';
 
   // 隐藏旧容器
   document.getElementById('industryCardContainer').style.display = 'none';
