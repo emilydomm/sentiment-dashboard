@@ -1124,8 +1124,8 @@ function classifyIndustryBrand(item) {
   const desc = (item.desc || '');
   const url = (item.url || '').toLowerCase();
   const combined = (title + ' ' + desc + ' ' + url).toLowerCase();
-  // 理想汽车相关
-  if (title.includes('理想') || combined.includes('li auto')) return '理想汽车';
+  // 理想汽车相关（标题或描述中出现"理想"、"li auto"、理想车型如L8/L9/L7/L6等）
+  if (title.includes('理想') || desc.includes('理想') || combined.includes('li auto')) return '理想汽车';
   // 其他品牌
   return '其他品牌';
 }
