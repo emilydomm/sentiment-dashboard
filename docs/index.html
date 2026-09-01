@@ -1124,8 +1124,15 @@ function classifyIndustryBrand(item) {
   const desc = (item.desc || '');
   const url = (item.url || '').toLowerCase();
   const combined = (title + ' ' + desc + ' ' + url).toLowerCase();
-  // 理想汽车相关（标题或描述中出现"理想"、"li auto"、理想车型如L8/L9/L7/L6等）
-  if (title.includes('理想') || desc.includes('理想') || combined.includes('li auto')) return '理想汽车';
+  // 多品牌盘点/综述类 → 归友商动态
+  const roundupWords = ['盘点', '汇总', '一览', '全记录', '新车上新', '重磅车型', '多品牌', '重磅新车', '新车密集'];
+  const isRoundup = roundupWords.some(w => title.includes(w) || desc.includes(w));
+  if (isRoundup) return '其他品牌';
+  // 理想汽车相关：标题或描述明确以理想为主角，且标题含理想/车型
+  const liBrandWords = ['理想L', '理想MEGA', '理想i8', '理想汽车', 'li auto'];
+  const hasLiModel = liBrandWords.some(w => combined.includes(w));
+  const liInTitle = title.includes('理想');
+  if (liInTitle && hasLiModel) return '理想汽车';
   // 其他品牌
   return '其他品牌';
 }
