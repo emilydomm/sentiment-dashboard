@@ -1,70 +1,58 @@
-{
-  "date": "2026-09-02",
-  "generated_at": "2026-09-02T07:00:00+08:00",
-  "items": [
-    {
-      "title": "零跑汽车8月交付破10万台，9月16日技术发布会定档",
-      "summary": "零跑汽车8月全球交付103,129台，同比增长80.7%，连续突破10万大关。宣布9月16日举办2026年度技术发布会，将发布达到全行业第一梯队水平的智能辅助驾驶世界模型及三电领域最新技术成果。",
-      "source": "IT之家/汽车时代网",
-      "url": "https://wap.ithome.com/html/993722.htm",
-      "date": "2026-09-01",
-      "tags": ["三电", "智驾", "发布会"]
-    },
-    {
-      "title": "增程技术2026年迎三大革新：电池/高压平台/热效率全面突破",
-      "summary": "宁德时代骁遥电池实现10分钟补能280公里、零下30度稳定放电；800V高压平台成增程车标配，5分钟补能200公里；多家车企研发热效率超45%增程器，广汽星源增程系统1升油榨出3.73度电。宝马、比亚迪、小鹏等巨头集体押注增程赛道。",
-      "source": "有驾/懂车帝",
-      "url": "https://m.yoojia.com/article/9287346059903943091.html",
-      "date": "2026-08-28",
-      "tags": ["增程", "电池", "充电", "三电"]
-    },
-    {
-      "title": "宁德时代华为联手，增程高速油耗直逼5L",
-      "summary": "2026年新一代增程系统热效率突破45%，采用EGR大流量低压冷却技术结合稀薄燃烧和电动增压器，热效率可达45.9%。问界M7月零售7273辆居增程榜首，北京现代计划2026年密集投放三款增程车型，续航突破1100公里。",
-      "source": "有驾",
-      "url": "https://m.yoojia.com/article/10058023785944309148.html",
-      "date": "2026-08-30",
-      "tags": ["增程", "能耗", "电池"]
-    },
-    {
-      "title": "三部门调整2026-2027年新能源汽车购置税技术要求",
-      "summary": "工信部、财政部、税务总局联合公告：插混/增程纯电续驶里程不低于100公里；2510kg以下车型电量保持模式燃料消耗量应小于限值70%，2510kg及以上小于75%。2026年1月1日起列入减免税目录的车型需符合要求。",
-      "source": "政府网站",
-      "url": "http://www.chikan.gov.cn/ckqzfw/xxgk/zdlyxxgk/jsjfxxgk/fylzzmszgrdzczt/content/post_2120961.html",
-      "date": "2026-08-27",
-      "tags": ["政策", "增程", "能耗"]
-    },
-    {
-      "title": "2026武汉新能源汽车及电池电机电控展览会前瞻",
-      "summary": "9月22-24日武汉国际博览中心举办，规模超10万平方米。重点展示固态电池、钠离子电池、碳化硅功率模块、永磁同步电机（效率提升至97%以上）、AI算法BMS电池管理系统等三电技术前沿。",
-      "source": "懂车帝/新浪财经",
-      "url": "https://m.dongchedi.com/article/7579909081314476606",
-      "date": "2026-08-29",
-      "tags": ["电池", "电机", "三电", "展会"]
-    },
-    {
-      "title": "汽车行业利润率跌破4%，发布会走向静默上架",
-      "summary": "2026年上半年行业利润率跌破4%，超600款新产品近千场发布会。极氪9X五座版一纸海报上市、理想i8后驱版仅发配置长图开售。用户到店前已对比3-5场直播，发布会决策权重降至最低，营销资源从形式主义向效率主义回归。",
-      "source": "今日头条",
-      "url": "https://m.toutiao.com/article/7677885458994430490/",
-      "date": "2026-08-28",
-      "tags": ["行业趋势", "市场"]
-    },
-    {
-      "title": "阿维塔06T增程版上市：330km纯电续航+5C快充+魔毯悬架",
-      "summary": "阿维塔06T增程版CLTC纯电续航330km，综合续航超1200km，支持5C快充30%-80%不到10分钟。标配前虚拟主销双叉臂+后多连杆独立悬架+空气悬架+CDC可变阻尼减振器，配备主动预瞄式魔毯悬架。",
-      "source": "中关村在线/中国青年网",
-      "url": "https://m.zol.com.cn/article/11997157.html",
-      "date": "2026-08-30",
-      "tags": ["增程", "充电", "悬架", "三电"]
-    },
-    {
-      "title": "2026年纯电市场碾压增程：单月销量已是增程7-9倍",
-      "summary": "2026年5月纯电车批发88.6万辆占新能源65.7%，增程仅9.5万辆同比暴跌24.9%，市场份额从10.3%收缩至7%。家用大三排SUV市场纯电已连续9个月超越增程。消费者购车逻辑从续航焦虑转向成本与纯电体验。",
-      "source": "有驾",
-      "url": "https://m.yoojia.com/article/9526381657350162121.html",
-      "date": "2026-08-27",
-      "tags": ["市场", "增程", "能耗"]
-    }
-  ]
-}
+[
+  {
+    "title": "罗永浩吐槽新能源车企 AI 大模型“垃圾”，试了数十辆车无一家接入完整版 Top 大模型",
+    "url": "https://www.ithome.com/0/997/133.htm",
+    "publish_date": "2026-09-01",
+    "keyword": "智能驾驶",
+    "desc": "罗永浩称其体验数十辆新能源车后，未发现有车企接入完整版头部大模型，折射出车端智能交互能力与用户体验仍有明显提升空间。",
+    "image": ""
+  },
+  {
+    "title": "2026 年 8 月汽车销量 / 交付汇总（持续更新）：长安汽车 21.88 万辆",
+    "url": "https://www.ithome.com/0/996/723.htm",
+    "publish_date": "2026-09-01",
+    "keyword": "新车发布",
+    "desc": "多家新能源车企集中披露 8 月销量与交付数据，比亚迪、零跑、极氪等延续增长态势，成为观察市场热度和新品拉动效果的重要窗口。",
+    "image": ""
+  },
+  {
+    "title": "赛力斯 8 月新能源汽车销量 24244 辆，同比下降 43.96%",
+    "url": "https://www.ithome.com/0/997/098.htm",
+    "publish_date": "2026-09-01",
+    "keyword": "新车发布",
+    "desc": "赛力斯披露 8 月新能源汽车销量 24244 辆，同比明显下滑，反映产品迭代过渡期与核心零部件成本波动对经营表现带来的压力。",
+    "image": ""
+  },
+  {
+    "title": "BYD flash charging network to hit 10,000 stations on August 28, doubling in 5 months",
+    "url": "https://cnevpost.com/2026/08/27/byd-flash-charging-10000-stations-aug-28-2026/",
+    "publish_date": "2026-08-27",
+    "keyword": "充电技术",
+    "desc": "比亚迪宣布其闪充网络将在 8 月 28 日达到 10000 座站点，不到 5 个月实现翻倍，显示车企自建高功率补能网络的推进速度明显加快。",
+    "image": "https://cnevpost.com/wp-content/uploads/2026/08/2026082704335131.jpg"
+  },
+  {
+    "title": "Chery launches Fulwin T7 electric SUV with 600 km range from under $15,000",
+    "url": "https://cnevpost.com/2026/08/27/chery-launches-fulwin-t7-electric-suv/",
+    "publish_date": "2026-08-27",
+    "keyword": "新车发布",
+    "desc": "奇瑞正式发布风云 T7 纯电 SUV，主打 600 公里续航和入门级价格带，进一步加剧经济型纯电 SUV 市场竞争。",
+    "image": "https://cnevpost.com/wp-content/uploads/2026/08/2026082702540171.jpg"
+  },
+  {
+    "title": "BYD Denza to launch N8L EV in September, expanding 6-seat SUV lineup",
+    "url": "https://cnevpost.com/2026/08/30/byd-denza-launch-n8l-ev-sept-2026/",
+    "publish_date": "2026-08-30",
+    "keyword": "新车发布",
+    "desc": "腾势计划在 9 月推出 N8L 纯电版，为六座 SUV 产品线补齐纯电动力选项，强化中高端家庭用车市场布局。",
+    "image": "https://cnevpost.com/wp-content/uploads/2026/08/2026083013522720.jpg"
+  },
+  {
+    "title": "BYD to launch Sealion 08 on September 2 as Ocean lineup's flagship SUV",
+    "url": "https://cnevpost.com/2026/08/25/byd-to-launch-sealion-08-sept-2-2026/",
+    "publish_date": "2026-08-25",
+    "keyword": "新车发布",
+    "desc": "比亚迪海洋网旗舰 SUV 海狮 08 定档 9 月 2 日上市，提供插混和纯电双动力，将成为观察比亚迪中高端 SUV 战略的重要样本。",
+    "image": "https://cnevpost.com/wp-content/uploads/2026/08/2026082509460675.jpg"
+  }
+]
