@@ -1,10 +1,50 @@
 [
   {
-    "title": "新一代理想MEGA发布：线控转向、后轮转向与800V主动防倾杆升级",
-    "url": "https://auto.sina.cn/2026-09-02/detail-iniqmfta7803448.d.html",
-    "publish_date": "2026-09-02",
-    "keyword": "底盘技术",
-    "desc": "理想于9月2日发布新一代MEGA。新车采用线控转向、±7°后轮转向和800V主动防倾杆；报道显示其转弯半径缩至5.5米，并保留双腔空气悬架与CDC减振器，以兼顾大型MPV的灵活性、侧倾抑制与乘坐舒适性。",
+    "title": "比亚迪回应闪充车型订单积压25万辆消息不实",
+    "url": "http://finance.sina.com.cn/tech/roll/2026-09-08/doc-inircmeu9372372.shtml",
+    "publish_date": "2026-09-08",
+    "keyword": "充电技术",
+    "desc": "9月8日快科技报道，比亚迪回应网传支持闪充技术车型订单积压25万辆的消息不实，并回顾第二代刀片电池与兆瓦闪充2.0技术进展，单枪充电功率提升至1500kW。",
+    "image": "https://n.sinaimg.cn/finance/c30320b4/20210712/wx_poster_finance1.png"
+  },
+  {
+    "title": "8月乘用车零售销量前十全部为新能源车",
+    "url": "http://finance.sina.com.cn/roll/2026-09-08/doc-inircmeq9240560.shtml",
+    "publish_date": "2026-09-08",
+    "keyword": "新车发布",
+    "desc": "9月8日懂车帝援引乘联分会数据称，2026年8月全国乘用车零售销量前十车型全部为新能源车，反映新能源渗透率继续抬升，理想i6、比亚迪元UP等车型进入前十。",
+    "image": "https://n.sinaimg.cn/finance/c30320b4/20210712/wx_poster_finance1.png"
+  },
+  {
+    "title": "新一代理想MEGA将于9月2日发布",
+    "url": "https://3g.sina.com.cn/news/article/comos_niptnus0294990.html",
+    "publish_date": "2026-08-27",
+    "keyword": "新车发布",
+    "desc": "8月27日报道称，新一代理想MEGA定档9月2日发布，新增后轮转向、4颗激光雷达和800V主动防倾杆，CLTC续航710km，补能与感知硬件同步升级。",
+    "image": ""
+  },
+  {
+    "title": "理想汽车累计交付突破180万辆 9月新车继续推进",
+    "url": "https://3g.sina.com.cn/news/article/comos_niqpqxy7005434.html",
+    "publish_date": "2026-09-03",
+    "keyword": "智能驾驶",
+    "desc": "9月3日报道称，理想汽车累计交付达1801834辆，9月将推进新一代MEGA和理想i9上市，并向Thor和Orin-X平台用户推送马赫VLA大模型能力。",
+    "image": ""
+  },
+  {
+    "title": "理想汽车迪拜发布全新L9并启动中东销售",
+    "url": "https://3g.sina.com.cn/news/article/comos_niqpqxy7005434.html",
+    "publish_date": "2026-09-03",
+    "keyword": "新车发布",
+    "desc": "同一篇9月3日报道提到，理想汽车已于9月3日在迪拜举行新产品上市活动，全新理想L9在当地上市，标志着中国新能源品牌继续向海外市场扩张。",
+    "image": ""
+  },
+  {
+    "title": "新一代理想MEGA支持5C超充 10.8分钟完成10%至80%补能",
+    "url": "https://3g.sina.com.cn/news/article/comos_niptnus0294990.html",
+    "publish_date": "2026-08-27",
+    "keyword": "充电技术",
+    "desc": "8月27日报道显示，新一代理想MEGA搭载108kWh三元锂电池包，支持800V 5C超充，官方称10%至80%快充约10.8分钟，瞄准高端纯电MPV补能体验升级。",
     "image": ""
   }
 ]
