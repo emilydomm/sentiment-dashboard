@@ -1,30 +1,50 @@
 [
   {
-    "title": "理想 i9 上市：5C 超充与800V纯电旗舰入场",
-    "url": "https://qd.ifeng.com/c/8wTbVoADRHe",
-    "publish_date": "2026-09-16",
-    "keyword": "三电 / 充电 / 悬架",
-    "desc": "理想 i9 以36.98万元上市，搭载101kWh三元锂5C电池、800V高压平台及前后双电机四驱；CLTC续航705km，官方称充电10分钟可补能约500km。底盘配备双腔双阀空气悬架、CDC减振、线控转向及整体主动转向。"
+    "title": "2026世界动力电池大会四川宜宾开幕 发布8项创新技术",
+    "url": "https://www.chinanews.com.cn/cj/2026/09-03/10689660.shtml",
+    "publish_date": "2026-09-03",
+    "keyword": "电池技术",
+    "desc": "2026世界动力电池大会在宜宾开幕，现场集中发布超快充动力电池、高比能混合固液电池、长寿命换电电池和新一代电池安全技术等8项创新成果，聚焦产业化和安全标准升级。",
+    "image": "https://www.chinanews.com.cn/fileftp/2022/05/2022-05-09/U435P4T47D50136F24533DT20220510101956.png"
   },
   {
-    "title": "FREELANDER神行者8上市：800V高压增程、6C补能与全地形底盘",
-    "url": "https://auto.caijing.com.cn/2026/0904/5181695.shtml",
-    "publish_date": "2026-09-04",
-    "keyword": "增程 / 电池 / 底盘",
-    "desc": "神行者8正式上市，限时权益价28.99万元起。全系采用800V高压增程与双电机四驱，配60.3kWh电池，CLTC纯电续航310km并支持6C超充；底盘提供闭式双腔空气悬架、连续可变阻尼减振和±10°后轮转向。"
+    "title": "从中国智造到全球引领，智能网联新能源汽车十五五规划擘画新蓝图",
+    "url": "https://m.thepaper.cn/newsDetail_forward_34065493",
+    "publish_date": "2026-09-11",
+    "keyword": "智能驾驶",
+    "desc": "工信部等部门印发智能网联新能源汽车发展十五五规划，提出到2030年新能源汽车和智能网联技术协同发展目标，明确加强智能底盘、智能网联和自动驾驶应用推广。",
+    "image": "https://image.thepaper.cn/publish/interaction/image/9/682/440.png"
   },
   {
-    "title": "启境 GX7 开启预售：800V 5C增程平台切入中大型五座SUV",
-    "url": "https://m.zol.com.cn/article/12427078.html",
-    "publish_date": "2026-09-04",
-    "keyword": "增程 / 充电 / 悬架",
-    "desc": "启境GX7预售价24.99万—31.19万元，采用1.5T增程架构，提供多电机方案；三电机版综合功率550kW、零百3.9秒。其800V 5C平台主打快充，配双腔空气悬架，并搭载四激光雷达感知与华为乾崑ADS 5。"
+    "title": "WNEVC 2026公众开放日定于9月24日，20+款新能源车型共同亮相",
+    "url": "https://auto.sina.cn/news/2026-09-18/detail-inisfiif3393271.d.html",
+    "publish_date": "2026-09-18",
+    "keyword": "新车发布",
+    "desc": "世界新能源汽车大会宣布技术及科普展向公众开放，届时将集中展示20多款新能源车型，以及三电、智能驾驶、智能座舱和车网互动等全链条创新成果。",
+    "image": "http://n.sinaimg.cn/auto/chezhan2017/ss724_shareWeibo.png"
   },
   {
-    "title": "传祺越7开启预售：硬派插混SUV叠加空气悬架与全地形能力",
-    "url": "https://i.ifeng.com/c/8w989l6IsTo",
-    "publish_date": "2026-09-02",
-    "keyword": "底盘 / 悬架 / 插混",
-    "desc": "传祺越7开启预售，预售权益价17.18万—21.78万元。新车采用1.5T插混，四驱版系统总功率425kW、零百最快4.2秒；底盘配闭式双腔空气悬架和连续可变阻尼减振器，并提供后机械差速锁、能量中锁及全地形模式。"
+    "title": "2026年国产汽车底盘技术实现重大突破了吗",
+    "url": "https://www.autohome.com.cn/ask/25131793.html",
+    "publish_date": "2026-09-09",
+    "keyword": "底盘技术",
+    "desc": "文章梳理国产汽车底盘技术进展，提到线控转向、线控制动、线控悬架、滑板底盘平台和800V高压主动悬架等技术进入加速落地阶段。",
+    "image": "https://z.autoimg.cn/fe/aigc/img/share-img-defaul4.png"
+  },
+  {
+    "title": "以闪充技术破解充电痛点，比亚迪引领新能源汽车迈入闪充时代",
+    "url": "https://mparticle.uc.cn/article.html?uc_param_str=frdnsnpfvecpntnwprdssskt#!wm_aid=d65fdddb2f0d4ecca3ced1a83a845b6d!!wm_id=b3995e67b06b4283bbf69a678b4e8036",
+    "publish_date": "2026-09-13",
+    "keyword": "充电技术",
+    "desc": "比亚迪在粉丝嘉年华上披露第二代刀片电池及闪充技术最新进展，称国内已建成1万座闪充站，并将继续在高速场景完善超快补能网络。",
+    "image": ""
+  },
+  {
+    "title": "2026年9月重磅新车盘点，多款新能源开启预售",
+    "url": "https://chejiahao.autohome.com.cn/info/26402919",
+    "publish_date": "2026-09-08",
+    "keyword": "新车发布",
+    "desc": "9月新能源市场进入新品密集投放期，广汽传祺越7、启境GX7、岚图梦想家9、长安启源Q06和智己LS6等多款新车相继开启预售或上市。",
+    "image": "https://img3.autoimg.cn/chejiahaodfs/g33/M02/F9/E4/autohomecar__ChxpVmqffIOAceI5AAnq3Fgz_7o937.jpg"
   }
 ]
